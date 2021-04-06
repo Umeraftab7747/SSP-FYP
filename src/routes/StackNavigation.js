@@ -16,7 +16,7 @@ import {
   SspPassowrd,
 } from '../screens/welcome';
 import {Details, Dispute} from '../screens/Admin';
-import {Rejected} from '../screens/SSP';
+import {Rejected, EditService} from '../screens/SSP';
 
 export const StackNavigation = () => {
   return (
@@ -36,6 +36,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Rejected"
           component={Rejected}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EditService"
+          component={EditService}
           options={{headerShown: false}}
         />
         {/* Service provider */}

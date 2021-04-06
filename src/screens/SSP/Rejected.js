@@ -69,7 +69,7 @@ export class Rejected extends Component {
           });
         }}
         style={styles.rightFlatlist}>
-        <Icon name={'eye'} type={'ionicon'} color={'#8F94FB'} size={30} />
+        <Icon name={'create'} type={'ionicon'} color={'#8F94FB'} size={30} />
       </TouchableOpacity>
     </View>
   );
@@ -97,33 +97,34 @@ export class Rejected extends Component {
               <Text style={styles.LoginText}>SERVICE PROVIDER DETAILS</Text>
               <View style={styles.TEXTCONTAINER}>
                 <Text style={[styles.LoginText2]}>
-                  NAME: {this.state.selectedData.Firstname}
+                  ServiceName: {this.state.selectedData.ServiceName}
                 </Text>
                 <Text style={styles.LoginText2}>
-                  COMPANY: {this.state.selectedData.Password}
+                  ServiceType: {this.state.selectedData.ServiceType}
                 </Text>
                 <Text style={styles.LoginText2}>
                   EMAIL: {this.state.selectedData.Email}
                 </Text>
                 <Text style={styles.LoginText2}>
-                  CNIC: {this.state.selectedData.Cnic}
-                </Text>
-                <Text style={styles.LoginText2}>
-                  PHONE:{this.state.selectedData.Phone}
+                  discription: {this.state.selectedData.discription}
                 </Text>
               </View>
 
               <Appbtn
                 onPress={() => {
-                  this.Verify(this.state.selectedData.Email);
+                  this.setState({modalVisible: false}, () => {
+                    this.props.navigation.navigate('EditService', {
+                      ShareData: this.state.selectedData,
+                    });
+                  });
                 }}
-                text={'APROVE'}
+                text={'UPDATE'}
               />
               <Appbtn
                 onPress={() => {
                   this.delete(this.state.selectedData.Email);
                 }}
-                text={'Dis-APROVE'}
+                text={'DELETE'}
               />
             </View>
           </View>

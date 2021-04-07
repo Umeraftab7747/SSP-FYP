@@ -11,6 +11,15 @@ export class Dashboard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
+            this.props.navigation.navigate('Approve');
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>APPROVE SERVICES</Text>
+        </TouchableOpacity>
+        {/* btn */}
+        {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
             this.props.navigation.navigate('Rejected');
           }}
           style={styles.Btn}>

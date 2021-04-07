@@ -16,7 +16,7 @@ import {
   SspPassowrd,
 } from '../screens/welcome';
 import {Details, Dispute} from '../screens/Admin';
-import {Rejected, EditService} from '../screens/SSP';
+import {Rejected, EditService, Approve} from '../screens/SSP';
 
 export const StackNavigation = () => {
   return (
@@ -36,6 +36,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Rejected"
           component={Rejected}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Approve"
+          component={Approve}
           options={{headerShown: false}}
         />
         <Stack.Screen

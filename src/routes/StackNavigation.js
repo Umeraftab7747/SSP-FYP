@@ -5,6 +5,7 @@ const Stack = createStackNavigator();
 
 import {AdminBottomTab} from './AdminBottomTab';
 import {ServiceproviderBottomtab} from './ServiceproviderBottomtab';
+import {UserBottomtab} from './UserBottomtab';
 
 // welcome for all
 import {
@@ -22,11 +23,18 @@ export const StackNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        {/* USER */}
+        <Stack.Screen
+          name="UserBottomtab"
+          component={UserBottomtab}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="UserLogin"
           component={UserLogin}
           options={{headerShown: false}}
         />
+        {/* USER */}
         {/* Service provider */}
         <Stack.Screen
           name="ServiceproviderBottomtab"

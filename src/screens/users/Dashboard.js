@@ -3,14 +3,61 @@ import {
   Text,
   StyleSheet,
   View,
+  FlatList,
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {Header} from '../../Components';
+import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
+import {axiosInstance, baseUrl} from '../api';
 
 export class Dashboard extends Component {
+  state = {
+    data: [],
+  };
+
+  componentDidMount() {
+    this.verifiedRequests();
+  }
+
+  verifiedRequests = () => {
+    axiosInstance
+      .get(baseUrl + '/users/services')
+      .then(res => {
+        const userData = res.data;
+        console.log(userData);
+        if (userData) {
+          this.setState({data: userData.user});
+          console.log(this.state.data);
+        } else if (!userData) {
+          console.log('404 status' + userData);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // ASYC
+  };
+  // Flatlist Container
+  renderItem = item => (
+    <View style={styles.FlatListContainer}>
+      <View style={styles.leftFlatlist}>
+        <Text style={styles.text}>Service: {item.ServiceName}</Text>
+      </View>
+
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.navigate('Details', {
+            otherData: item,
+          });
+        }}
+        style={styles.rightFlatlist}>
+        <Icon name={'eye'} type={'ionicon'} color={'#8F94FB'} size={30} />
+      </TouchableOpacity>
+    </View>
+  );
+
   render() {
     return (
       <View style={styles.Container}>
@@ -27,6 +74,12 @@ export class Dashboard extends Component {
           />
         </View>
         {/* Searchbar */}
+
+        <FlatList
+          data={this.state.data}
+          renderItem={({item}) => this.renderItem(item)}
+          keyExtractor={item => item._id}
+        />
       </View>
     );
   }
@@ -66,5 +119,32 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingLeft: h('1%'),
     color: '#8F94FB',
+  },
+  FlatListContainer: {
+    width: w('90%'),
+    height: h('10%'),
+    backgroundColor: 'white',
+    marginTop: h('2%'),
+    borderRadius: h('0.5%'),
+    elevation: 7,
+    flexDirection: 'row',
+  },
+  leftFlatlist: {
+    width: '80%',
+    height: '100%',
+    justifyContent: 'center',
+    // backgroundColor: 'red',
+    paddingLeft: 10,
+  },
+  rightFlatlist: {
+    width: '20%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: '#8F94FB',
+    fontSize: h('2%'),
+    fontWeight: 'bold',
   },
 });

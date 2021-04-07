@@ -40,7 +40,6 @@ export class Service extends Component {
         const data = JSON.parse(value);
         if (data !== null) {
           this.setState({Email: data});
-          console.warn(this.state.Email);
         }
       })
       .done();
@@ -277,9 +276,12 @@ export class Service extends Component {
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({ServiceType: itemValue})
               }>
-              <Picker.Item label="Mall Security" value="english" />
-              <Picker.Item label="Office/Factory Security" value="urdu" />
-              <Picker.Item label="Housing Security" value="urdu" />
+              <Picker.Item label="Mall Security" value="Mall Security" />
+              <Picker.Item
+                label="Office/Factory Security"
+                value="Office/Factory Security"
+              />
+              <Picker.Item label="Housing Security" value="Housing Security" />
             </Picker>
           ) : null}
           {/* picker */}

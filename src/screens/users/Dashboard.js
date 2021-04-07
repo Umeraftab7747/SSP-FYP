@@ -15,6 +15,7 @@ import {axiosInstance, baseUrl} from '../api';
 export class Dashboard extends Component {
   state = {
     data: [],
+    listData: [],
   };
 
   componentDidMount() {
@@ -29,6 +30,7 @@ export class Dashboard extends Component {
         console.log(userData);
         if (userData) {
           this.setState({data: userData.user});
+          this.setState({listData: this.state.data});
           console.log(this.state.data);
         } else if (!userData) {
           console.log('404 status' + userData);
@@ -39,6 +41,19 @@ export class Dashboard extends Component {
       });
     // ASYC
   };
+
+  // filter data
+  searching = text => {
+    const newData = this.state.data.filter(item => {
+      const itemData = `${item.ServiceName.toUpperCase()} `;
+
+      const searchText = text.toUpperCase();
+
+      return itemData.indexOf(searchText) > -1;
+    });
+    this.setState({listData: newData});
+  };
+
   // Flatlist Container
   renderItem = item => (
     <View style={styles.FlatListContainer}>
@@ -68,6 +83,7 @@ export class Dashboard extends Component {
             <Icon name={'search'} type={'ionicon'} color={'#fff'} size={30} />
           </View>
           <TextInput
+            onChangeText={text => this.searching(text)}
             placeholder={'Search'}
             placeholderTextColor={'#8F94FB'}
             style={styles.TextinputContainer}
@@ -76,7 +92,7 @@ export class Dashboard extends Component {
         {/* Searchbar */}
 
         <FlatList
-          data={this.state.data}
+          data={this.state.listData}
           renderItem={({item}) => this.renderItem(item)}
           keyExtractor={item => item._id}
         />

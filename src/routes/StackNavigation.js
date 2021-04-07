@@ -23,17 +23,18 @@ export const StackNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="UserLogin"
+          component={UserLogin}
+          options={{headerShown: false}}
+        />
         {/* USER */}
         <Stack.Screen
           name="UserBottomtab"
           component={UserBottomtab}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="UserLogin"
-          component={UserLogin}
-          options={{headerShown: false}}
-        />
+
         {/* USER */}
         {/* Service provider */}
         <Stack.Screen

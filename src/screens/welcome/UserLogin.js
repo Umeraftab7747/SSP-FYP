@@ -11,6 +11,7 @@ import {
 import {w, h} from 'react-native-responsiveness';
 import {AppInput, Appbtn} from '../../Components';
 import {axiosInstance, baseUrl} from '../api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {KeyboardAwareScrollView} from '@codler/react-native-keyboard-aware-scroll-view';
 
 export class UserLogin extends Component {
@@ -37,6 +38,9 @@ export class UserLogin extends Component {
               const userData = res.data;
               if (userData.sucess === true) {
                 alert('USER LOGIN');
+                AsyncStorage.setItem('UserData', JSON.stringify(Email), () => {
+                  this.props.navigation.replace('UserBottomtab');
+                });
               } else if (userData.sucess === false) {
                 alert(userData.msg);
               }

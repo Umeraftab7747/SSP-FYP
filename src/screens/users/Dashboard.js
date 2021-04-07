@@ -11,6 +11,7 @@ import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class Dashboard extends Component {
   state = {
@@ -21,6 +22,18 @@ export class Dashboard extends Component {
   componentDidMount() {
     this.verifiedRequests();
   }
+
+  // GETING LOGIN DATA
+  getData = () => {
+    AsyncStorage.getItem('UserData')
+      .then(value => {
+        const data = JSON.parse(value);
+        if (data !== null) {
+          // this.setState({Email: data});
+        }
+      })
+      .done();
+  };
 
   verifiedRequests = () => {
     axiosInstance

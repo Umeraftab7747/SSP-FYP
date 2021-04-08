@@ -91,7 +91,7 @@ export class SspSignup extends Component {
               style={styles.ImageContainer}
               source={require('../../assets/log.png')}
             />
-            <Text style={styles.LogoText}>Security Service Providing</Text>
+            <Text style={styles.LogoText}>Security Services Application</Text>
           </ImageBackground>
           {/* Image Container */}
 

@@ -20,6 +20,7 @@ export class Dashboard extends Component {
     listData: [],
     modalVisible: false,
     selectedData: '',
+    isFetching: false,
   };
 
   componentDidMount() {
@@ -58,6 +59,14 @@ export class Dashboard extends Component {
     // ASYC
   };
 
+  // loading
+  onRefresh() {
+    this.setState({isFetching: true}, () => {
+      this.componentDidMount();
+      this.setState({isFetching: false});
+    });
+  }
+
   // filter data
   searching = text => {
     const newData = this.state.data.filter(item => {
@@ -80,7 +89,9 @@ export class Dashboard extends Component {
       <TouchableOpacity
         onPress={() => {
           this.setState({selectedData: item}, () => {
-            this.setState({modalVisible: true});
+            this.props.navigation.navigate('ServiceDeatails', {
+              Alldata: this.state.selectedData,
+            });
           });
         }}
         style={styles.rightFlatlist}>
@@ -111,43 +122,9 @@ export class Dashboard extends Component {
           data={this.state.listData}
           renderItem={({item}) => this.renderItem(item)}
           keyExtractor={item => item._id}
+          onRefresh={() => this.onRefresh()}
+          refreshing={this.state.isFetching}
         />
-        {/* ٘MODAL*/}
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            this.setState({modalVisible: false});
-          }}>
-          <View style={styles.ModalContainer}>
-            <View style={styles.ViewContainer}>
-              <Text style={styles.LoginText}>SERVICE PROVIDER DETAILS</Text>
-              <View style={styles.TEXTCONTAINER}>
-                <Text style={[styles.LoginText2]}>
-                  Name: {this.state.selectedData.ServiceName}
-                </Text>
-                <Text style={styles.LoginText2}>
-                  Service Type: {this.state.selectedData.ServiceType}
-                </Text>
-                <Text style={styles.LoginText2}>
-                  Email: {this.state.selectedData.Email}
-                </Text>
-                <Text style={styles.LoginText2}>
-                  Discription: {this.state.selectedData.discription}
-                </Text>
-              </View>
-
-              <Appbtn
-                onPress={() => {
-                  this.Verify(this.state.selectedData.Email);
-                }}
-                text={'BOOK'}
-              />
-            </View>
-          </View>
-        </Modal>
-        {/* ٘MODAL*/}
       </View>
     );
   }
@@ -214,38 +191,5 @@ const styles = StyleSheet.create({
     color: '#8F94FB',
     fontSize: h('2%'),
     fontWeight: 'bold',
-  },
-  ModalContainer: {
-    flex: 1,
-    backgroundColor: '#0004',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  ViewContainer: {
-    width: w('95%'),
-    height: h('50%'),
-    backgroundColor: 'white',
-    borderRadius: h('2%'),
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  LoginText: {
-    color: '#8F94FB',
-    fontSize: h('3%'),
-    fontWeight: 'bold',
-    marginTop: h('1%'),
-  },
-  LoginText2: {
-    color: '#8F94FB',
-    fontSize: h('2%'),
-    fontWeight: 'bold',
-    marginTop: h('1%'),
-  },
-  TEXTCONTAINER: {
-    width: '100%',
-    height: '50%',
-    // backgroundColor: 'red',
-    paddingTop: h('2%'),
-    paddingLeft: h('2%'),
   },
 });

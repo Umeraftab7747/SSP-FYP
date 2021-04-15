@@ -14,11 +14,12 @@ import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export class Booking extends Component {
+export class SSPBooking extends Component {
   state = {
     data: [],
     listData: [],
-    Email: '',
+    modalVisible: false,
+    selectedData: '',
     isFetching: false,
   };
 
@@ -28,7 +29,7 @@ export class Booking extends Component {
 
   // GETING LOGIN DATA
   getData = () => {
-    AsyncStorage.getItem('UserData')
+    AsyncStorage.getItem('ServiceProviderData')
       .then(value => {
         const data = JSON.parse(value);
         if (data !== null) {
@@ -45,7 +46,7 @@ export class Booking extends Component {
     };
     // ASY
     axiosInstance
-      .post(baseUrl + '/booking/userbooking', params)
+      .post(baseUrl + '/booking/Serviceproviderbooking', params)
       .then(res => {
         const userData = res.data;
 
@@ -64,6 +65,14 @@ export class Booking extends Component {
     // ASYC
   };
 
+  // loading
+  onRefresh() {
+    this.setState({isFetching: true}, () => {
+      this.componentDidMount();
+      this.setState({isFetching: false});
+    });
+  }
+
   // filter data
   searching = text => {
     const newData = this.state.data.filter(item => {
@@ -76,12 +85,6 @@ export class Booking extends Component {
     this.setState({listData: newData});
   };
 
-  onRefresh() {
-    this.setState({isFetching: true}, () => {
-      this.componentDidMount();
-    });
-  }
-
   // Flatlist Container
   renderItem = item => (
     <View style={styles.FlatListContainer}>
@@ -92,7 +95,9 @@ export class Booking extends Component {
       <TouchableOpacity
         onPress={() => {
           this.setState({selectedData: item}, () => {
-            this.setState({modalVisible: true});
+            this.props.navigation.navigate('ServiceDeatails', {
+              Alldata: this.state.selectedData,
+            });
           });
         }}
         style={styles.rightFlatlist}>
@@ -119,7 +124,6 @@ export class Booking extends Component {
         </View>
         {/* Searchbar */}
 
-        {/* flatlist */}
         <FlatList
           data={this.state.listData}
           renderItem={({item}) => this.renderItem(item)}
@@ -127,7 +131,6 @@ export class Booking extends Component {
           onRefresh={() => this.onRefresh()}
           refreshing={this.state.isFetching}
         />
-        {/* flatlist */}
       </View>
     );
   }
@@ -135,8 +138,10 @@ export class Booking extends Component {
 
 const styles = StyleSheet.create({
   Container: {
-    width: w('100%'),
+    // backgroundColor: 'red',
+    width: '100%',
     height: '100%',
+    // justifyContent: 'center',
     alignItems: 'center',
   },
   SearchbarContainer: {

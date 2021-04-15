@@ -32,7 +32,7 @@ export class Users extends Component {
 
         if (userData.status === 200) {
           this.setState({data: userData.user});
-          console.log(this.state.data);
+          // console.log(this.state.data);
 
           // console.log('200 status' + userData);
         } else if (userData.status === 404) {
@@ -47,6 +47,7 @@ export class Users extends Component {
 
   // delet
   delete = Email => {
+    // variabl
     const params = {
       Email: Email,
     };

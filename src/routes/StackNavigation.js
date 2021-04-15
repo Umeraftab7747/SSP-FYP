@@ -17,7 +17,8 @@ import {
   SspPassowrd,
 } from '../screens/welcome';
 import {Details, Dispute} from '../screens/Admin';
-import {Rejected, EditService, Approve} from '../screens/SSP';
+import {Rejected, EditService, Approve, SSPBooking} from '../screens/SSP';
+import {ServiceDeatails} from '../screens/users';
 
 export const StackNavigation = () => {
   return (
@@ -32,6 +33,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="UserBottomtab"
           component={UserBottomtab}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ServiceDeatails"
+          component={ServiceDeatails}
           options={{headerShown: false}}
         />
 
@@ -56,6 +62,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="EditService"
           component={EditService}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SSPBooking"
+          component={SSPBooking}
           options={{headerShown: false}}
         />
         {/* Service provider */}

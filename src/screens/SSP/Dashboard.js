@@ -26,6 +26,15 @@ export class Dashboard extends Component {
           <Text style={styles.BtnText}>REJECTED SERVICES</Text>
         </TouchableOpacity>
         {/* btn */}
+        {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('SSPBooking');
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>BOOKING</Text>
+        </TouchableOpacity>
+        {/* btn */}
       </View>
     );
   }

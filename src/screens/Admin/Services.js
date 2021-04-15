@@ -1,13 +1,6 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Modal,
-} from 'react-native';
-import {Header, Appbtn} from '../../Components';
+import {Text, StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
+import {Header} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
@@ -32,7 +25,7 @@ export class Services extends Component {
       .get(baseUrl + '/service/alldata')
       .then(res => {
         const userData = res.data;
-        console.log(userData);
+        // console.log(userData);
         if (userData) {
           this.setState({data: userData.user});
           console.log(this.state.data);

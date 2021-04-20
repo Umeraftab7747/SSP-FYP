@@ -92,7 +92,9 @@ export class Booking extends Component {
       <TouchableOpacity
         onPress={() => {
           this.setState({selectedData: item}, () => {
-            this.setState({modalVisible: true});
+            this.props.navigation.navigate('BookingDetails', {
+              ShareData: this.state.selectedData,
+            });
           });
         }}
         style={styles.rightFlatlist}>

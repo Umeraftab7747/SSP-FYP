@@ -20,6 +20,19 @@ export class SspLogin extends Component {
     Password: '',
   };
 
+  componentDidMount() {
+    this.UserLogin();
+  }
+
+  UserLogin = () => {
+    AsyncStorage.getItem('ServiceProviderData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.props.navigation.replace('ServiceproviderBottomtab');
+      }
+    });
+  };
+
   validate = () => {
     const {Email, Password} = this.state;
     if (Email !== '') {

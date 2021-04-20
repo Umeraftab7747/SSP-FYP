@@ -19,6 +19,20 @@ export class UserLogin extends Component {
     Email: '',
     Password: '',
   };
+
+  componentDidMount() {
+    this.UserLogin();
+  }
+
+  UserLogin = () => {
+    AsyncStorage.getItem('UserData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.props.navigation.replace('UserBottomtab');
+      }
+    });
+  };
+
   validate = () => {
     const {Email, Password} = this.state;
 

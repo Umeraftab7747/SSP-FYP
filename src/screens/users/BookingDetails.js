@@ -13,11 +13,12 @@ import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {KeyboardAwareScrollView} from '@codler/react-native-keyboard-aware-scroll-view';
 
 export class BookingDetails extends Component {
   state = {
     data: [],
+    disputeMessage: '',
   };
 
   componentDidMount() {
@@ -50,46 +51,79 @@ export class BookingDetails extends Component {
       });
   };
 
+  Disputed = () => {
+    if (this.state.disputeMessage === '') {
+      alert('ENTER THE DISPUTE REASON');
+    } else {
+      const params = {
+        id: this.state.data._id,
+        Dispute: this.state.data.UserName,
+        Message: this.state.disputeMessage,
+      };
+
+      axiosInstance
+        .post(baseUrl + '/booking/Dispute', params)
+        .then(res => {
+          this.props.navigation.goBack();
+        })
+        .catch(error => {
+          if (error) {
+            alert('Something Went Wrong');
+          }
+        });
+    }
+  };
+
   render() {
     return (
-      <View style={styles.Container}>
-        <Header text={'BOOKING DETAILS'} />
-        <View style={styles.UpperContainer}>
-          <Text style={styles.LoginText}>DETAILS</Text>
-          {/* detils */}
-          <View style={styles.DetailsContainer}>
-            <Text style={styles.LoginText2}>
-              Service Name: {this.state.data.ServiceName}
-            </Text>
-            <Text style={styles.LoginText2}>
-              ServiceType: {this.state.data.ServiceType}
-            </Text>
-            <Text style={styles.LoginText2}>
-              EMAIL: {this.state.data.ServiceProviderEmail}
-            </Text>
+      <KeyboardAwareScrollView>
+        <View style={styles.Container}>
+          <Header text={'BOOKING DETAILS'} />
+          <View style={styles.UpperContainer}>
+            <Text style={styles.LoginText}>DETAILS</Text>
+            {/* detils */}
+            <View style={styles.DetailsContainer}>
+              <Text style={styles.LoginText2}>
+                UserName: {this.state.data.UserName}
+              </Text>
+              <Text style={styles.LoginText2}>
+                Service Name: {this.state.data.ServiceName}
+              </Text>
+              <Text style={styles.LoginText2}>
+                ServiceType: {this.state.data.ServiceType}
+              </Text>
+              <Text style={styles.LoginText2}>
+                EMAIL: {this.state.data.ServiceProviderEmail}
+              </Text>
+            </View>
+            {/* detils */}
+            <Appbtn
+              onPress={() => {
+                this.Completed();
+              }}
+              text={'COMPLETED'}
+            />
           </View>
-          {/* detils */}
-          <Appbtn
-            onPress={() => {
-              this.Completed();
-            }}
-            text={'COMPLETED'}
-          />
+          <View style={styles.LowerContainer}>
+            <Text style={styles.LoginText}>Dispute Reason</Text>
+            <TextInput
+              onChangeText={disputeMessage => {
+                this.setState({disputeMessage});
+              }}
+              style={styles.TextinputStyle}
+              placeholderTextColor={'#8F94FB'}
+              placeholder={'Enter Reason for Dispute'}
+              multiline
+            />
+            <Appbtn
+              onPress={() => {
+                this.Disputed();
+              }}
+              text={'DISPUTE'}
+            />
+          </View>
         </View>
-        <View style={styles.LowerContainer}>
-          <Text style={styles.LoginText}>Dispute Reason</Text>
-          <TextInput
-            onChangeText={Message => {
-              this.setState({Message});
-            }}
-            style={styles.TextinputStyle}
-            placeholderTextColor={'#8F94FB'}
-            placeholder={'Enter Reason for Dispute'}
-            multiline
-          />
-          <Appbtn text={'DISPUTE'} />
-        </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

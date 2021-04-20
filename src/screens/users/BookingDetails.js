@@ -24,6 +24,31 @@ export class BookingDetails extends Component {
     this.setState({data: xyz});
   }
 
+  Completed = () => {
+    const params = {
+      id: this.state.data._id,
+    };
+
+    axiosInstance
+      .post(baseUrl + '/booking/Completed', params)
+      .then(res => {
+        const userData = res.data;
+        this.props.navigation.navigate('RateService', {
+          Details: this.state.data,
+        });
+        if (userData.status === '200') {
+          this.props.navigation.navigate('RateService', {
+            Details: this.state.data,
+          });
+        }
+      })
+      .catch(error => {
+        if (error) {
+          alert('Something Went Wrong');
+        }
+      });
+  };
+
   render() {
     return (
       <View style={styles.Container}>
@@ -45,9 +70,7 @@ export class BookingDetails extends Component {
           {/* detils */}
           <Appbtn
             onPress={() => {
-              let isVerified = true;
-
-              this.request(this.state.data._id, isVerified, this.state.Message);
+              this.Completed();
             }}
             text={'COMPLETED'}
           />
@@ -63,14 +86,7 @@ export class BookingDetails extends Component {
             placeholder={'Enter Reason for DisApprove'}
             multiline
           />
-          <Appbtn
-            onPress={() => {
-              let isVerified = false;
-
-              this.request(this.state.data._id, isVerified, this.state.Message);
-            }}
-            text={'DISPUTE'}
-          />
+          <Appbtn text={'DISPUTE'} />
         </View>
       </View>
     );

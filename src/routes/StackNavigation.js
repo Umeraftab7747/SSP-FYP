@@ -18,7 +18,7 @@ import {
 } from '../screens/welcome';
 import {Details, Dispute} from '../screens/Admin';
 import {Rejected, EditService, Approve, SSPBooking} from '../screens/SSP';
-import {ServiceDeatails, BookingDetails} from '../screens/users';
+import {ServiceDeatails, BookingDetails, RateService} from '../screens/users';
 
 export const StackNavigation = () => {
   return (
@@ -43,6 +43,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="BookingDetails"
           component={BookingDetails}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="RateService"
+          component={RateService}
           options={{headerShown: false}}
         />
 

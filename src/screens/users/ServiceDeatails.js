@@ -18,6 +18,7 @@ export class ServiceDeatails extends Component {
   state = {
     data: [],
     Email: '',
+    UserData: [],
   };
   componentDidMount() {
     const abc = this.props.route.params.Alldata;
@@ -32,6 +33,23 @@ export class ServiceDeatails extends Component {
         const data = JSON.parse(value);
         if (data !== null) {
           this.setState({Email: data});
+
+          const params = {
+            email: this.state.Email,
+          };
+
+          axiosInstance
+            .post(baseUrl + '/users/UserDetails', params)
+            .then(res => {
+              const userData = res.data;
+
+              this.setState({UserData: userData.user});
+            })
+            .catch(error => {
+              if (error) {
+                alert('Something Went Wrong');
+              }
+            });
         }
       })
       .done();
@@ -40,9 +58,11 @@ export class ServiceDeatails extends Component {
   BookService = () => {
     const params = {
       UserEmail: this.state.Email,
+      UserName: this.state.UserData.Name,
       ServiceProviderEmail: this.state.data.Email,
       ServiceName: this.state.data.ServiceName,
       ServiceType: this.state.data.ServiceType,
+      ServiceId: this.state.data._id,
     };
 
     axiosInstance

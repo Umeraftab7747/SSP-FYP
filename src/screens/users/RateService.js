@@ -37,8 +37,9 @@ export class RateService extends Component {
         if (data !== null) {
           // this.setState({Email: data});
           const params = {
-            Sid: this.state.data._id,
+            Sid: this.state.data.ServiceId,
             UserEmail: data,
+            UserName: this.state.data.UserName,
             ServiceName: this.state.data.ServiceName,
             Rating: this.state.Rating,
             Message: this.state.Comment,

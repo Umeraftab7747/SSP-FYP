@@ -23,9 +23,7 @@ export class Booking extends Component {
   };
 
   componentDidMount() {
-    setInterval(() => {
-      this.getData();
-    }, 1000);
+    this.getData();
   }
 
   // GETING LOGIN DATA

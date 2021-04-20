@@ -59,6 +59,9 @@ export class BookingDetails extends Component {
           {/* detils */}
           <View style={styles.DetailsContainer}>
             <Text style={styles.LoginText2}>
+              id: {this.state.data.ServiceId}
+            </Text>
+            <Text style={styles.LoginText2}>
               Service Name: {this.state.data.ServiceName}
             </Text>
             <Text style={styles.LoginText2}>

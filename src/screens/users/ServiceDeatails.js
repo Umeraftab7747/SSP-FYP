@@ -19,6 +19,7 @@ export class ServiceDeatails extends Component {
     data: [],
     Email: '',
     UserData: [],
+    rating: [],
   };
   componentDidMount() {
     const abc = this.props.route.params.Alldata;
@@ -33,6 +34,8 @@ export class ServiceDeatails extends Component {
         const data = JSON.parse(value);
         if (data !== null) {
           this.setState({Email: data});
+
+          this.Rating();
 
           const params = {
             email: this.state.Email,
@@ -55,6 +58,7 @@ export class ServiceDeatails extends Component {
       .done();
   };
 
+  // Booking
   BookService = () => {
     const params = {
       UserEmail: this.state.Email,
@@ -81,6 +85,58 @@ export class ServiceDeatails extends Component {
         }
       });
   };
+
+  // Rating
+  Rating = () => {
+    const params = {
+      id: this.state.data._id,
+    };
+
+    axiosInstance
+      .post(baseUrl + '/rating/rating', params)
+      .then(res => {
+        const userData = res.data;
+        this.setState({rating: userData.user});
+      })
+      .catch(error => {
+        if (error) {
+          alert('Something Went Wrong');
+        }
+      });
+  };
+
+  // Flatlist Container
+  renderItem = item => (
+    <View style={styles.FlatListContainer}>
+      <View style={styles.RightFlatList}>
+        <Text style={styles.FlatlistName}>NAME: {item.UserName}</Text>
+        <Text
+          style={[
+            styles.FlatlistName,
+            {
+              marginLeft: h('2%'),
+            },
+          ]}>
+          Rating:
+        </Text>
+
+        <Icon
+          name="star"
+          type="ionicon"
+          color="#517fa4"
+          size={15}
+          style={{
+            marginLeft: h('0.5%'),
+          }}
+        />
+        <Text style={styles.FlatlistRating}>{item.Rating} </Text>
+      </View>
+      {/* lower Container */}
+      <View style={styles.RightLowerContainer}>
+        <Text style={styles.FlatlistRating}>{item.Message}</Text>
+      </View>
+    </View>
+  );
 
   render() {
     return (
@@ -112,7 +168,15 @@ export class ServiceDeatails extends Component {
         {/* detail Container end */}
 
         <View style={styles.RatingContainer}>
-          <Text style={styles.Text}>RATING</Text>
+          <Text style={styles.Text}>RATING </Text>
+
+          {/* flatlist */}
+          <FlatList
+            data={this.state.rating}
+            renderItem={({item}) => this.renderItem(item)}
+            keyExtractor={item => item._id}
+          />
+          {/* flatlist */}
         </View>
       </View>
     );
@@ -154,5 +218,40 @@ const styles = StyleSheet.create({
     height: h('100%'),
     // backgroundColor: 'red',
     padding: h('2%'),
+  },
+  FlatListContainer: {
+    backgroundColor: 'white',
+    width: '90%',
+    height: h('10%'),
+    borderRadius: h('1%'),
+    marginTop: 5,
+
+    borderColor: '#8F94FB',
+    borderWidth: h('0.2%'),
+  },
+  RightLowerContainer: {
+    // backgroundColor: 'red',
+    width: '100%',
+    height: h('10%'),
+    paddingLeft: h('1%'),
+    paddingRight: h('1%'),
+  },
+  RightFlatList: {
+    // backgroundColor: 'green',
+    width: '100%',
+    height: '35%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingLeft: h('1%'),
+  },
+  FlatlistName: {
+    color: '#8F94FB',
+    fontSize: h('2%'),
+    fontWeight: 'bold',
+  },
+  FlatlistRating: {
+    color: '#8F94FB',
+    fontSize: h('2%'),
+    marginLeft: h('0.5%'),
   },
 });

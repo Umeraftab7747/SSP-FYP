@@ -122,13 +122,26 @@ export class Booking extends Component {
         {/* Searchbar */}
 
         {/* flatlist */}
-        <FlatList
-          data={this.state.listData}
-          renderItem={({item}) => this.renderItem(item)}
-          keyExtractor={item => item._id}
-          onRefresh={() => this.onRefresh()}
-          refreshing={this.state.isFetching}
-        />
+        {this.state.listData.length <= 0 ? (
+          <View style={styles.LoadData}>
+            <TouchableOpacity
+              style={styles.RButton}
+              onPress={() => {
+                this.componentDidMount();
+              }}>
+              <Text style={styles.EmptyText}>Refresh ?</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <FlatList
+            data={this.state.listData}
+            renderItem={({item}) => this.renderItem(item)}
+            keyExtractor={item => item._id}
+            onRefresh={() => this.onRefresh()}
+            refreshing={this.state.isFetching}
+          />
+        )}
+
         {/* flatlist */}
       </View>
     );
@@ -194,5 +207,25 @@ const styles = StyleSheet.create({
     color: '#8F94FB',
     fontSize: h('2%'),
     fontWeight: 'bold',
+  },
+  LoadData: {
+    width: '100%',
+    height: '80%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  EmptyText: {
+    color: '#8F94FB',
+    fontSize: h('2.5%'),
+    fontWeight: 'bold',
+  },
+  RButton: {
+    width: w('60%'),
+    height: h('7%'),
+    borderWidth: h('0.3%'),
+    borderColor: '#8F94FB',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: h('10%'),
   },
 });

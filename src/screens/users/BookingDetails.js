@@ -59,9 +59,6 @@ export class BookingDetails extends Component {
           {/* detils */}
           <View style={styles.DetailsContainer}>
             <Text style={styles.LoginText2}>
-              id: {this.state.data.ServiceId}
-            </Text>
-            <Text style={styles.LoginText2}>
               Service Name: {this.state.data.ServiceName}
             </Text>
             <Text style={styles.LoginText2}>
@@ -80,14 +77,14 @@ export class BookingDetails extends Component {
           />
         </View>
         <View style={styles.LowerContainer}>
-          <Text style={styles.LoginText}>MESSAGE</Text>
+          <Text style={styles.LoginText}>Dispute Reason</Text>
           <TextInput
             onChangeText={Message => {
               this.setState({Message});
             }}
             style={styles.TextinputStyle}
             placeholderTextColor={'#8F94FB'}
-            placeholder={'Enter Reason for DisApprove'}
+            placeholder={'Enter Reason for Dispute'}
             multiline
           />
           <Appbtn text={'DISPUTE'} />

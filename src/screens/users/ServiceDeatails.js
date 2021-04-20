@@ -169,15 +169,14 @@ export class ServiceDeatails extends Component {
 
         <View style={styles.RatingContainer}>
           <Text style={styles.Text}>RATING </Text>
-
-          {/* flatlist */}
-          <FlatList
-            data={this.state.rating}
-            renderItem={({item}) => this.renderItem(item)}
-            keyExtractor={item => item._id}
-          />
-          {/* flatlist */}
         </View>
+        {/* flatlist */}
+        <FlatList
+          data={this.state.rating}
+          renderItem={({item}) => this.renderItem(item)}
+          keyExtractor={item => item._id}
+        />
+        {/* flatlist */}
       </View>
     );
   }
@@ -215,13 +214,13 @@ const styles = StyleSheet.create({
   },
   RatingContainer: {
     width: '100%',
-    height: h('100%'),
+    height: h('7%'),
     // backgroundColor: 'red',
     padding: h('2%'),
   },
   FlatListContainer: {
     backgroundColor: 'white',
-    width: '90%',
+    width: w('90%'),
     height: h('10%'),
     borderRadius: h('1%'),
     marginTop: 5,

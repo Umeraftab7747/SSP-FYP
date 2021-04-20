@@ -245,7 +245,7 @@ export class Service extends Component {
               }>
               <Picker.Item
                 label="CCTV Desgin and Installtion"
-                value="english"
+                value="CCTV Desgin and Installtion"
               />
               <Picker.Item
                 label="Number Plate Camera"

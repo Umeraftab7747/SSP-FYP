@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {
   Text,
@@ -12,17 +13,14 @@ import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
+import {Picker} from '@react-native-picker/picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class RateService extends Component {
   state = {
     data: [],
-    Rating: '',
-    star1: true,
-    star2: true,
-    star3: true,
-    star4: true,
-    star5: true,
+    Rating: '1',
+    Comment: '',
   };
 
   componentDidMount() {
@@ -31,42 +29,38 @@ export class RateService extends Component {
   }
 
   Rated = text => {
-    AsyncStorage.getItem('UserData').then(value => {
-      const data = JSON.parse(value);
-      if (data !== null) {
-        // this.setState({Email: data});
-        const params = {
-          Sid: this.state.data._id,
-          UserEmail: 'adasd',
-          ServiceName: data,
-          Rating: '',
-          Message: text,
-        };
+    if (this.state.Comment === '') {
+      alert('Kindly Write the Comment to Submit');
+    } else {
+      AsyncStorage.getItem('UserData').then(value => {
+        const data = JSON.parse(value);
+        if (data !== null) {
+          // this.setState({Email: data});
+          const params = {
+            Sid: this.state.data._id,
+            UserEmail: data,
+            ServiceName: this.state.data.ServiceName,
+            Rating: this.state.Rating,
+            Message: this.state.Comment,
+          };
 
-        axiosInstance
-          .post(baseUrl + '/booking/Completed', params)
-          .then(res => {
-            const userData = res.data;
-            console.log(userData.user);
+          axiosInstance
+            .post(baseUrl + '/rating/rateService', params)
+            .then(res => {
+              const userData = res.data;
+              console.log(userData.user);
 
-            if (userData.status === '200') {
-              this.props.navigation.navigate('RateService', {
-                Details: userData.user,
-              });
-            }
-          })
-          .catch(error => {
-            if (error) {
-              alert('Something Went Wrong');
-            }
-          });
-      }
-    });
-  };
-
-  StarValue = value => {
-    if (value === 1) {
-      this.setState({Rating: 1, star1: !this.state.star1});
+              if (userData.status === '200') {
+                this.props.navigation.navigate('UserBottomtab');
+              }
+            })
+            .catch(error => {
+              if (error) {
+                alert('Something Went Wrong');
+              }
+            });
+        }
+      });
     }
   };
 
@@ -80,28 +74,22 @@ export class RateService extends Component {
           <Text style={styles.LoginText2}>RATE THE SERVICE </Text>
 
           {/* RATING BAR */}
-          <View style={styles.RatingContainer}>
-            {this.state.star === true ? (
-              <TouchableOpacity
-                onPress={() => {
-                  this.StarValue(1);
-                }}>
-                <Icon name="star" type="ionicon" color="gold" size={40} />
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                onPress={() => {
-                  this.StarValue(0);
-                }}>
-                <Icon
-                  name="star-outline"
-                  type="ionicon"
-                  color="gold"
-                  size={40}
-                />
-              </TouchableOpacity>
-            )}
-          </View>
+          <Picker
+            selectedValue={this.state.Rating}
+            style={{
+              height: h('7%'),
+              width: w('25%'),
+              color: '#8F94FB',
+            }}
+            onValueChange={(itemValue, itemIndex) =>
+              this.setState({Rating: itemValue})
+            }>
+            <Picker.Item label="1" value="1" />
+            <Picker.Item label="2" value="2" />
+            <Picker.Item label="3" value="3" />
+            <Picker.Item label="4" value="4" />
+            <Picker.Item label="5" value="5" />
+          </Picker>
           {/* RATING BAR */}
 
           {/* detils */}
@@ -109,15 +97,20 @@ export class RateService extends Component {
         <View style={styles.LowerContainer}>
           <Text style={styles.LoginText}>Comment</Text>
           <TextInput
-            onChangeText={Message => {
-              this.setState({Message});
+            onChangeText={Comment => {
+              this.setState({Comment});
             }}
             style={styles.TextinputStyle}
             placeholderTextColor={'#8F94FB'}
-            placeholder={'Enter Reason for DisApprove'}
+            placeholder={'Enter Comment'}
             multiline
           />
-          <Appbtn text={'Rate Service'} />
+          <Appbtn
+            onPress={() => {
+              this.Rated();
+            }}
+            text={'Rate Service'}
+          />
         </View>
       </View>
     );

@@ -12,6 +12,7 @@ import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class BookingDetails extends Component {

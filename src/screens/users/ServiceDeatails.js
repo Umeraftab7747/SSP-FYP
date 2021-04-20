@@ -72,8 +72,8 @@ export class ServiceDeatails extends Component {
         }
       })
       .catch(error => {
-        if (error) {
-          alert('Something Went Wrong');
+        if ('Error: Request failed with status code 404') {
+          alert('Service Already BOOKED');
         }
       });
   };

@@ -15,7 +15,11 @@ export class Dashbord extends Component {
       <View style={styles.Container}>
         <Header text={'ADMIN-DASHBOARD'} />
         {/* btn */}
-        <TouchableOpacity style={styles.Btn}>
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('Dispute');
+          }}
+          style={styles.Btn}>
           <Text style={styles.BtnText}>DISPUTES</Text>
         </TouchableOpacity>
         {/* btn */}

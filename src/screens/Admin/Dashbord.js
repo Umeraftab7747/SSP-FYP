@@ -2,12 +2,18 @@ import React, {Component} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Header} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class Dashbord extends Component {
+  removeData = () => {
+    AsyncStorage.removeItem('admin', () => {
+      this.props.navigation.replace('UserLogin');
+    });
+  };
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'DASHBOARD'} />
+        <Header text={'ADMIN-DASHBOARD'} />
         {/* btn */}
         <TouchableOpacity style={styles.Btn}>
           <Text style={styles.BtnText}>DISPUTES</Text>
@@ -20,6 +26,15 @@ export class Dashbord extends Component {
         {/* btn */}
         <TouchableOpacity style={styles.Btn}>
           <Text style={styles.BtnText}>ADD EQUIPMENTS</Text>
+        </TouchableOpacity>
+        {/* btn */}
+        {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
+            this.removeData();
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>LOGOUT</Text>
         </TouchableOpacity>
         {/* btn */}
       </View>

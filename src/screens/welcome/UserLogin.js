@@ -31,13 +31,23 @@ export class UserLogin extends Component {
         this.props.navigation.replace('UserBottomtab');
       }
     });
+
+    // admin auto
+    AsyncStorage.getItem('admin').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.props.navigation.replace('AdminBottomTab');
+      }
+    });
   };
 
   validate = () => {
     const {Email, Password} = this.state;
 
     if (Email === 'admin@admin.com' && Password === '123456') {
-      this.props.navigation.replace('AdminBottomTab');
+      AsyncStorage.setItem('admin', JSON.stringify(Email), () => {
+        this.props.navigation.replace('AdminBottomTab');
+      });
     } else {
       if (Email !== '') {
         if (Password !== '') {

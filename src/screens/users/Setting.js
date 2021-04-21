@@ -2,8 +2,15 @@ import React, {Component} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Header} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class Setting extends Component {
+  removeData = () => {
+    AsyncStorage.removeItem('UserData', () => {
+      this.props.navigation.replace('UserLogin');
+    });
+  };
+
   render() {
     return (
       <>
@@ -27,7 +34,11 @@ export class Setting extends Component {
           </TouchableOpacity>
           {/* btn */}
           {/* btn */}
-          <TouchableOpacity style={styles.Btn}>
+          <TouchableOpacity
+            onPress={() => {
+              this.removeData();
+            }}
+            style={styles.Btn}>
             <Text style={styles.BtnText}>LOGOUT</Text>
           </TouchableOpacity>
           {/* btn */}

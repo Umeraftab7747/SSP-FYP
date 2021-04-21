@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  Modal,
-} from 'react-native';
+import {Text, StyleSheet, View, FlatList, TextInput} from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class AllBooking extends Component {
   state = {

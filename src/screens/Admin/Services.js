@@ -7,6 +7,7 @@ import {axiosInstance, baseUrl} from '../api';
 export class Services extends Component {
   state = {
     data: [],
+    isFetching: false,
   };
 
   componentDidMount() {
@@ -27,8 +28,9 @@ export class Services extends Component {
         const userData = res.data;
         // console.log(userData);
         if (userData) {
-          this.setState({data: userData.user});
-          console.log(this.state.data);
+          this.setState({data: userData.user}, () => {
+            this.setState({isFetching: false});
+          });
         } else if (!userData) {
           console.log('404 status' + userData);
         }
@@ -39,6 +41,11 @@ export class Services extends Component {
     // ASYC
   };
 
+  onRefresh() {
+    this.setState({isFetching: true}, () => {
+      this.componentDidMount();
+    });
+  }
   // Flatlist Container
   renderItem = item => (
     <View style={styles.FlatListContainer}>
@@ -65,6 +72,8 @@ export class Services extends Component {
           data={this.state.data}
           renderItem={({item}) => this.renderItem(item)}
           keyExtractor={item => item._id}
+          onRefresh={() => this.onRefresh()}
+          refreshing={this.state.isFetching}
         />
       </View>
     );

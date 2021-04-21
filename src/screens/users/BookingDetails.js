@@ -47,7 +47,7 @@ export class BookingDetails extends Component {
     } else {
       const params = {
         id: this.state.data._id,
-        Dispute: this.state.data.UserName,
+        Disputedby: this.state.data.UserName,
         Message: this.state.disputeMessage,
       };
 

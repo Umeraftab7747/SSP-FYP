@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 import {Icon} from 'react-native-elements';
 
-import {Dashboard, Booking} from '../screens/users';
+import {Dashboard, Booking, Setting} from '../screens/users';
 
 export const UserBottomtab = () => {
   return (
@@ -31,6 +31,22 @@ export const UserBottomtab = () => {
           tabBarLabel: 'Booking',
           tabBarIcon: ({color, size}) => (
             <Icon name={'folder'} type={'ionicon'} color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Setting"
+        component={Setting}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Setting',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name={'cog-sharp'}
+              type={'ionicon'}
+              color={color}
+              size={size}
+            />
           ),
         }}
       />

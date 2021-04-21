@@ -103,7 +103,7 @@ export class Service extends Component {
               alert('Data Submitted for Review');
               this.setState({
                 Name: '',
-                ServiceType: '',
+                ServiceType: 'Armed Guard',
                 discription: '',
                 image: '',
               });

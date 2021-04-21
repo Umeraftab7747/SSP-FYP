@@ -3,6 +3,7 @@ import {Text, StyleSheet, View, TextInput} from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {axiosInstance, baseUrl} from '../api';
+import {KeyboardAwareScrollView} from '@codler/react-native-keyboard-aware-scroll-view';
 
 export class Details extends Component {
   state = {
@@ -41,56 +42,66 @@ export class Details extends Component {
 
   render() {
     return (
-      <View style={styles.Container}>
-        <Header text={'SERVICE DETAILS'} />
-        <View style={styles.UpperContainer}>
-          <Text style={styles.LoginText}>DETAILS</Text>
-          {/* detils */}
-          <View style={styles.DetailsContainer}>
-            <Text style={styles.LoginText2}>
-              Service Name: {this.state.data.ServiceName}
-            </Text>
-            <Text style={styles.LoginText2}>
-              ServiceType: {this.state.data.ServiceType}
-            </Text>
-            <Text style={styles.LoginText2}>
-              EMAIL: {this.state.data.Email}
-            </Text>
-            <Text style={styles.LoginText2}>
-              Discription: {this.state.data.discription}
-            </Text>
+      <KeyboardAwareScrollView>
+        <View style={styles.Container}>
+          <Header text={'SERVICE DETAILS'} />
+          <View style={styles.UpperContainer}>
+            <Text style={styles.LoginText}>DETAILS</Text>
+            {/* detils */}
+            <View style={styles.DetailsContainer}>
+              <Text style={styles.LoginText2}>
+                Service Name: {this.state.data.ServiceName}
+              </Text>
+              <Text style={styles.LoginText2}>
+                ServiceType: {this.state.data.ServiceType}
+              </Text>
+              <Text style={styles.LoginText2}>
+                EMAIL: {this.state.data.Email}
+              </Text>
+              <Text style={styles.LoginText2}>
+                Discription: {this.state.data.discription}
+              </Text>
+            </View>
+            {/* detils */}
+            <Appbtn
+              onPress={() => {
+                let isVerified = true;
+
+                this.request(
+                  this.state.data._id,
+                  isVerified,
+                  this.state.Message,
+                );
+              }}
+              text={'APPROVE'}
+            />
           </View>
-          {/* detils */}
-          <Appbtn
-            onPress={() => {
-              let isVerified = true;
+          <View style={styles.LowerContainer}>
+            <Text style={styles.LoginText}>MESSAGE</Text>
+            <TextInput
+              onChangeText={Message => {
+                this.setState({Message});
+              }}
+              style={styles.TextinputStyle}
+              placeholderTextColor={'#8F94FB'}
+              placeholder={'Enter Reason for DisApprove'}
+              multiline
+            />
+            <Appbtn
+              onPress={() => {
+                let isVerified = false;
 
-              this.request(this.state.data._id, isVerified, this.state.Message);
-            }}
-            text={'APPROVE'}
-          />
+                this.request(
+                  this.state.data._id,
+                  isVerified,
+                  this.state.Message,
+                );
+              }}
+              text={'Dis-APPROVE'}
+            />
+          </View>
         </View>
-        <View style={styles.LowerContainer}>
-          <Text style={styles.LoginText}>MESSAGE</Text>
-          <TextInput
-            onChangeText={Message => {
-              this.setState({Message});
-            }}
-            style={styles.TextinputStyle}
-            placeholderTextColor={'#8F94FB'}
-            placeholder={'Enter Reason for DisApprove'}
-            multiline
-          />
-          <Appbtn
-            onPress={() => {
-              let isVerified = false;
-
-              this.request(this.state.data._id, isVerified, this.state.Message);
-            }}
-            text={'Dis-APPROVE'}
-          />
-        </View>
-      </View>
+      </KeyboardAwareScrollView>
     );
   }
 }

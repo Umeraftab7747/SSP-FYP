@@ -23,7 +23,11 @@ export class Dashbord extends Component {
           <Text style={styles.BtnText}>DISPUTES</Text>
         </TouchableOpacity>
         {/* btn */}
-        <TouchableOpacity style={styles.Btn}>
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('AllBooking');
+          }}
+          style={styles.Btn}>
           <Text style={styles.BtnText}>BOOKING</Text>
         </TouchableOpacity>
         {/* btn */}

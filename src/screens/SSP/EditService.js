@@ -28,12 +28,19 @@ export class EditService extends Component {
     discription: '',
     image: '',
     test: '',
-    data: '',
+    data: [],
+    ServiceName: '',
   };
 
   componentDidMount() {
     const abc = this.props.route.params.ShareData;
-    this.setState({data: abc});
+    this.setState({data: abc}, () => {
+      this.setState({
+        Name: this.state.data.ServiceName,
+        discription: this.state.data.discription,
+      });
+    });
+
     this.getData();
   }
 
@@ -133,7 +140,7 @@ export class EditService extends Component {
             onChangeText={Name => {
               this.setState({Name});
             }}
-            value={this.state.data.ServiceName}
+            value={this.state.Name}
           />
 
           <View style={styles.RadioContainer}>
@@ -289,7 +296,7 @@ export class EditService extends Component {
             placeholderTextColor={'#8F94FB'}
             placeholder={'Enter Discription'}
             multiline
-            value={this.state.data.discription}
+            value={this.state.discription}
           />
 
           <View style={styles.RadioContainer}>

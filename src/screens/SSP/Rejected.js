@@ -99,14 +99,17 @@ export class Rejected extends Component {
                 <Text style={[styles.LoginText2]}>
                   ServiceName: {this.state.selectedData.ServiceName}
                 </Text>
-                <Text style={styles.LoginText2}>
-                  ServiceType: {this.state.selectedData.ServiceType}
+                <Text
+                  style={[
+                    styles.LoginText2,
+                    {
+                      marginTop: h('2%'),
+                    },
+                  ]}>
+                  Rejection Reason:
                 </Text>
-                <Text style={styles.LoginText2}>
-                  EMAIL: {this.state.selectedData.Email}
-                </Text>
-                <Text style={styles.LoginText2}>
-                  discription: {this.state.selectedData.discription}
+                <Text style={styles.LoginText3}>
+                  {this.state.selectedData.Message}
                 </Text>
               </View>
 
@@ -192,6 +195,11 @@ const styles = StyleSheet.create({
     fontSize: h('2.4%'),
     fontWeight: 'bold',
     marginTop: h('1%'),
+  },
+  LoginText3: {
+    color: '#8F94FB',
+    fontSize: h('2.2%'),
+    // marginTop: h('1%'),
   },
   TEXTCONTAINER: {
     width: '100%',

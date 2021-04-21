@@ -2,8 +2,14 @@ import React, {Component} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Header} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class Dashboard extends Component {
+  removeData = () => {
+    AsyncStorage.removeItem('ServiceProviderData', () => {
+      this.props.navigation.replace('SspLogin');
+    });
+  };
   render() {
     return (
       <View style={styles.Container}>
@@ -35,6 +41,13 @@ export class Dashboard extends Component {
           <Text style={styles.BtnText}>BOOKING</Text>
         </TouchableOpacity>
         {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
+            this.removeData();
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>LOGOUT</Text>
+        </TouchableOpacity>
       </View>
     );
   }

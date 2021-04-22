@@ -16,7 +16,6 @@ export class Dashboard extends Component {
       const data = JSON.parse(value);
       if (data !== null) {
         this.setState({Email: data});
-        console.warn(this.state.Email);
       }
     });
   };

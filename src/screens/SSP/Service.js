@@ -291,6 +291,7 @@ export class Service extends Component {
           <TextInput
             onChangeText={discription => this.setState({discription})}
             style={styles.TextinputStyle}
+            value={this.state.discription}
             placeholderTextColor={'#8F94FB'}
             placeholder={'Enter Discription'}
             multiline

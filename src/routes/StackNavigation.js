@@ -15,6 +15,7 @@ import {
   SspSignup,
   UserPassword,
   SspPassowrd,
+  SplashScreen,
 } from '../screens/welcome';
 import {Details, Dispute, AllBooking} from '../screens/Admin';
 import {Rejected, EditService, Approve, SSPBooking} from '../screens/SSP';
@@ -30,7 +31,13 @@ export const StackNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="SplashScreen"
+          component={SplashScreen}
+          options={{headerShown: false}}
+        />
         {/* USER */}
+
         <Stack.Screen
           name="UserLogin"
           component={UserLogin}

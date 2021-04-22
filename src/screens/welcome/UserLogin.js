@@ -39,6 +39,14 @@ export class UserLogin extends Component {
         this.props.navigation.replace('AdminBottomTab');
       }
     });
+
+    // Service Provider Login
+    AsyncStorage.getItem('ServiceProviderData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.props.navigation.replace('ServiceproviderBottomtab');
+      }
+    });
   };
 
   validate = () => {

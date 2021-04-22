@@ -5,6 +5,21 @@ import {w, h} from 'react-native-responsiveness';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class Dashboard extends Component {
+  state = {
+    Email: '',
+  };
+  componentDidMount() {
+    this.getData();
+  }
+  getData = () => {
+    AsyncStorage.getItem('ServiceProviderData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.setState({Email: data});
+        console.warn(this.state.Email);
+      }
+    });
+  };
   removeData = () => {
     AsyncStorage.removeItem('ServiceProviderData', () => {
       this.props.navigation.replace('SspLogin');

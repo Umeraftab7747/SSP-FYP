@@ -35,7 +35,10 @@ export class Approve extends Component {
 
           // AXIOS NOW
           axiosInstance
-            .get(baseUrl + `/service-provider/services/${this.state.Email}`)
+            .get(
+              baseUrl +
+                `/service-provider/verifiedservices/${this.state.Email}`,
+            )
             .then(res => {
               const userData = res.data;
               console.log(userData);
@@ -99,17 +102,12 @@ export class Approve extends Component {
                 <Text style={[styles.LoginText2]}>
                   ServiceName: {this.state.selectedData.ServiceName}
                 </Text>
-                <Text
-                  style={[
-                    styles.LoginText2,
-                    {
-                      marginTop: h('2%'),
-                    },
-                  ]}>
-                  Rejection Reason:
+                <Text style={[styles.LoginText2]}>
+                  Email:{this.state.selectedData.Email}
                 </Text>
+                <Text style={[styles.LoginText2]}>Discription:</Text>
                 <Text style={styles.LoginText3}>
-                  {this.state.selectedData.Message}
+                  {this.state.selectedData.discription}
                 </Text>
               </View>
 

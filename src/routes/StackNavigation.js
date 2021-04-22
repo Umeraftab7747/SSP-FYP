@@ -18,7 +18,13 @@ import {
   SplashScreen,
 } from '../screens/welcome';
 import {Details, Dispute, AllBooking} from '../screens/Admin';
-import {Rejected, EditService, Approve, SSPBooking} from '../screens/SSP';
+import {
+  Rejected,
+  EditService,
+  Approve,
+  SSPBooking,
+  SSPServiceDetails,
+} from '../screens/SSP';
 import {
   ServiceDeatails,
   BookingDetails,
@@ -100,6 +106,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="SSPBooking"
           component={SSPBooking}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SSPServiceDetails"
+          component={SSPServiceDetails}
           options={{headerShown: false}}
         />
         {/* Service provider */}

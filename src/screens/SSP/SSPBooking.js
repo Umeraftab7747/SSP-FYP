@@ -95,7 +95,7 @@ export class SSPBooking extends Component {
       <TouchableOpacity
         onPress={() => {
           this.setState({selectedData: item}, () => {
-            this.props.navigation.navigate('ServiceDeatails', {
+            this.props.navigation.navigate('SSPServiceDetails', {
               Alldata: this.state.selectedData,
             });
           });

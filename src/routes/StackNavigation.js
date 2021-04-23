@@ -17,7 +17,13 @@ import {
   SspPassowrd,
   SplashScreen,
 } from '../screens/welcome';
-import {Details, Dispute, AllBooking} from '../screens/Admin';
+import {
+  Details,
+  Dispute,
+  AllBooking,
+  AllServices,
+  AllserviceDetails,
+} from '../screens/Admin';
 import {
   Rejected,
   EditService,
@@ -142,6 +148,17 @@ export const StackNavigation = () => {
           component={AllBooking}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="AllServices"
+          component={AllServices}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AllserviceDetails"
+          component={AllserviceDetails}
+          options={{headerShown: false}}
+        />
+
         {/* ADMIN */}
 
         <Stack.Screen

@@ -140,7 +140,7 @@ export class SspLogin extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                this.props.navigation.goBack();
+                this.props.navigation.navigate('UserLogin');
               }}>
               <Text
                 style={[

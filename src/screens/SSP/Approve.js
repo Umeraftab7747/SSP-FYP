@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
-import {Icon} from 'react-native-elements';
+import {Icon, ThemeConsumer} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -148,7 +148,14 @@ export class Approve extends Component {
                 }}
                 text={'DELETE'}
               />
-              <Appbtn onPress={() => {}} text={'Rating'} />
+              <Appbtn
+                onPress={() => {
+                  this.props.navigation.navigate('RatingScreen', {
+                    id: this.state.selectedData._id,
+                  });
+                }}
+                text={'Rating'}
+              />
             </View>
           </View>
         </Modal>

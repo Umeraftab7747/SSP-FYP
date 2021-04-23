@@ -27,35 +27,56 @@ export class Approve extends Component {
   }
 
   unverifiedusers = () => {
-    AsyncStorage.getItem('ServiceProviderData')
-      .then(value => {
-        const data = JSON.parse(value);
-        if (data !== null) {
-          this.setState({Email: data});
+    AsyncStorage.getItem('ServiceProviderData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.setState({Email: data});
 
-          // AXIOS NOW
-          axiosInstance
-            .get(
-              baseUrl +
-                `/service-provider/verifiedservices/${this.state.Email}`,
-            )
-            .then(res => {
-              const userData = res.data;
-              console.log(userData);
+        // AXIOS NOW
+        axiosInstance
+          .get(
+            baseUrl + `/service-provider/verifiedservices/${this.state.Email}`,
+          )
+          .then(res => {
+            const userData = res.data;
+            console.log(userData);
 
-              if (userData) {
-                this.setState({data: userData});
-              } else if (userData.status === 404) {
-                console.log('404 status' + userData);
-              }
-            })
-            .catch(error => {
-              console.log('error catch status' + error);
-            });
-          // AXIOS END
+            if (userData) {
+              this.setState({data: userData});
+            } else if (userData.status === 404) {
+              console.log('404 status' + userData);
+            }
+          })
+          .catch(error => {
+            console.log('error catch status' + error);
+          });
+        // AXIOS END
+      }
+    });
+  };
+
+  // delet
+  Delete = value => {
+    const params = {
+      _id: value,
+    };
+
+    // ASY
+    axiosInstance
+      .post(baseUrl + '/service/deletService', params)
+      .then(res => {
+        const userData = res.data;
+        if (userData.status === 200) {
+          alert('Service Deleted');
+          this.setState({modalVisible: false}, () => {
+            this.componentDidMount();
+          });
         }
       })
-      .done();
+      .catch(error => {
+        console.log(error);
+      });
+    // ASYC
   };
 
   // Flatlist Container
@@ -123,10 +144,11 @@ export class Approve extends Component {
               />
               <Appbtn
                 onPress={() => {
-                  this.delete(this.state.selectedData.Email);
+                  this.Delete(this.state.selectedData._id);
                 }}
                 text={'DELETE'}
               />
+              <Appbtn onPress={() => {}} text={'Rating'} />
             </View>
           </View>
         </Modal>
@@ -177,7 +199,7 @@ const styles = StyleSheet.create({
   },
   ViewContainer: {
     width: w('95%'),
-    height: h('50%'),
+    height: h('75%'),
     backgroundColor: 'white',
     borderRadius: h('2%'),
     alignItems: 'center',

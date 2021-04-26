@@ -48,6 +48,13 @@ export class Dashbord extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
+            this.props.navigation.navigate('AllUser');
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>ALL USERS</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
             this.removeData();
           }}
           style={styles.Btn}>

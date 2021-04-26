@@ -6,3 +6,4 @@ export {Dispute} from './Dispute';
 export {AllBooking} from './AllBooking';
 export {AllServices} from './AllServices';
 export {AllserviceDetails} from './AllserviceDetails';
+export {AllUser} from './AllUser';

@@ -27,18 +27,6 @@ export class AllServices extends Component {
     this.verifiedRequests();
   }
 
-  // GETING LOGIN DATA
-  getData = () => {
-    AsyncStorage.getItem('UserData')
-      .then(value => {
-        const data = JSON.parse(value);
-        if (data !== null) {
-          // this.setState({Email: data});
-        }
-      })
-      .done();
-  };
-
   verifiedRequests = () => {
     axiosInstance
       .get(baseUrl + '/users/services')

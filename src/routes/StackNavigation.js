@@ -24,6 +24,7 @@ import {
   AllServices,
   AllserviceDetails,
   AllUser,
+  AllUserDetails,
 } from '../screens/Admin';
 import {
   Rejected,
@@ -162,6 +163,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="AllUser"
           component={AllUser}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AllUserDetails"
+          component={AllUserDetails}
           options={{headerShown: false}}
         />
 

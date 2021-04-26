@@ -7,3 +7,4 @@ export {AllBooking} from './AllBooking';
 export {AllServices} from './AllServices';
 export {AllserviceDetails} from './AllserviceDetails';
 export {AllUser} from './AllUser';
+export {AllUserDetails} from './AllUserDetails';

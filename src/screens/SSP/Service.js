@@ -13,6 +13,10 @@ import {w, h} from 'react-native-responsiveness';
 import {Picker} from '@react-native-picker/picker';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import storage from '@react-native-firebase/storage';
+// Import Document Picker
+import DocumentPicker from 'react-native-document-picker';
 
 export class Service extends Component {
   state = {
@@ -33,6 +37,39 @@ export class Service extends Component {
   componentDidMount() {
     this.getData();
   }
+
+  openCamera = () => {
+    launchImageLibrary({quality: 0.5}, fileobj => {
+      // end
+      const uploadTask = storage()
+        .ref()
+        .child(`/items/${Date.now()}`)
+        .putFile(fileobj.uri);
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          var progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          if (progress == 100) {
+            alert('uploaded');
+          }
+        },
+
+        error => {
+          console.log(error);
+          alert('something went wrong');
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+            this.setState({image: downloadURL});
+          });
+        },
+      );
+
+      // end
+    });
+  };
+
   // getLogin Data
   getData = () => {
     AsyncStorage.getItem('ServiceProviderData')
@@ -53,7 +90,7 @@ export class Service extends Component {
       ServiceType !== '' &&
       discription !== ''
     ) {
-      if (image === '') {
+      if (image) {
         const params = {
           Email: Email,
           Name: Name,
@@ -352,10 +389,10 @@ export class Service extends Component {
 
           {this.state.check ? (
             <Appbtn
-              text={'Image Upload'}
+              text={'Take Image'}
               onPress={() => {
                 // this.selectFile();
-                this.pickFromGallery();
+                this.openCamera();
               }}
             />
           ) : null}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput} from 'react-native';
+import {Text, StyleSheet, View, TextInput, Image} from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {axiosInstance, baseUrl} from '../api';
@@ -13,7 +13,7 @@ export class Details extends Component {
 
   componentDidMount() {
     const xyz = this.props.route.params.otherData;
-    this.setState({data: xyz});
+    this.setState({data: xyz}, () => {});
   }
 
   request = (_id, isVerified, Message) => {
@@ -61,7 +61,16 @@ export class Details extends Component {
               <Text style={styles.LoginText2}>
                 Discription: {this.state.data.discription}
               </Text>
+              {this.state.data.test ? (
+                <Text style={styles.LoginText2}>
+                  TEST Message: {this.state.data.test}
+                </Text>
+              ) : null}
             </View>
+            <Image
+              style={{width: 240, height: 140}}
+              source={{uri: this.state.data.ImageUrl}}
+            />
             {/* detils */}
             <Appbtn
               onPress={() => {
@@ -113,7 +122,7 @@ const styles = StyleSheet.create({
   },
   UpperContainer: {
     width: w('100%'),
-    height: h('40%'),
+    height: h('60%'),
     alignItems: 'center',
     // backgroundColor: 'red',
   },

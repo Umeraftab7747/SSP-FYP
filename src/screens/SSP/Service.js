@@ -28,6 +28,7 @@ export class Service extends Component {
     // all field for backend
     Email: '',
     Name: '',
+    Price: '',
     ServiceType: 'Armed Guard',
     discription: '',
     image: '',
@@ -82,11 +83,20 @@ export class Service extends Component {
       .done();
   };
   submit = () => {
-    const {Email, Name, ServiceType, discription, image, test} = this.state;
+    const {
+      Email,
+      Name,
+      Price,
+      ServiceType,
+      discription,
+      image,
+      test,
+    } = this.state;
 
     if (
       Email !== '' &&
       Name !== '' &&
+      Price !== '' &&
       ServiceType !== '' &&
       discription !== ''
     ) {
@@ -94,6 +104,7 @@ export class Service extends Component {
         const params = {
           Email: Email,
           Name: Name,
+          Price: Price,
           ServiceType: ServiceType,
           discription: discription,
           image: image,
@@ -109,7 +120,8 @@ export class Service extends Component {
               alert('Data Submitted for Review');
               this.setState({
                 Name: '',
-                ServiceType: '',
+                ServiceType: 'Armed Guard',
+                Price: '',
                 discription: '',
                 image: '',
               });
@@ -125,6 +137,7 @@ export class Service extends Component {
         const params = {
           Email: Email,
           Name: Name,
+          Price: Price,
           ServiceType: ServiceType,
           discription: discription,
           test: test,
@@ -142,6 +155,7 @@ export class Service extends Component {
                 Name: '',
                 ServiceType: 'Armed Guard',
                 discription: '',
+                Price: '',
                 image: '',
               });
               // this.componentDidMount();
@@ -173,6 +187,15 @@ export class Service extends Component {
               this.setState({Name});
             }}
             value={this.state.Name}
+          />
+          <AppInput
+            IconName={'add'}
+            Placeholder={'Price of the service'}
+            onChangeText={Price => {
+              this.setState({Price});
+            }}
+            keyboardType={'numeric'}
+            value={this.state.Price}
           />
 
           <View style={styles.RadioContainer}>

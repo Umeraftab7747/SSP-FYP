@@ -81,7 +81,7 @@ export class EditService extends Component {
             console.log(userData);
             if (userData.status === 200) {
               alert('Data Submitted for Review');
-              this.props.navigation.goBack();
+              this.props.navigation.navigate('ServiceproviderBottomtab');
             } else if (userData.status === 400) {
               alert(userData.msg);
             }
@@ -352,15 +352,6 @@ export class EditService extends Component {
             {/* radio button */}
           </View>
 
-          {this.state.check ? (
-            <Appbtn
-              text={'Image Upload'}
-              onPress={() => {
-                // this.selectFile();
-                this.pickFromGallery();
-              }}
-            />
-          ) : null}
           <Appbtn
             onPress={() => {
               this.update(this.state.data._id);

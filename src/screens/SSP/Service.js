@@ -42,30 +42,36 @@ export class Service extends Component {
   openCamera = () => {
     launchImageLibrary({quality: 0.5}, fileobj => {
       // end
-      const uploadTask = storage()
-        .ref()
-        .child(`/items/${Date.now()}`)
-        .putFile(fileobj.uri);
-      uploadTask.on(
-        'state_changed',
-        snapshot => {
-          var progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          if (progress == 100) {
-            alert('uploaded');
-          }
-        },
 
-        error => {
-          console.log(error);
-          alert('something went wrong');
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-            this.setState({image: downloadURL});
-          });
-        },
-      );
+      try {
+        const uploadTask = storage()
+          .ref()
+          .child(`/items/${Date.now()}`)
+          .putFile(fileobj.uri);
+
+        uploadTask.on(
+          'state_changed',
+          snapshot => {
+            var progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            if (progress == 100) {
+              alert('uploaded');
+            }
+          },
+
+          error => {
+            console.log(error);
+            alert('something went wrong');
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+              this.setState({image: downloadURL});
+            });
+          },
+        );
+      } catch (error) {
+        console.log(error);
+      }
 
       // end
     });

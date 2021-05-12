@@ -7,9 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class SSPProfile extends Component {
   state = {
-    Name: '',
-    Email: '',
-    Cnic: '',
     Phone: '+92',
     dataEmail: '',
     userDetails: '',
@@ -40,14 +37,7 @@ export class SSPProfile extends Component {
     axiosInstance
       .post(baseUrl + '/service-provider/ServiceProviderData', params)
       .then(res => {
-        this.setState({userDetails: res.data.user[0]}, () => {
-          this.setState({
-            Email: this.state.userDetails.Email,
-            Name: this.state.userDetails.Firstname,
-            Cnic: this.state.userDetails.Cnic,
-            Phone: this.state.userDetails.Phone,
-          });
-        });
+        this.setState({userDetails: res.data.user[0]});
       })
       .catch(error => {
         console.log(error);

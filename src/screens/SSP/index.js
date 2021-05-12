@@ -7,3 +7,4 @@ export {SSPBooking} from './SSPBooking';
 export {SSPServiceDetails} from './SSPServiceDetails';
 export {RatingScreen} from './RatingScreen';
 export {SSPProfile} from './SSPProfile';
+export {Updateprofile} from './Updateprofile';

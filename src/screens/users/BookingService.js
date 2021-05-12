@@ -12,11 +12,15 @@ export class BookingService extends Component {
     Email: '',
     UserData: [],
     rating: [],
+    Name: '',
+    BookingDay: '',
+    Phone: '',
+    discription: '',
   };
 
   componentDidMount() {
     const abc = this.props.route.params.Servicedata;
-    this.setState({Servicedata: abc});
+    this.setState({Servicedata: abc}, () => {});
     this.getData();
   }
 
@@ -29,7 +33,6 @@ export class BookingService extends Component {
         const params = {
           email: this.state.Email,
         };
-
         axiosInstance
           .post(baseUrl + '/users/UserDetails', params)
           .then(res => {
@@ -46,6 +49,36 @@ export class BookingService extends Component {
       }
     });
   };
+
+  // Booking
+  BookService = () => {
+    const params = {
+      UserEmail: this.state.Email,
+      UserName: this.state.Name,
+      PhoneNo: this.state.Phone,
+      discription: this.state.discription,
+      BookingDay: this.state.BookingDay,
+      ServiceProviderEmail: this.state.Servicedata.Email,
+      ServiceName: this.state.Servicedata.ServiceName,
+      ServiceType: this.state.Servicedata.ServiceType,
+      ServiceId: this.state.Servicedata._id,
+    };
+    axiosInstance
+      .post(baseUrl + '/booking/book', params)
+      .then(res => {
+        const userData = res.data;
+        if (userData.status === '200') {
+          alert(userData.msg);
+          this.props.navigation.navigate('UserBottomtab');
+        }
+      })
+      .catch(error => {
+        if ('Error: Request failed with status code 404') {
+          alert('Service Already BOOKED');
+        }
+      });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -58,27 +91,19 @@ export class BookingService extends Component {
           }}
           Placeholder={'Name'}
         />
-        <AppInput
-          IconName={'add'}
-          onChangeText={Name => {
-            this.setState({Name});
-          }}
-          Placeholder={'Booking Time'}
-          keyboardType={'numeric'}
-        />
 
         <AppInput
           IconName={'add'}
-          onChangeText={Name => {
-            this.setState({Name});
+          onChangeText={BookingDay => {
+            this.setState({BookingDay});
           }}
           keyboardType={'numeric'}
           Placeholder={'Booking Day'}
         />
         <AppInput
           IconName={'call'}
-          onChangeText={Name => {
-            this.setState({Name});
+          onChangeText={Phone => {
+            this.setState({Phone});
           }}
           keyboardType={'numeric'}
           Placeholder={'Phone No'}
@@ -92,7 +117,12 @@ export class BookingService extends Component {
           placeholder={'Enter Discription'}
           multiline
         />
-        <Appbtn text={'BOOK NOW'} />
+        <Appbtn
+          text={'BOOK NOW'}
+          onPress={() => {
+            this.BookService();
+          }}
+        />
       </View>
     );
   }

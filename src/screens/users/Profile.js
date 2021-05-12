@@ -5,6 +5,9 @@ import {AppInput, Header} from '../../Components';
 export class Profile extends Component {
   state = {
     Name: '',
+    Email: '',
+    Cnic: '',
+    Phone: '',
   };
   render() {
     return (
@@ -13,7 +16,6 @@ export class Profile extends Component {
         {/* edit info */}
         <AppInput
           IconName={'add'}
-          Placeholder={'Name of the service'}
           onChangeText={Name => {
             this.setState({Name});
           }}
@@ -22,20 +24,27 @@ export class Profile extends Component {
         {/* edit info */}
         <AppInput
           IconName={'add'}
-          Placeholder={'Name of the service'}
-          onChangeText={Name => {
-            this.setState({Name});
+          onChangeText={Email => {
+            this.setState({Email});
           }}
-          value={this.state.Name}
+          value={this.state.Email}
         />
         {/* edit info */}
         <AppInput
           IconName={'add'}
-          Placeholder={'Name of the service'}
-          onChangeText={Name => {
-            this.setState({Name});
+          onChangeText={Cnic => {
+            this.setState({Cnic});
           }}
-          value={this.state.Name}
+          value={this.state.Cnic}
+        />
+        />
+        {/* edit info */}
+        <AppInput
+          IconName={'add'}
+          onChangeText={Phone => {
+            this.setState({Phone});
+          }}
+          value={this.state.Phone}
         />
       </View>
     );

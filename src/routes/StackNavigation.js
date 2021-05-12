@@ -33,6 +33,7 @@ import {
   SSPBooking,
   SSPServiceDetails,
   RatingScreen,
+  SSPProfile,
 } from '../screens/SSP';
 import {
   ServiceDeatails,
@@ -137,6 +138,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="RatingScreen"
           component={RatingScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SSPProfile"
+          component={SSPProfile}
           options={{headerShown: false}}
         />
         {/* Service provider */}

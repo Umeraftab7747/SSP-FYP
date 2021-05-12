@@ -6,3 +6,4 @@ export {Approve} from './Approve';
 export {SSPBooking} from './SSPBooking';
 export {SSPServiceDetails} from './SSPServiceDetails';
 export {RatingScreen} from './RatingScreen';
+export {SSPProfile} from './SSPProfile';

@@ -55,7 +55,7 @@ export class AllUser extends Component {
   // filter data
   searching = text => {
     const newData = this.state.data.filter(item => {
-      const itemData = `${item.ServiceName.toUpperCase()} `;
+      const itemData = `${item.Firstname.toUpperCase()} `;
 
       const searchText = text.toUpperCase();
 

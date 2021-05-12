@@ -19,6 +19,15 @@ export class Setting extends Component {
           {/* btn */}
           <TouchableOpacity
             onPress={() => {
+              this.props.navigation.navigate('ACCOUNT');
+            }}
+            style={styles.Btn}>
+            <Text style={styles.BtnText}>ACCOUNT</Text>
+          </TouchableOpacity>
+          {/* btn */}
+          {/* btn */}
+          <TouchableOpacity
+            onPress={() => {
               this.props.navigation.navigate('Disputes');
             }}
             style={styles.Btn}>

@@ -41,6 +41,7 @@ import {
   BookingHistory,
   Disputes,
   Profile,
+  ACCOUNT,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -92,6 +93,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Profile"
           component={Profile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ACCOUNT"
+          component={ACCOUNT}
           options={{headerShown: false}}
         />
 

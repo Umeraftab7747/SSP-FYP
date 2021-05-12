@@ -1,13 +1,5 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  Modal,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {axiosInstance, baseUrl} from '../api';
@@ -15,11 +7,75 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class Profile extends Component {
   state = {
-    Name: 'Umer',
-    Email: 'Umeraftab4422@gmail.com',
+    Name: '',
+    Email: '',
     Cnic: '',
     Phone: '+92',
+    dataEmail: '',
+    userDetails: '',
   };
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  // GETING LOGIN DATA
+  getData = () => {
+    AsyncStorage.getItem('UserData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.setState({dataEmail: data});
+        this.DETAILS(this.state.dataEmail);
+      }
+    });
+  };
+
+  // GETINS USER DETAILS
+  DETAILS = value => {
+    const params = {
+      Email: value,
+    };
+
+    // ASY
+    axiosInstance
+      .post(baseUrl + '/users/User', params)
+      .then(res => {
+        this.setState({userDetails: res.data.user[0]}, () => {
+          this.setState({
+            Email: this.state.userDetails.Email,
+            Name: this.state.userDetails.Name,
+            Cnic: this.state.userDetails.Cnic,
+            Phone: this.state.userDetails.Phone,
+          });
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // ASYC
+  };
+
+  // GETINS USER DETAILS
+  UPDATED = () => {
+    const params = {
+      Email: this.state.userDetails.Email,
+      Name: this.state.Name,
+      Cnic: this.state.Cnic,
+      Phone: this.state.Phone,
+    };
+
+    // ASY
+    axiosInstance
+      .post(baseUrl + '/users/UserUpdate', params)
+      .then(res => {
+        this.props.navigation.goBack();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // ASYC
+  };
+
   render() {
     return (
       <View style={styles.Container}>
@@ -58,7 +114,12 @@ export class Profile extends Component {
             }}
             value={this.state.Phone}
           />
-          <Appbtn text={'Update'} />
+          <Appbtn
+            onPress={() => {
+              this.UPDATED();
+            }}
+            text={'Update'}
+          />
         </View>
       </View>
     );

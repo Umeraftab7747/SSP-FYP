@@ -13,7 +13,7 @@ export class BookingDetails extends Component {
 
   componentDidMount() {
     const xyz = this.props.route.params.ShareData;
-    this.setState({data: xyz});
+    this.setState({data: xyz}, () => {});
   }
 
   Completed = () => {
@@ -114,6 +114,19 @@ export class BookingDetails extends Component {
               }}
               text={'COMPLETED'}
             />
+
+            {/* UPDATE */}
+
+            {this.state.data.ServiceproviderAprove === false ? (
+              <Appbtn
+                onPress={() => {
+                  this.props.navigation.navigate('UpdateBooking');
+                }}
+                text={'UPDATE BOOKING'}
+              />
+            ) : null}
+
+            {/* UPDATE */}
           </View>
           <View style={styles.LowerContainer}>
             <Text style={styles.LoginText}>Dispute Reason</Text>
@@ -151,7 +164,7 @@ const styles = StyleSheet.create({
   },
   UpperContainer: {
     width: w('100%'),
-    height: h('40%'),
+    height: h('50%'),
     alignItems: 'center',
     // backgroundColor: 'red',
   },

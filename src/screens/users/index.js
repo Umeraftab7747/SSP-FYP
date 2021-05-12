@@ -9,3 +9,4 @@ export {Profile} from './Profile';
 export {ACCOUNT} from './ACCOUNT';
 export {BookingService} from './BookingService';
 export {Disputes} from './Disputes';
+export {UpdateBooking} from './UpdateBooking';

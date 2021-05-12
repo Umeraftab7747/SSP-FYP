@@ -52,31 +52,41 @@ export class BookingService extends Component {
 
   // Booking
   BookService = () => {
-    const params = {
-      UserEmail: this.state.Email,
-      UserName: this.state.Name,
-      PhoneNo: this.state.Phone,
-      discription: this.state.discription,
-      BookingDay: this.state.BookingDay,
-      ServiceProviderEmail: this.state.Servicedata.Email,
-      ServiceName: this.state.Servicedata.ServiceName,
-      ServiceType: this.state.Servicedata.ServiceType,
-      ServiceId: this.state.Servicedata._id,
-    };
-    axiosInstance
-      .post(baseUrl + '/booking/book', params)
-      .then(res => {
-        const userData = res.data;
-        if (userData.status === '200') {
-          alert(userData.msg);
-          this.props.navigation.navigate('UserBottomtab');
-        }
-      })
-      .catch(error => {
-        if ('Error: Request failed with status code 404') {
-          alert('Service Already BOOKED');
-        }
-      });
+    const {Name, BookingDay, Phone, discription} = this.state;
+    if (
+      Name !== '' &&
+      BookingDay !== '' &&
+      Phone !== '' &&
+      discription !== ''
+    ) {
+      const params = {
+        UserEmail: this.state.Email,
+        UserName: this.state.Name,
+        PhoneNo: this.state.Phone,
+        discription: this.state.discription,
+        BookingDay: this.state.BookingDay,
+        ServiceProviderEmail: this.state.Servicedata.Email,
+        ServiceName: this.state.Servicedata.ServiceName,
+        ServiceType: this.state.Servicedata.ServiceType,
+        ServiceId: this.state.Servicedata._id,
+      };
+      axiosInstance
+        .post(baseUrl + '/booking/book', params)
+        .then(res => {
+          const userData = res.data;
+          if (userData.status === '200') {
+            alert(userData.msg);
+            this.props.navigation.navigate('UserBottomtab');
+          }
+        })
+        .catch(error => {
+          if ('Error: Request failed with status code 404') {
+            alert('Service Already BOOKED');
+          }
+        });
+    } else {
+      alert('ALL FIELDS ARE REQUIRED');
+    }
   };
 
   render() {

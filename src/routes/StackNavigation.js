@@ -44,6 +44,7 @@ import {
   Disputes,
   Profile,
   ACCOUNT,
+  BookingService,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -100,6 +101,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="ACCOUNT"
           component={ACCOUNT}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BookingService"
+          component={BookingService}
           options={{headerShown: false}}
         />
 

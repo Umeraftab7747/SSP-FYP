@@ -64,6 +64,27 @@ export class BookingDetails extends Component {
     }
   };
 
+  cancel = () => {
+    const params = {
+      _id: this.state.data._id,
+    };
+
+    // ASY
+    axiosInstance
+      .post(baseUrl + '/booking/deleteBooking', params)
+      .then(res => {
+        const userData = res.data;
+        if (userData.status === 200) {
+          alert('BOOKING CANCELED');
+          this.props.navigation.goBack();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // ASYC
+  };
+
   render() {
     return (
       <KeyboardAwareScrollView>
@@ -111,6 +132,12 @@ export class BookingDetails extends Component {
               }}
               text={'DISPUTE'}
             />
+            <Appbtn
+              onPress={() => {
+                this.cancel();
+              }}
+              text={'CANCEL ORDER'}
+            />
           </View>
         </View>
       </KeyboardAwareScrollView>
@@ -130,7 +157,7 @@ const styles = StyleSheet.create({
   },
   LowerContainer: {
     width: w('100%'),
-    height: h('40%'),
+    height: h('50%'),
     // backgroundColor: 'purple',
     alignItems: 'center',
   },

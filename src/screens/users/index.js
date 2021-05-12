@@ -7,4 +7,5 @@ export {Setting} from './Setting';
 export {BookingHistory} from './BookingHistory';
 export {Profile} from './Profile';
 export {ACCOUNT} from './ACCOUNT';
+export {BookingService} from './BookingService';
 export {Disputes} from './Disputes';

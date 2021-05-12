@@ -6,7 +6,6 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
-  Modal,
 } from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
@@ -23,7 +22,11 @@ export class Booking extends Component {
   };
 
   componentDidMount() {
-    this.getData();
+    setInterval(() => {
+      this.getData();
+    }, 1000);
+
+    // this.getData();
   }
 
   // GETING LOGIN DATA

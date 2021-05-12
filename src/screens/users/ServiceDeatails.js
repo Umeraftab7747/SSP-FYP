@@ -21,61 +21,65 @@ export class ServiceDeatails extends Component {
 
   // GETING LOGIN DATA
   getData = () => {
-    AsyncStorage.getItem('UserData')
-      .then(value => {
-        const data = JSON.parse(value);
-        if (data !== null) {
-          this.setState({Email: data});
+    AsyncStorage.getItem('UserData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.setState({Email: data});
 
-          this.Rating();
+        this.Rating();
 
-          const params = {
-            email: this.state.Email,
-          };
+        const params = {
+          email: this.state.Email,
+        };
 
-          axiosInstance
-            .post(baseUrl + '/users/UserDetails', params)
-            .then(res => {
-              const userData = res.data;
+        axiosInstance
+          .post(baseUrl + '/users/UserDetails', params)
+          .then(res => {
+            const userData = res.data;
 
-              this.setState({UserData: userData.user});
-            })
-            .catch(error => {
-              if (error) {
-                alert('Something Went Wrong');
-              }
-            });
-        }
-      })
-      .done();
+            this.setState({UserData: userData.user});
+          })
+          .catch(error => {
+            if (error) {
+              alert('Something Went Wrong');
+            }
+          });
+      }
+    });
   };
 
   // Booking
   BookService = () => {
-    const params = {
-      UserEmail: this.state.Email,
-      UserName: this.state.UserData.Name,
-      ServiceProviderEmail: this.state.data.Email,
-      ServiceName: this.state.data.ServiceName,
-      ServiceType: this.state.data.ServiceType,
-      ServiceId: this.state.data._id,
-    };
+    // console.warn(this.state.data);
 
-    axiosInstance
-      .post(baseUrl + '/booking/book', params)
-      .then(res => {
-        const userData = res.data;
+    this.props.navigation.navigate('BookingService', {
+      Servicedata: this.state.data,
+    });
 
-        if (userData.status === '200') {
-          alert(userData.msg);
-          this.props.navigation.goBack();
-        }
-      })
-      .catch(error => {
-        if ('Error: Request failed with status code 404') {
-          alert('Service Already BOOKED');
-        }
-      });
+    //    const params = {
+    //   UserEmail: this.state.Email,
+    //   UserName: this.state.UserData.Name,
+    //   ServiceProviderEmail: this.state.data.Email,
+    //   ServiceName: this.state.data.ServiceName,
+    //   ServiceType: this.state.data.ServiceType,
+    //   ServiceId: this.state.data._id,
+    // };
+
+    // axiosInstance
+    //   .post(baseUrl + '/booking/book', params)
+    //   .then(res => {
+    //     const userData = res.data;
+
+    //     if (userData.status === '200') {
+    //       alert(userData.msg);
+    //       this.props.navigation.goBack();
+    //     }
+    //   })
+    //   .catch(error => {
+    //     if ('Error: Request failed with status code 404') {
+    //       alert('Service Already BOOKED');
+    //     }
+    //   });
   };
 
   // Rating

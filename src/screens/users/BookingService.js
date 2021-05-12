@@ -92,6 +92,7 @@ export class BookingService extends Component {
           placeholder={'Enter Discription'}
           multiline
         />
+        <Appbtn text={'BOOK NOW'} />
       </View>
     );
   }

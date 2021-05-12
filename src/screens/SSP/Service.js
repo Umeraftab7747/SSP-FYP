@@ -77,14 +77,12 @@ export class Service extends Component {
 
   // getLogin Data
   getData = () => {
-    AsyncStorage.getItem('ServiceProviderData')
-      .then(value => {
-        const data = JSON.parse(value);
-        if (data !== null) {
-          this.setState({Email: data});
-        }
-      })
-      .done();
+    AsyncStorage.getItem('ServiceProviderData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.setState({Email: data});
+      }
+    });
   };
   submit = () => {
     const {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {AppInput, Header} from '../../Components';
 
 export class Profile extends Component {
@@ -15,7 +15,7 @@ export class Profile extends Component {
         <Header text={'UPDATE PROFILE'} />
         {/* edit info */}
         <AppInput
-          IconName={'add'}
+          IconName={'person'}
           onChangeText={Name => {
             this.setState({Name});
           }}
@@ -23,7 +23,7 @@ export class Profile extends Component {
         />
         {/* edit info */}
         <AppInput
-          IconName={'add'}
+          IconName={'mail'}
           onChangeText={Email => {
             this.setState({Email});
           }}
@@ -31,16 +31,15 @@ export class Profile extends Component {
         />
         {/* edit info */}
         <AppInput
-          IconName={'add'}
+          IconName={'id-card'}
           onChangeText={Cnic => {
             this.setState({Cnic});
           }}
           value={this.state.Cnic}
         />
-        />
         {/* edit info */}
         <AppInput
-          IconName={'add'}
+          IconName={'call'}
           onChangeText={Phone => {
             this.setState({Phone});
           }}

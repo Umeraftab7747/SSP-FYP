@@ -12,6 +12,7 @@ export class BookingService extends Component {
     Email: '',
     UserData: [],
     rating: [],
+
     Name: '',
     BookingDay: '',
     Phone: '',

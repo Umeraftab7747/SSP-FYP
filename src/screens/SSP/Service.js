@@ -13,10 +13,8 @@ import {w, h} from 'react-native-responsiveness';
 import {Picker} from '@react-native-picker/picker';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
-// Import Document Picker
-import DocumentPicker from 'react-native-document-picker';
 
 export class Service extends Component {
   state = {

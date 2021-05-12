@@ -36,6 +36,15 @@ export class Setting extends Component {
           {/* btn */}
           <TouchableOpacity
             onPress={() => {
+              this.props.navigation.navigate('Profile');
+            }}
+            style={styles.Btn}>
+            <Text style={styles.BtnText}>UPDATE PROFILE</Text>
+          </TouchableOpacity>
+          {/* btn */}
+          {/* btn */}
+          <TouchableOpacity
+            onPress={() => {
               this.removeData();
             }}
             style={styles.Btn}>

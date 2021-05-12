@@ -40,6 +40,7 @@ import {
   RateService,
   BookingHistory,
   Disputes,
+  Profile,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -86,6 +87,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Disputes"
           component={Disputes}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
           options={{headerShown: false}}
         />
 

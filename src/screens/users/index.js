@@ -5,4 +5,5 @@ export {BookingDetails} from './BookingDetails';
 export {RateService} from './RateService';
 export {Setting} from './Setting';
 export {BookingHistory} from './BookingHistory';
+export {Profile} from './Profile';
 export {Disputes} from './Disputes';

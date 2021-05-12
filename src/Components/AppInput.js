@@ -11,6 +11,7 @@ export class AppInput extends Component {
           <Icon name={this.props.IconName} type="ionicon" color="#8F94FB" />
         </View>
         <TextInput
+          maxLength={this.props.maxLength}
           {...this.props}
           style={styles.TextInput}
           placeholder={this.props.Placeholder}

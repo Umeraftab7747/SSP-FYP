@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {Text, StyleSheet, View, TextInput, Image} from 'react-native';
 import {Header, Appbtn} from '../../Components';
@@ -46,7 +47,9 @@ export class Details extends Component {
         <View style={styles.Container}>
           <Header text={'SERVICE DETAILS'} />
           <View style={styles.UpperContainer}>
-            <Text style={styles.LoginText}>DETAILS</Text>
+            <Text style={[styles.LoginText, {paddingBottom: h('2%')}]}>
+              DETAILS
+            </Text>
             {/* detils */}
             <View style={styles.DetailsContainer}>
               <Text style={styles.LoginText2}>
@@ -58,6 +61,12 @@ export class Details extends Component {
               <Text style={styles.LoginText2}>
                 EMAIL: {this.state.data.Email}
               </Text>
+              <Text style={[styles.LoginText2, {paddingTop: h('1%')}]}>
+                Starting Hours: {this.state.data.Startinghour}
+              </Text>
+              <Text style={[styles.LoginText2, {paddingBottom: h('2%')}]}>
+                Ending Hours: {this.state.data.EndingHour}
+              </Text>
               <Text style={styles.LoginText2}>
                 Discription: {this.state.data.discription}
               </Text>
@@ -68,7 +77,12 @@ export class Details extends Component {
               ) : null}
             </View>
             <Image
-              style={{width: 240, height: 140}}
+              style={{
+                width: 240,
+                height: 140,
+                // backgroundColor: 'red',
+                marginTop: h('3%'),
+              }}
               source={{uri: this.state.data.ImageUrl}}
             />
             {/* detils */}
@@ -122,13 +136,13 @@ const styles = StyleSheet.create({
   },
   UpperContainer: {
     width: w('100%'),
-    height: h('60%'),
+    height: h('65%'),
     alignItems: 'center',
     // backgroundColor: 'red',
   },
   LowerContainer: {
     width: w('100%'),
-    height: h('40%'),
+    height: h('50%'),
     // backgroundColor: 'purple',
     alignItems: 'center',
   },

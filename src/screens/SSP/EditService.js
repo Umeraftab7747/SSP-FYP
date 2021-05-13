@@ -7,11 +7,14 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Button,
 } from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Picker} from '@react-native-picker/picker';
 import {axiosInstance, baseUrl} from '../api';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class EditService extends Component {
@@ -30,6 +33,12 @@ export class EditService extends Component {
     test: '',
     data: [],
     ServiceName: '',
+
+    // datepicker 2
+    isDatePickerVisible: false,
+    isDatePickerVisible2: false,
+    StartHour: '',
+    EndHour: '',
   };
 
   componentDidMount() {
@@ -38,6 +47,8 @@ export class EditService extends Component {
       this.setState({
         Name: this.state.data.ServiceName,
         discription: this.state.data.discription,
+        StartHour: this.state.data.StartHour,
+        EndHour: this.state.EndHour,
       });
     });
 
@@ -45,22 +56,63 @@ export class EditService extends Component {
   }
 
   getData = () => {
-    AsyncStorage.getItem('ServiceProviderData')
-      .then(value => {
-        const data = JSON.parse(value);
-        if (data !== null) {
-          this.setState({Email: data});
-        }
-      })
-      .done();
+    AsyncStorage.getItem('ServiceProviderData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.setState({Email: data});
+      }
+    });
   };
 
+  // datetimepicker
+
+  showDatePicker = () => {
+    this.setState({isDatePickerVisible: true});
+  };
+
+  hideDatePicker = () => {
+    this.setState({isDatePickerVisible: false});
+  };
+  showDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: true});
+  };
+
+  hideDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: false});
+  };
+
+  handleConfirm = value => {
+    const time = value.toLocaleTimeString();
+    this.setState({StartHour: time});
+
+    this.hideDatePicker();
+  };
+  handleConfirm2 = value => {
+    const time = value.toLocaleTimeString();
+    this.setState({EndHour: time});
+
+    this.hideDatePicker2();
+  };
+
+  // datetimepicker
+
   update = id => {
-    const {Email, Name, ServiceType, discription, image, test} = this.state;
+    const {
+      Email,
+      Name,
+      ServiceType,
+      discription,
+      image,
+      test,
+      StartHour,
+      EndHour,
+    } = this.state;
     if (
       Email !== '' &&
       Name !== '' &&
       ServiceType !== '' &&
+      StartHour !== '' &&
+      EndHour !== '' &&
       discription !== ''
     ) {
       if (image === '') {
@@ -71,6 +123,8 @@ export class EditService extends Component {
           ServiceType: ServiceType,
           discription: discription,
           image: image,
+          Startinghour: StartHour,
+          EndingHour: EndHour,
         };
 
         // ASY
@@ -96,6 +150,8 @@ export class EditService extends Component {
           ServiceType: ServiceType,
           discription: discription,
           test: test,
+          Startinghour: StartHour,
+          EndingHour: EndHour,
         };
 
         // ASY
@@ -287,6 +343,51 @@ export class EditService extends Component {
             </Picker>
           ) : null}
           {/* picker */}
+
+          {/* WORKING HOURS */}
+          <Text style={styles.text}>WORKING HOURS</Text>
+          {/* STart hour */}
+          <Text>START FROM</Text>
+          <View>
+            <Button
+              title="Starting Time"
+              onPress={() => {
+                this.showDatePicker();
+              }}
+            />
+            <DateTimePickerModal
+              isVisible={this.state.isDatePickerVisible}
+              mode="time"
+              onConfirm={time => {
+                this.handleConfirm(time);
+              }}
+              onCancel={() => {
+                this.hideDatePicker();
+              }}
+            />
+          </View>
+
+          {/* End Hour */}
+          <Text>To</Text>
+          <View>
+            <Button
+              title="Ending Time"
+              onPress={() => {
+                this.showDatePicker2();
+              }}
+            />
+            <DateTimePickerModal
+              isVisible={this.state.isDatePickerVisible2}
+              mode="time"
+              onConfirm={time => {
+                this.handleConfirm2(time);
+              }}
+              onCancel={() => {
+                this.hideDatePicker2();
+              }}
+            />
+          </View>
+          {/* WORKING HOURS */}
 
           <Text style={styles.text}>DISCRIPTION</Text>
 

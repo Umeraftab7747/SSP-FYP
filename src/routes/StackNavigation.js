@@ -35,6 +35,8 @@ import {
   RatingScreen,
   SSPProfile,
   Updateprofile,
+  SSPconfirmbooking,
+  ConfirmBooking,
 } from '../screens/SSP';
 import {
   ServiceDeatails,
@@ -161,6 +163,16 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Updateprofile"
           component={Updateprofile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SSPconfirmbooking"
+          component={SSPconfirmbooking}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ConfirmBooking"
+          component={ConfirmBooking}
           options={{headerShown: false}}
         />
         {/* Service provider */}

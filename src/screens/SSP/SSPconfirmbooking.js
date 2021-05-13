@@ -14,7 +14,7 @@ import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export class SSPBooking extends Component {
+export class SSPconfirmbooking extends Component {
   state = {
     data: [],
     listData: [],
@@ -26,41 +26,36 @@ export class SSPBooking extends Component {
   componentDidMount() {
     this.getData();
   }
-
   // GETING LOGIN DATA
   getData = () => {
-    AsyncStorage.getItem('ServiceProviderData')
-      .then(value => {
-        const data = JSON.parse(value);
-        if (data !== null) {
-          this.setState({Email: data});
-          this.AllBooking();
-        }
-      })
-      .done();
+    AsyncStorage.getItem('ServiceProviderData').then(value => {
+      const data = JSON.parse(value);
+      if (data !== null) {
+        this.setState({Email: data}, () => {
+          this.verifiedRequests();
+        });
+      }
+    });
   };
-
-  AllBooking = () => {
+  verifiedRequests = () => {
     const params = {
       Email: this.state.Email,
     };
+    console.log(this.state.Email);
+
     // ASY
     axiosInstance
-      .post(baseUrl + '/booking/Serviceproviderbooking', params)
+      .post(baseUrl + '/booking/BOOKINGREQUEST', params)
       .then(res => {
         const userData = res.data;
 
-        if (userData.status === 200) {
-          this.setState({data: userData.user});
-          this.setState({listData: this.state.data}, () => {
-            this.setState({isFetching: false});
-          });
-        } else if (userData.sucess === 404) {
-          alert(userData.msg);
-        }
+        this.setState({data: userData.user}, () => {});
+        this.setState({listData: this.state.data}, () => {
+          this.setState({isFetching: false});
+        });
       })
       .catch(error => {
-        // alert('data not found');
+        alert('data not found');
       });
     // ASYC
   };
@@ -76,7 +71,7 @@ export class SSPBooking extends Component {
   // filter data
   searching = text => {
     const newData = this.state.data.filter(item => {
-      const itemData = `${item.ServiceName.toUpperCase()} `;
+      const itemData = `${item.UserName.toUpperCase()} `;
 
       const searchText = text.toUpperCase();
 
@@ -89,13 +84,13 @@ export class SSPBooking extends Component {
   renderItem = item => (
     <View style={styles.FlatListContainer}>
       <View style={styles.leftFlatlist}>
-        <Text style={styles.text}>Service: {item.ServiceName}</Text>
+        <Text style={styles.text}>Name: {item.UserName}</Text>
       </View>
 
       <TouchableOpacity
         onPress={() => {
           this.setState({selectedData: item}, () => {
-            this.props.navigation.navigate('SSPServiceDetails', {
+            this.props.navigation.navigate('ConfirmBooking', {
               Alldata: this.state.selectedData,
             });
           });
@@ -109,7 +104,7 @@ export class SSPBooking extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'ALL BOOKING'} />
+        <Header text={'CONFIRM BOOKING'} />
         {/* Searchbar */}
         <View style={styles.SearchbarContainer}>
           <View style={styles.LeftIconContainer}>
@@ -192,6 +187,7 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    // backgroundColor: 'purple',
   },
   text: {
     color: '#8F94FB',

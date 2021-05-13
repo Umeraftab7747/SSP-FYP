@@ -70,7 +70,16 @@ export class Dashboard extends Component {
             this.props.navigation.navigate('SSPBooking');
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>BOOKING</Text>
+          <Text style={styles.BtnText}>BOOKING HISTORY</Text>
+        </TouchableOpacity>
+        {/* btn */}
+        {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('SSPconfirmbooking');
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>BOOKING REQUEST</Text>
         </TouchableOpacity>
         {/* btn */}
         <TouchableOpacity

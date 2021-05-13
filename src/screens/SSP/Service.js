@@ -7,6 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Platform,
+  Button,
 } from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
@@ -15,6 +17,7 @@ import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 export class Service extends Component {
   state = {
@@ -31,11 +34,49 @@ export class Service extends Component {
     discription: '',
     image: '',
     test: '',
+
+    // datepicker 2
+    isDatePickerVisible: false,
+    isDatePickerVisible2: false,
+    StartHour: '',
+    EndHour: '',
   };
 
   componentDidMount() {
     this.getData();
   }
+
+  // datetimepicker
+
+  showDatePicker = () => {
+    this.setState({isDatePickerVisible: true});
+  };
+
+  hideDatePicker = () => {
+    this.setState({isDatePickerVisible: false});
+  };
+  showDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: true});
+  };
+
+  hideDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: false});
+  };
+
+  handleConfirm = value => {
+    const time = value.toLocaleTimeString();
+    this.setState({StartHour: time});
+
+    this.hideDatePicker();
+  };
+  handleConfirm2 = value => {
+    const time = value.toLocaleTimeString();
+    this.setState({EndHour: time});
+
+    this.hideDatePicker2();
+  };
+
+  // datetimepicker
 
   openCamera = () => {
     launchImageLibrary({quality: 0.5}, fileobj => {
@@ -93,6 +134,8 @@ export class Service extends Component {
       discription,
       image,
       test,
+      StartHour,
+      EndHour,
     } = this.state;
 
     if (
@@ -100,6 +143,8 @@ export class Service extends Component {
       Name !== '' &&
       Price !== '' &&
       ServiceType !== '' &&
+      StartHour !== '' &&
+      EndHour !== '' &&
       discription !== ''
     ) {
       if (image) {
@@ -109,6 +154,8 @@ export class Service extends Component {
           Price: Price,
           ServiceType: ServiceType,
           discription: discription,
+          Startinghour: StartHour,
+          EndingHour: EndHour,
           image: image,
         };
 
@@ -142,6 +189,8 @@ export class Service extends Component {
           Price: Price,
           ServiceType: ServiceType,
           discription: discription,
+          Startinghour: StartHour,
+          EndingHour: EndHour,
           test: test,
         };
 
@@ -348,6 +397,51 @@ export class Service extends Component {
           ) : null}
           {/* picker */}
 
+          {/* WORKING HOURS */}
+          <Text style={styles.text}>WORKING HOURS</Text>
+          {/* STart hour */}
+          <Text>START FROM</Text>
+          <View>
+            <Button
+              title="Starting Time"
+              onPress={() => {
+                this.showDatePicker();
+              }}
+            />
+            <DateTimePickerModal
+              isVisible={this.state.isDatePickerVisible}
+              mode="time"
+              onConfirm={time => {
+                this.handleConfirm(time);
+              }}
+              onCancel={() => {
+                this.hideDatePicker();
+              }}
+            />
+          </View>
+
+          {/* End Hour */}
+          <Text>To</Text>
+          <View>
+            <Button
+              title="Ending Time"
+              onPress={() => {
+                this.showDatePicker2();
+              }}
+            />
+            <DateTimePickerModal
+              isVisible={this.state.isDatePickerVisible2}
+              mode="time"
+              onConfirm={time => {
+                this.handleConfirm2(time);
+              }}
+              onCancel={() => {
+                this.hideDatePicker2();
+              }}
+            />
+          </View>
+          {/* WORKING HOURS */}
+
           <Text style={styles.text}>DISCRIPTION</Text>
 
           <TextInput
@@ -436,14 +530,13 @@ export class Service extends Component {
 const styles = StyleSheet.create({
   Container: {
     width: '100%',
-    height: h('130%'),
+    height: h('330%'),
     backgroundColor: 'white',
-    // alignItems: 'center',
   },
   TopContainer: {
     // backgroundColor: 'red',
     width: '100%',
-    height: h('110%'),
+    height: h('150%'),
     alignItems: 'center',
     paddingTop: 40,
   },

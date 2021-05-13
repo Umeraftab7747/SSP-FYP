@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput} from 'react-native';
+import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class BookingService extends Component {
@@ -17,6 +18,12 @@ export class BookingService extends Component {
     BookingDay: '',
     Phone: '',
     discription: '',
+
+    // datepicker 2
+    isDatePickerVisible: false,
+    isDatePickerVisible2: false,
+    day: '',
+    time: '',
   };
 
   componentDidMount() {
@@ -51,13 +58,45 @@ export class BookingService extends Component {
     });
   };
 
+  // datetimepicker
+
+  showDatePicker = () => {
+    this.setState({isDatePickerVisible: true});
+  };
+
+  hideDatePicker = () => {
+    this.setState({isDatePickerVisible: false});
+  };
+  showDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: true});
+  };
+
+  hideDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: false});
+  };
+
+  handleConfirm = value => {
+    const day = value.toDateString();
+    this.setState({day: day});
+    this.hideDatePicker();
+  };
+  handleConfirm2 = value => {
+    const time = value.toLocaleTimeString();
+    this.setState({time: time});
+    console.warn(this.state.time);
+    this.hideDatePicker2();
+  };
+
+  // datetimepicker
+
   // Booking
   BookService = () => {
-    const {Name, BookingDay, Phone, discription} = this.state;
+    const {Name, Phone, discription, day, time} = this.state;
     if (
       Name !== '' &&
-      BookingDay !== '' &&
       Phone !== '' &&
+      day !== '' &&
+      time !== '' &&
       discription !== ''
     ) {
       const params = {
@@ -70,6 +109,8 @@ export class BookingService extends Component {
         ServiceName: this.state.Servicedata.ServiceName,
         ServiceType: this.state.Servicedata.ServiceType,
         ServiceId: this.state.Servicedata._id,
+        day: this.state.day,
+        time: this.state.time,
       };
       axiosInstance
         .post(baseUrl + '/booking/book', params)
@@ -103,14 +144,53 @@ export class BookingService extends Component {
           Placeholder={'Name'}
         />
 
-        <AppInput
-          IconName={'add'}
-          onChangeText={BookingDay => {
-            this.setState({BookingDay});
-          }}
-          keyboardType={'numeric'}
-          Placeholder={'Booking Day'}
-        />
+        <Text style={styles.Text}>BOOKING TIME AND DAY</Text>
+
+        {/* WORKING HOURS */}
+
+        {/* STart hour */}
+        <Text>SELECT DAY</Text>
+        <View>
+          <Button
+            title="SELECT DAY"
+            onPress={() => {
+              this.showDatePicker();
+            }}
+          />
+          <DateTimePickerModal
+            isVisible={this.state.isDatePickerVisible}
+            mode="date"
+            onConfirm={time => {
+              this.handleConfirm(time);
+            }}
+            onCancel={() => {
+              this.hideDatePicker();
+            }}
+          />
+        </View>
+
+        {/* End Hour */}
+        <Text>SELECT TIME</Text>
+        <View>
+          <Button
+            title="SELECT TIME"
+            onPress={() => {
+              this.showDatePicker2();
+            }}
+          />
+          <DateTimePickerModal
+            isVisible={this.state.isDatePickerVisible2}
+            mode="time"
+            onConfirm={time => {
+              this.handleConfirm2(time);
+            }}
+            onCancel={() => {
+              this.hideDatePicker2();
+            }}
+          />
+        </View>
+        {/* WORKING HOURS */}
+
         <AppInput
           IconName={'call'}
           onChangeText={Phone => {
@@ -152,5 +232,10 @@ const styles = StyleSheet.create({
     borderColor: '#8F94FB',
     borderWidth: h('0.3%'),
     padding: h('2%'),
+  },
+  Text: {
+    color: '#8F94FB',
+    fontWeight: 'bold',
+    fontSize: h('2.5%'),
   },
 });

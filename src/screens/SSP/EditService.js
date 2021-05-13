@@ -400,58 +400,7 @@ export class EditService extends Component {
             value={this.state.discription}
           />
 
-          <View style={styles.RadioContainer}>
-            {/* radio button */}
-            <View style={styles.radiobutton}>
-              {this.state.check ? (
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setState({check: !this.state.check});
-                  }}>
-                  <View style={styles.Checkbtn} />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setState({check: !this.state.check, check2: false});
-                  }}>
-                  <View style={styles.unCheckbtn} />
-                </TouchableOpacity>
-              )}
-
-              <Text>UPLOAD IMAGE</Text>
-            </View>
-            {/* radio button */}
-
-            {/* radio button */}
-            <View style={styles.radiobutton2}>
-              {this.state.check2 ? (
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setState({check2: !this.state.check2}, () => {
-                      this.setState({test: ''});
-                    });
-                  }}>
-                  <View style={styles.Checkbtn} />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  onPress={() => {
-                    this.setState(
-                      {check2: !this.state.check2, check: false},
-                      () => {
-                        this.setState({test: 'I WILL GIVE TEST'});
-                      },
-                    );
-                  }}>
-                  <View style={styles.unCheckbtn} />
-                </TouchableOpacity>
-              )}
-
-              <Text>TEST</Text>
-            </View>
-            {/* radio button */}
-          </View>
+          <View style={styles.RadioContainer}></View>
 
           <Appbtn
             onPress={() => {

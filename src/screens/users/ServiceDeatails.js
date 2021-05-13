@@ -50,36 +50,9 @@ export class ServiceDeatails extends Component {
 
   // Booking
   BookService = () => {
-    // console.warn(this.state.data);
-
     this.props.navigation.navigate('BookingService', {
       Servicedata: this.state.data,
     });
-
-    //    const params = {
-    //   UserEmail: this.state.Email,
-    //   UserName: this.state.UserData.Name,
-    //   ServiceProviderEmail: this.state.data.Email,
-    //   ServiceName: this.state.data.ServiceName,
-    //   ServiceType: this.state.data.ServiceType,
-    //   ServiceId: this.state.data._id,
-    // };
-
-    // axiosInstance
-    //   .post(baseUrl + '/booking/book', params)
-    //   .then(res => {
-    //     const userData = res.data;
-
-    //     if (userData.status === '200') {
-    //       alert(userData.msg);
-    //       this.props.navigation.goBack();
-    //     }
-    //   })
-    //   .catch(error => {
-    //     if ('Error: Request failed with status code 404') {
-    //       alert('Service Already BOOKED');
-    //     }
-    //   });
   };
 
   // Rating
@@ -142,6 +115,12 @@ export class ServiceDeatails extends Component {
         <View style={styles.DetailContainer}>
           <Text style={styles.Text}>Name: {this.state.data.ServiceName} </Text>
           <Text style={styles.Text}>Type: {this.state.data.ServiceType} </Text>
+          <Text style={[styles.Text, {paddingTop: h('1%')}]}>
+            Starting Hours: {this.state.data.Startinghour}
+          </Text>
+          <Text style={[styles.Text, {paddingBottom: h('2%')}]}>
+            Ending Hours: {this.state.data.EndingHour}
+          </Text>
           <Text
             style={[
               styles.Text,
@@ -155,6 +134,12 @@ export class ServiceDeatails extends Component {
           <View style={styles.ButtonContainer}>
             <Appbtn
               text={'Booking'}
+              onPress={() => {
+                this.BookService();
+              }}
+            />
+            <Appbtn
+              text={'CHECK BOOKING'}
               onPress={() => {
                 this.BookService();
               }}
@@ -185,7 +170,7 @@ const styles = StyleSheet.create({
   },
   DetailContainer: {
     width: w('100%'),
-    height: h('40%'),
+    height: h('55%'),
     // backgroundColor: 'green',
     // alignItems: 'center',
     paddingTop: h('2%'),
@@ -204,7 +189,7 @@ const styles = StyleSheet.create({
   ButtonContainer: {
     // backgroundColor: 'red',
     width: w('80%'),
-    height: h('8%'),
+    height: h('15%'),
     justifyContent: 'center',
     alignItems: 'center',
   },

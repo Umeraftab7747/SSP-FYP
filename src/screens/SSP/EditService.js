@@ -468,14 +468,14 @@ export class EditService extends Component {
 const styles = StyleSheet.create({
   Container: {
     width: '100%',
-    height: h('130%'),
+    height: h('330%'),
     backgroundColor: 'white',
     // alignItems: 'center',
   },
   TopContainer: {
     // backgroundColor: 'red',
     width: '100%',
-    height: h('110%'),
+    height: h('150%'),
     alignItems: 'center',
     paddingTop: 40,
   },

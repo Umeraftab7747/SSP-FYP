@@ -62,17 +62,19 @@ export class ConfirmBooking extends Component {
           <Text style={styles.Text}>Name:- {this.state.data.ServiceName} </Text>
           <Text style={styles.Text}>Type:- {this.state.data.ServiceType} </Text>
           <Text style={styles.Text}>
-            User Name:- {this.state.data.UserName}
+            Client Name:- {this.state.data.UserName}
           </Text>
           <Text style={styles.Text}>
-            User Phone:- {this.state.data.PhoneNo}
+            Client Phone:- {this.state.data.PhoneNo}
           </Text>
           <Text style={styles.Text}>
-            User Booking Date:- {this.state.data.BookingDay}th
+            Client Booking Date:- {this.state.data.BookingDay}th
           </Text>
           <Text style={styles.Text}>
-            User Email:- {this.state.data.UserEmail}
+            Client Email:- {this.state.data.UserEmail}
           </Text>
+          <Text style={styles.Text}>Day:- {this.state.data.day}</Text>
+          <Text style={styles.Text}>Time:- {this.state.data.time}</Text>
           <Text
             style={[
               styles.Text,

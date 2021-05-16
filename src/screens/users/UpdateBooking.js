@@ -1,42 +1,71 @@
 import React, {Component} from 'react';
-import {TextInput, StyleSheet, View} from 'react-native';
+import {TextInput, StyleSheet, View, Text, Button} from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {axiosInstance, baseUrl} from '../api';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export class UpdateBooking extends Component {
   state = {
     Email: '',
+    id: '',
 
     Name: '',
     Phone: '+92',
     discription: '',
-    BookingDay: '',
 
     userDetails: '',
+
+    // datepicker 2
+    isDatePickerVisible: false,
+    isDatePickerVisible2: false,
+    day: '',
+    time: '',
   };
 
   componentDidMount() {
-    this.getData();
+    const xyz = this.props.route.params.id;
+    this.setState({id: xyz}, () => {
+      this.DETAILS();
+    });
   }
 
-  // GETING LOGIN DATA
-  getData = () => {
-    AsyncStorage.getItem('UserData').then(value => {
-      const data = JSON.parse(value);
-      if (data !== null) {
-        this.setState({Email: data}, () => {
-          this.DETAILS(this.state.Email);
-        });
-      }
-    });
+  // datetimepicker
+
+  showDatePicker = () => {
+    this.setState({isDatePickerVisible: true});
   };
 
+  hideDatePicker = () => {
+    this.setState({isDatePickerVisible: false});
+  };
+  showDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: true});
+  };
+
+  hideDatePicker2 = () => {
+    this.setState({isDatePickerVisible2: false});
+  };
+
+  handleConfirm = value => {
+    const day = value.toDateString();
+    this.setState({day: day});
+    this.hideDatePicker();
+  };
+  handleConfirm2 = value => {
+    const time = value.toLocaleTimeString();
+    this.setState({time: time});
+    console.warn(this.state.time);
+    this.hideDatePicker2();
+  };
+
+  // datetimepicker
+
   // GETINS USER DETAILS
-  DETAILS = value => {
+  DETAILS = () => {
     const params = {
-      Email: value,
+      id: this.state.id,
     };
 
     // ASY
@@ -48,7 +77,8 @@ export class UpdateBooking extends Component {
             Name: this.state.userDetails.UserName,
             Phone: this.state.userDetails.PhoneNo,
             discription: this.state.userDetails.discription,
-            BookingDay: this.state.userDetails.BookingDay,
+            day: this.state.userDetails.day,
+            time: this.state.userDetails.time,
           });
         });
       })
@@ -61,11 +91,12 @@ export class UpdateBooking extends Component {
   // Update DETAILS
   UPDATED = () => {
     const params = {
-      Email: this.state.Email,
+      id: this.state.id,
       Name: this.state.Name,
       Phone: this.state.Phone,
       discription: this.state.discription,
-      BookingDay: this.state.BookingDay,
+      day: this.state.day,
+      time: this.state.time,
     };
 
     // ASY
@@ -95,15 +126,51 @@ export class UpdateBooking extends Component {
           value={this.state.Name}
         />
 
-        <AppInput
-          IconName={'add'}
-          onChangeText={BookingDay => {
-            this.setState({BookingDay});
-          }}
-          keyboardType={'numeric'}
-          Placeholder={'Booking Day'}
-          value={this.state.BookingDay}
-        />
+        {/* WORKING HOURS */}
+
+        {/* STart hour */}
+        <Text>SELECT DAY</Text>
+        <View>
+          <Button
+            title="SELECT DAY"
+            onPress={() => {
+              this.showDatePicker();
+            }}
+          />
+          <DateTimePickerModal
+            isVisible={this.state.isDatePickerVisible}
+            mode="date"
+            onConfirm={time => {
+              this.handleConfirm(time);
+            }}
+            onCancel={() => {
+              this.hideDatePicker();
+            }}
+          />
+        </View>
+
+        {/* End Hour */}
+        <Text>SELECT TIME</Text>
+        <View>
+          <Button
+            title="SELECT TIME"
+            onPress={() => {
+              this.showDatePicker2();
+            }}
+          />
+          <DateTimePickerModal
+            isVisible={this.state.isDatePickerVisible2}
+            mode="time"
+            onConfirm={time => {
+              this.handleConfirm2(time);
+            }}
+            onCancel={() => {
+              this.hideDatePicker2();
+            }}
+          />
+        </View>
+        {/* WORKING HOURS */}
+
         <AppInput
           IconName={'call'}
           onChangeText={Phone => {

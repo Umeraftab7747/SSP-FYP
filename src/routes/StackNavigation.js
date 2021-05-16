@@ -48,6 +48,7 @@ import {
   ACCOUNT,
   BookingService,
   UpdateBooking,
+  Checkbooking,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -114,6 +115,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="UpdateBooking"
           component={UpdateBooking}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Checkbooking"
+          component={Checkbooking}
           options={{headerShown: false}}
         />
 

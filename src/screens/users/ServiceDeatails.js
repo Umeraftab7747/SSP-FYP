@@ -141,7 +141,9 @@ export class ServiceDeatails extends Component {
             <Appbtn
               text={'CHECK BOOKING'}
               onPress={() => {
-                this.BookService();
+                this.props.navigation.navigate('Checkbooking', {
+                  data: this.state.data,
+                });
               }}
             />
           </View>

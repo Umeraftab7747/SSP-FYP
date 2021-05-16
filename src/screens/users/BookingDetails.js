@@ -108,19 +108,24 @@ export class BookingDetails extends Component {
               </Text>
             </View>
             {/* detils */}
-            <Appbtn
-              onPress={() => {
-                this.Completed();
-              }}
-              text={'COMPLETED'}
-            />
+
+            {this.state.data.ServiceproviderAprove === true ? (
+              <Appbtn
+                onPress={() => {
+                  this.Completed();
+                }}
+                text={'COMPLETED'}
+              />
+            ) : null}
 
             {/* UPDATE */}
 
             {this.state.data.ServiceproviderAprove === false ? (
               <Appbtn
                 onPress={() => {
-                  this.props.navigation.navigate('UpdateBooking');
+                  this.props.navigation.navigate('UpdateBooking', {
+                    id: this.state.data._id,
+                  });
                 }}
                 text={'UPDATE BOOKING'}
               />
@@ -129,28 +134,35 @@ export class BookingDetails extends Component {
             {/* UPDATE */}
           </View>
           <View style={styles.LowerContainer}>
-            <Text style={styles.LoginText}>Dispute Reason</Text>
-            <TextInput
-              onChangeText={disputeMessage => {
-                this.setState({disputeMessage});
-              }}
-              style={styles.TextinputStyle}
-              placeholderTextColor={'#8F94FB'}
-              placeholder={'Enter Reason for Dispute'}
-              multiline
-            />
-            <Appbtn
-              onPress={() => {
-                this.Disputed();
-              }}
-              text={'DISPUTE'}
-            />
-            <Appbtn
-              onPress={() => {
-                this.cancel();
-              }}
-              text={'CANCEL ORDER'}
-            />
+            {this.state.data.ServiceproviderAprove === true ? (
+              <>
+                <Text style={styles.LoginText}>Dispute Reason</Text>
+                <TextInput
+                  onChangeText={disputeMessage => {
+                    this.setState({disputeMessage});
+                  }}
+                  style={styles.TextinputStyle}
+                  placeholderTextColor={'#8F94FB'}
+                  placeholder={'Enter Reason for Dispute'}
+                  multiline
+                />
+                <Appbtn
+                  onPress={() => {
+                    this.Disputed();
+                  }}
+                  text={'DISPUTE'}
+                />
+              </>
+            ) : null}
+
+            {this.state.data.ServiceproviderAprove === false ? (
+              <Appbtn
+                onPress={() => {
+                  this.cancel();
+                }}
+                text={'CANCEL ORDER'}
+              />
+            ) : null}
           </View>
         </View>
       </KeyboardAwareScrollView>

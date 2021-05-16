@@ -17,7 +17,7 @@ export const AdminBottomTab = () => {
         component={Dashbord}
         options={{
           headerShown: false,
-          tabBarLabel: 'Dashbord',
+          tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
             <Icon name={'home'} type={'ionicon'} color={color} size={size} />
           ),

@@ -24,16 +24,17 @@ export class AllUser extends Component {
   componentDidMount() {
     this.verifiedRequests();
   }
+
   verifiedRequests = () => {
     axiosInstance
       .get(baseUrl + '/admin/ALLverify')
       .then(res => {
         const userData = res.data;
-        console.log(userData);
+
         if (userData) {
           this.setState({data: userData.user});
+          // cloning in to list data from data
           this.setState({listData: this.state.data});
-          console.log(this.state.data);
         } else if (!userData) {
           console.log('404 status' + userData);
         }
@@ -41,7 +42,6 @@ export class AllUser extends Component {
       .catch(error => {
         console.log(error);
       });
-    // ASYC
   };
 
   // loading
@@ -61,6 +61,7 @@ export class AllUser extends Component {
 
       return itemData.indexOf(searchText) > -1;
     });
+
     this.setState({listData: newData});
   };
 

@@ -28,7 +28,7 @@ export class Dashbord extends Component {
             this.props.navigation.navigate('AllBooking');
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>BOOKING</Text>
+          <Text style={styles.BtnText}>ALL BOOKING</Text>
         </TouchableOpacity>
         {/* btn */}
         {/* btn */}

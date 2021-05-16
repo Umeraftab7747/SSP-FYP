@@ -52,7 +52,7 @@ export class UserLogin extends Component {
   validate = () => {
     const {Email, Password} = this.state;
 
-    if (Email === 'admin@admin.com' && Password === '123456') {
+    if (Email === 'admin@gmail.com' && Password === '123456') {
       AsyncStorage.setItem('admin', JSON.stringify(Email), () => {
         this.props.navigation.replace('AdminBottomTab');
       });

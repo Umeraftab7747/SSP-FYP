@@ -67,9 +67,7 @@ export class ConfirmBooking extends Component {
           <Text style={styles.Text}>
             Client Phone:- {this.state.data.PhoneNo}
           </Text>
-          <Text style={styles.Text}>
-            Client Booking Date:- {this.state.data.BookingDay}th
-          </Text>
+
           <Text style={styles.Text}>
             Client Email:- {this.state.data.UserEmail}
           </Text>

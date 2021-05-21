@@ -10,7 +10,7 @@ export class Updateprofile extends Component {
     Name: '',
     Email: '',
     Cnic: '',
-    Phone: '+92',
+    Phone: '+92 ',
     dataEmail: '',
     Password: '',
     userDetails: '',

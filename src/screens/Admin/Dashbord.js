@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   Btn: {
-    width: w('90%'),
-    height: h('10%'),
+    width: w('70%'),
+    height: h('7%'),
     backgroundColor: '#8F94FB',
     marginTop: h('2%'),
     borderRadius: h('1%'),

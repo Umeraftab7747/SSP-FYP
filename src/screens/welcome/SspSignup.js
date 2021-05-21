@@ -21,7 +21,7 @@ export class SspSignup extends Component {
     Password: '',
     confirmPassword: '',
     Cnic: '',
-    Phone: '',
+    Phone: '+92 ',
   };
 
   validate = () => {
@@ -121,6 +121,7 @@ export class SspSignup extends Component {
               <AppInput
                 onChangeText={Password => this.setState({Password})}
                 IconName={'lock-closed'}
+                secureTextEntry
                 Placeholder={'Enter Password'}
               />
               <AppInput
@@ -128,17 +129,21 @@ export class SspSignup extends Component {
                   this.setState({confirmPassword})
                 }
                 IconName={'lock-closed'}
+                secureTextEntry
                 Placeholder={'Confirm Password'}
               />
               <AppInput
                 onChangeText={Phone => this.setState({Phone})}
                 IconName={'call'}
                 Placeholder={'Enter Phone'}
+                value={this.state.Phone}
+                maxLength={15}
               />
               <AppInput
                 onChangeText={Cnic => this.setState({Cnic})}
                 IconName={'card'}
                 Placeholder={'Enter Cnic'}
+                maxLength={13}
               />
             </View>
             {/* BUTTON */}

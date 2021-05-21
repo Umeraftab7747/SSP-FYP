@@ -16,6 +16,7 @@ export class AppInput extends Component {
           style={styles.TextInput}
           placeholder={this.props.Placeholder}
           placeholderTextColor={'#8F94FB'}
+          secureTextEntry={this.props.secureTextEntry}
         />
       </View>
     );

@@ -20,7 +20,7 @@ export class UserSignup extends Component {
     Password: '',
     confirmPassword: '',
     Cnic: '',
-    Phone: '',
+    Phone: '+92 ',
   };
 
   validate = () => {
@@ -101,6 +101,7 @@ export class UserSignup extends Component {
               <AppInput
                 onChangeText={Password => this.setState({Password})}
                 IconName={'lock-closed'}
+                secureTextEntry
                 Placeholder={'Enter Password'}
               />
               <AppInput
@@ -108,17 +109,21 @@ export class UserSignup extends Component {
                   this.setState({confirmPassword})
                 }
                 IconName={'lock-closed'}
+                secureTextEntry
                 Placeholder={'Confirm Password'}
               />
               <AppInput
                 onChangeText={Cnic => this.setState({Cnic})}
                 IconName={'card'}
+                maxLength={13}
                 Placeholder={'Enter Cnic'}
               />
               <AppInput
                 onChangeText={Phone => this.setState({Phone})}
                 IconName={'call'}
                 Placeholder={'Enter Phone'}
+                value={this.state.Phone}
+                maxLength={15}
               />
             </View>
             {/* BUTTON */}

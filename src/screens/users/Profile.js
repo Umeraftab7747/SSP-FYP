@@ -12,6 +12,7 @@ export class Profile extends Component {
     Cnic: '',
     Phone: '+92',
     dataEmail: '',
+    Password: '',
     userDetails: '',
   };
 
@@ -46,6 +47,7 @@ export class Profile extends Component {
             Name: this.state.userDetails.Name,
             Cnic: this.state.userDetails.Cnic,
             Phone: this.state.userDetails.Phone,
+            Password: this.state.userDetails.Password,
           });
         });
       })
@@ -62,6 +64,7 @@ export class Profile extends Component {
       Name: this.state.Name,
       Cnic: this.state.Cnic,
       Phone: this.state.Phone,
+      Password: this.state.Password,
     };
 
     // ASY
@@ -96,6 +99,13 @@ export class Profile extends Component {
               this.setState({Email});
             }}
             value={this.state.Email}
+          />
+          <AppInput
+            IconName={'lock-closed'}
+            onChangeText={Password => {
+              this.setState({Password});
+            }}
+            value={this.state.Password}
           />
           {/* edit info */}
           <AppInput

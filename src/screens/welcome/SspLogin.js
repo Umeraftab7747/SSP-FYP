@@ -106,6 +106,7 @@ export class SspLogin extends Component {
                 onChangeText={Password => this.setState({Password})}
                 IconName={'lock-closed-outline'}
                 Placeholder={'Enter Password'}
+                secureTextEntry
               />
               <TouchableOpacity
                 onPress={() => {

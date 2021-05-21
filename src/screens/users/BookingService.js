@@ -76,9 +76,19 @@ export class BookingService extends Component {
   };
 
   handleConfirm = value => {
-    const day = value.toDateString();
-    this.setState({day: day});
-    this.hideDatePicker();
+    var time = new Date();
+    var today = time.getDate();
+
+    const day = value.getDate();
+
+    if (day < today) {
+      alert('YOU CAN NOT SELECT A PREVIOUS DAY!');
+      return this.hideDatePicker();
+    } else {
+      console.warn(day);
+      this.setState({day: day});
+      this.hideDatePicker();
+    }
   };
   handleConfirm2 = value => {
     const time = value.toLocaleTimeString();

@@ -153,12 +153,18 @@ export class ServiceDeatails extends Component {
         <View style={styles.RatingContainer}>
           <Text style={styles.Text}>RATING </Text>
         </View>
+
+        {this.state.rating < 1 ? (
+          <Text style={styles.Text3}>NO RATING YET!</Text>
+        ) : (
+          <FlatList
+            data={this.state.rating}
+            renderItem={({item}) => this.renderItem(item)}
+            keyExtractor={item => item._id}
+          />
+        )}
         {/* flatlist */}
-        <FlatList
-          data={this.state.rating}
-          renderItem={({item}) => this.renderItem(item)}
-          keyExtractor={item => item._id}
-        />
+
         {/* flatlist */}
       </View>
     );
@@ -182,6 +188,11 @@ const styles = StyleSheet.create({
     color: '#8F94FB',
     fontWeight: 'bold',
     fontSize: h('2.5%'),
+  },
+  Text3: {
+    color: 'rgba(0,0,0,0.5)',
+    fontWeight: 'bold',
+    fontSize: h('3%'),
   },
   Text2: {
     color: '#8F94FB',

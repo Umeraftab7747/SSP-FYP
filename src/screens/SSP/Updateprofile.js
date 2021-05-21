@@ -12,7 +12,9 @@ export class Updateprofile extends Component {
     Cnic: '',
     Phone: '+92',
     dataEmail: '',
+    Password: '',
     userDetails: '',
+    Companyname: '',
   };
 
   componentDidMount() {
@@ -45,6 +47,8 @@ export class Updateprofile extends Component {
             Name: this.state.userDetails.Firstname,
             Cnic: this.state.userDetails.Cnic,
             Phone: this.state.userDetails.Phone,
+            Password: this.state.userDetails.Password,
+            Companyname: this.state.userDetails.Companyname,
           });
         });
       })
@@ -61,6 +65,8 @@ export class Updateprofile extends Component {
       Name: this.state.Name,
       Cnic: this.state.Cnic,
       Phone: this.state.Phone,
+      Companyname: this.state.Companyname,
+      Password: this.state.Password,
     };
 
     // ASY
@@ -88,6 +94,13 @@ export class Updateprofile extends Component {
             }}
             value={this.state.Name}
           />
+          <AppInput
+            IconName={'business'}
+            onChangeText={Companyname => {
+              this.setState({Companyname});
+            }}
+            value={this.state.Companyname}
+          />
           {/* edit info */}
           <AppInput
             IconName={'mail'}
@@ -95,6 +108,13 @@ export class Updateprofile extends Component {
               this.setState({Email});
             }}
             value={this.state.Email}
+          />
+          <AppInput
+            IconName={'lock-closed'}
+            onChangeText={Password => {
+              this.setState({Password});
+            }}
+            value={this.state.Password}
           />
           {/* edit info */}
           <AppInput

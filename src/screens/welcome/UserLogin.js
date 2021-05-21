@@ -121,6 +121,7 @@ export class UserLogin extends Component {
               <AppInput
                 onChangeText={Password => this.setState({Password})}
                 IconName={'lock-closed-outline'}
+                secureTextEntry
                 Placeholder={'Enter Password'}
               />
               <TouchableOpacity

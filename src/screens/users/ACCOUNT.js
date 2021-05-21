@@ -60,14 +60,46 @@ export class ACCOUNT extends Component {
       <View style={styles.container}>
         <Header text={'PROFILE'} />
         <View style={styles.EditBox}>
-          <Text style={styles.text}>
-            Email : {this.state.userDetails.Email}
-          </Text>
-          <Text style={styles.text}>Name : {this.state.userDetails.Name}</Text>
-          <Text style={styles.text}>Cnic : {this.state.userDetails.Cnic}</Text>
-          <Text style={styles.text}>
-            Phone : {this.state.userDetails.Phone}
-          </Text>
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Email: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.userDetails.Email}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Name: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.userDetails.Name}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Cnic: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.userDetails.Cnic}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Phone: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.userDetails.Phone}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
         </View>
       </View>
     );
@@ -88,5 +120,33 @@ const styles = StyleSheet.create({
     fontSize: h('2.5%'),
     fontWeight: 'bold',
     marginTop: h('1%'),
+  },
+  GridView: {
+    borderColor: '#8F94FB',
+    borderWidth: w('1%'),
+    width: w('90%'),
+    height: h('7%'),
+    flexDirection: 'row',
+    marginTop: h('0.5%'),
+  },
+  leftGridView: {
+    // backgroundColor: 'yellow',
+    width: '30%',
+    height: '100%',
+    borderRightColor: '#8F94FB',
+    borderRightWidth: w('1%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  RightGridView: {
+    // backgroundColor: 'green',
+    width: '70%',
+    height: '100%',
+    justifyContent: 'center',
+  },
+  Text: {
+    color: '#8F94FB',
+    fontWeight: 'bold',
+    fontSize: h('2.5%'),
   },
 });

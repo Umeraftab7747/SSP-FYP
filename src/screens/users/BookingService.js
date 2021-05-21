@@ -83,7 +83,6 @@ export class BookingService extends Component {
   handleConfirm2 = value => {
     const time = value.toLocaleTimeString();
     this.setState({time: time});
-    console.warn(this.state.time);
     this.hideDatePicker2();
   };
 

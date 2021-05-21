@@ -53,7 +53,7 @@ export class AllUserDetails extends Component {
       .then(res => {
         const userData = res.data;
         if (userData.status === 200) {
-          alert('User Deleted');
+          alert('User Block');
           this.props.navigation.goBack();
         }
       })
@@ -69,12 +69,68 @@ export class AllUserDetails extends Component {
         <Header text={'USER DETAILS'} />
         {/* detail container */}
         <View style={styles.DetailContainer}>
-          <Text style={styles.Text}>Name: {this.state.data.Firstname} </Text>
-          <Text style={styles.Text}>
-            Company name: {this.state.data.Companyname}
-          </Text>
-          <Text style={[styles.Text]}>Email: {this.state.data.Email} </Text>
-          <Text style={[styles.Text]}>Status: {this.state.status}</Text>
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Name: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.data.Firstname}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Email: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.data.Email}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Company: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.data.Companyname}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Cnic: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.data.Cnic}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Phone: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.data.Phone}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+          {/* detial palet */}
+          <View style={styles.GridView}>
+            <View style={styles.leftGridView}>
+              <Text style={styles.Text}> Status: </Text>
+            </View>
+            <View style={styles.RightGridView}>
+              <Text style={styles.Text}> {this.state.status}</Text>
+            </View>
+          </View>
+          {/* detial palet */}
+
           <View style={styles.ButtonContainer}>
             <Appbtn
               onPress={() => {
@@ -125,5 +181,28 @@ const styles = StyleSheet.create({
     height: h('20%'),
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  GridView: {
+    borderColor: '#8F94FB',
+    borderWidth: w('1%'),
+    width: w('90%'),
+    height: h('7%'),
+    flexDirection: 'row',
+    marginTop: h('0.5%'),
+  },
+  leftGridView: {
+    // backgroundColor: 'yellow',
+    width: '30%',
+    height: '100%',
+    borderRightColor: '#8F94FB',
+    borderRightWidth: w('1%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  RightGridView: {
+    // backgroundColor: 'green',
+    width: '70%',
+    height: '100%',
+    justifyContent: 'center',
   },
 });

@@ -290,7 +290,7 @@ export class Service extends Component {
                 </TouchableOpacity>
               )}
 
-              <Text>Survilance Guard</Text>
+              <Text>Survelenc security</Text>
             </View>
             {/* radio button */}
           </View>
@@ -493,7 +493,11 @@ export class Service extends Component {
                     this.setState(
                       {check2: !this.state.check2, check: false},
                       () => {
-                        this.setState({test: 'I WILL GIVE TEST'});
+                        this.setState({test: 'I WILL GIVE TEST'}, () => {
+                          alert(
+                            'Admin will contact you to give physical skill test to prove your skill',
+                          );
+                        });
                       },
                     );
                   }}>

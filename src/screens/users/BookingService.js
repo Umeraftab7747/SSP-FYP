@@ -14,8 +14,8 @@ export class BookingService extends Component {
     UserData: [],
     rating: [],
 
+    address: '',
     Name: '',
-    BookingDay: '',
     Phone: '',
     discription: '',
 
@@ -85,7 +85,6 @@ export class BookingService extends Component {
       alert('YOU CAN NOT SELECT A PREVIOUS DAY!');
       return this.hideDatePicker();
     } else {
-      console.warn(day);
       this.setState({day: day});
       this.hideDatePicker();
     }
@@ -100,9 +99,10 @@ export class BookingService extends Component {
 
   // Booking
   BookService = () => {
-    const {Name, Phone, discription, day, time} = this.state;
+    const {address, Phone, discription, day, time, Name} = this.state;
     if (
       Name !== '' &&
+      address !== '' &&
       Phone !== '' &&
       day !== '' &&
       time !== '' &&
@@ -113,7 +113,7 @@ export class BookingService extends Component {
         UserName: this.state.Name,
         PhoneNo: this.state.Phone,
         discription: this.state.discription,
-        BookingDay: this.state.BookingDay,
+        address: this.state.address,
         ServiceProviderEmail: this.state.Servicedata.Email,
         ServiceName: this.state.Servicedata.ServiceName,
         ServiceType: this.state.Servicedata.ServiceType,
@@ -151,6 +151,13 @@ export class BookingService extends Component {
             this.setState({Name});
           }}
           Placeholder={'Name'}
+        />
+        <AppInput
+          IconName={'add'}
+          onChangeText={address => {
+            this.setState({address});
+          }}
+          Placeholder={'Address'}
         />
 
         <Text style={styles.Text}>BOOKING TIME AND DAY</Text>

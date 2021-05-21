@@ -66,7 +66,9 @@ export class AllBooking extends Component {
   renderItem = item => (
     <View style={styles.FlatListContainer}>
       <View style={styles.leftFlatlist}>
-        <Text style={styles.text}>Service: {item.ServiceName}</Text>
+        <Text style={styles.text}>User: {item.UserName}</Text>
+        <Text style={styles.text}>UserEmail: {item.UserEmail}</Text>
+        <Text style={styles.text}>Service Name: {item.ServiceName}</Text>
         <Text style={styles.text}>Type: {item.ServiceType}</Text>
         <Text style={styles.text}>Date: {item.Date}</Text>
       </View>

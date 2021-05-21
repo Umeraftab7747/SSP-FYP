@@ -21,7 +21,9 @@ export class Users extends Component {
   };
 
   componentDidMount() {
-    this.unverifiedusers();
+    setInterval(() => {
+      this.unverifiedusers();
+    }, 4000);
   }
 
   unverifiedusers = () => {

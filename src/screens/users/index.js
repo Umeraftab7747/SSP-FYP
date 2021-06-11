@@ -11,3 +11,5 @@ export {BookingService} from './BookingService';
 export {Disputes} from './Disputes';
 export {UpdateBooking} from './UpdateBooking';
 export {Checkbooking} from './Checkbooking';
+export {Suggestion} from './Suggestion';
+export {Suggested} from './Suggested';

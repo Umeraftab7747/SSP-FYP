@@ -49,6 +49,8 @@ import {
   BookingService,
   UpdateBooking,
   Checkbooking,
+  Suggestion,
+  Suggested,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -120,6 +122,16 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Checkbooking"
           component={Checkbooking}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Suggestion"
+          component={Suggestion}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Suggested"
+          component={Suggested}
           options={{headerShown: false}}
         />
 

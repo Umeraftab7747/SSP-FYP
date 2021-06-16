@@ -10,3 +10,5 @@ export {AllUser} from './AllUser';
 export {AllUserDetails} from './AllUserDetails';
 export {AddEquipement} from './AddEquipement';
 export {Equipment} from './Equipment';
+export {UpdateEquipment} from './UpdateEquipment';
+export {EquipmentDetails} from './EquipmentDetails';

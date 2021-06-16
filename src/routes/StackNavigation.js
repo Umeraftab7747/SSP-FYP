@@ -27,6 +27,8 @@ import {
   AllUserDetails,
   AddEquipement,
   Equipment,
+  UpdateEquipment,
+  EquipmentDetails,
 } from '../screens/Admin';
 import {
   Rejected,
@@ -246,6 +248,16 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Equipment"
           component={Equipment}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UpdateEquipment"
+          component={UpdateEquipment}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="EquipmentDetails"
+          component={EquipmentDetails}
           options={{headerShown: false}}
         />
 

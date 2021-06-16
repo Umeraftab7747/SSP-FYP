@@ -10,9 +10,7 @@ export class Suggested extends Component {
   };
   componentDidMount() {
     const xyz = this.props.route.params.data;
-    this.setState({data: xyz}, () => {
-      console.log(this.state.data);
-    });
+    this.setState({data: xyz});
   }
   render() {
     return (
@@ -23,7 +21,7 @@ export class Suggested extends Component {
             We recomend you the following Security Plans for your house:
           </Text>
           <Text style={styles.Question2}>
-            1. Total {this.state.data.bodyGurad} Bodyguard on each Enternce of
+            1. Total {this.state.data.bodyGurad} Bodyguards on each Enternce of
             your house.
           </Text>
           <Text style={styles.Question2}>

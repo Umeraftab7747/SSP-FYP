@@ -57,7 +57,7 @@ export class Setting extends Component {
               this.props.navigation.navigate('Suggestion');
             }}
             style={styles.Btn}>
-            <Text style={styles.BtnText}>Suggestion</Text>
+            <Text style={styles.BtnText}>SUGGESTION</Text>
           </TouchableOpacity>
           {/* btn */}
           {/* btn */}

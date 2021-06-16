@@ -8,3 +8,5 @@ export {AllServices} from './AllServices';
 export {AllserviceDetails} from './AllserviceDetails';
 export {AllUser} from './AllUser';
 export {AllUserDetails} from './AllUserDetails';
+export {AddEquipement} from './AddEquipement';
+export {Equipment} from './Equipment';

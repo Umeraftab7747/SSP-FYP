@@ -14,7 +14,7 @@ import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export class AllServices extends Component {
+export class AddEquipement extends Component {
   state = {
     data: [],
     listData: [],
@@ -46,7 +46,6 @@ export class AllServices extends Component {
       });
     // ASYC
   };
-
   // loading
   onRefresh() {
     this.setState({isFetching: true}, () => {
@@ -54,18 +53,6 @@ export class AllServices extends Component {
       this.setState({isFetching: false});
     });
   }
-
-  // filter data
-  searching = text => {
-    const newData = this.state.data.filter(item => {
-      const itemData = `${item.ServiceName.toUpperCase()} `;
-
-      const searchText = text.toUpperCase();
-
-      return itemData.indexOf(searchText) > -1;
-    });
-    this.setState({listData: newData});
-  };
 
   // Flatlist Container
   renderItem = item => (
@@ -77,7 +64,7 @@ export class AllServices extends Component {
       <TouchableOpacity
         onPress={() => {
           this.setState({selectedData: item}, () => {
-            this.props.navigation.navigate('AllserviceDetails', {
+            this.props.navigation.navigate('Equipment', {
               Alldata: this.state.selectedData,
             });
           });
@@ -87,24 +74,10 @@ export class AllServices extends Component {
       </TouchableOpacity>
     </View>
   );
-
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'All Services'} />
-        {/* Searchbar */}
-        <View style={styles.SearchbarContainer}>
-          <View style={styles.LeftIconContainer}>
-            <Icon name={'search'} type={'ionicon'} color={'#fff'} size={30} />
-          </View>
-          <TextInput
-            onChangeText={text => this.searching(text)}
-            placeholder={'Search'}
-            placeholderTextColor={'#8F94FB'}
-            style={styles.TextinputContainer}
-          />
-        </View>
-        {/* Searchbar */}
+        <Header text={'Add Equipment'} />
 
         <FlatList
           data={this.state.listData}

@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Button,
+  Modal,
+  ToastAndroid,
+} from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {Icon} from 'react-native-elements';
@@ -13,6 +22,11 @@ export class BookingService extends Component {
     Email: '',
     UserData: [],
     rating: [],
+    modalVisible: false,
+    check: false,
+    Toolsdata: [],
+    addedTools: [],
+    modalData: [],
 
     address: '',
     Name: '',
@@ -28,9 +42,34 @@ export class BookingService extends Component {
 
   componentDidMount() {
     const abc = this.props.route.params.Servicedata;
-    this.setState({Servicedata: abc}, () => {});
+    this.setState({Servicedata: abc}, () => {
+      this.getTools();
+    });
     this.getData();
   }
+
+  getTools = () => {
+    const params = {
+      ServiceId: this.state.Servicedata._id,
+    };
+
+    // ASY
+    axiosInstance
+      .post(baseUrl + '/admin/allEquipment', params)
+      .then(res => {
+        const userData = res.data;
+
+        if (userData.status === 200) {
+          this.setState({Toolsdata: userData.user}, () => {
+            // console.log(this.state.Toolsdata);
+          });
+        }
+      })
+      .catch(error => {
+        // console.log(error);
+      });
+    // ASYC
+  };
 
   getData = () => {
     AsyncStorage.getItem('UserData').then(value => {
@@ -97,6 +136,29 @@ export class BookingService extends Component {
 
   // datetimepicker
 
+  AddEquipment = () => {
+    const params = {
+      ServiceId: this.state.modalData._id,
+      UserEmail: this.state.Email,
+      ServiceName: this.state.Servicedata.ServiceName,
+      tools: this.state.addedTools,
+    };
+    axiosInstance
+      .post(baseUrl + '/users/EquipmentBooking', params)
+      .then(res => {
+        const userData = res.data;
+        alert(userData.msg);
+        this.setState({modalVisible: false}, () => {
+          this.props.navigation.navigate('UserBottomtab');
+        });
+      })
+      .catch(error => {
+        if (error) {
+          alert('Something Went Wrong');
+        }
+      });
+  };
+
   // Booking
   BookService = () => {
     const {address, Phone, discription, day, time, Name} = this.state;
@@ -126,8 +188,14 @@ export class BookingService extends Component {
         .then(res => {
           const userData = res.data;
           if (userData.status === '200') {
-            alert(userData.msg);
-            this.props.navigation.navigate('UserBottomtab');
+            alert('ADD TOOLS IF YOU WANT');
+            // this.props.navigation.navigate('UserBottomtab');
+            this.setState(
+              {modalVisible: true, modalData: userData.user},
+              () => {
+                console.log(this.state.modalData._id);
+              },
+            );
           }
         })
         .catch(error => {
@@ -225,11 +293,76 @@ export class BookingService extends Component {
           multiline
         />
         <Appbtn
+          text={'ADD EQUIPMENT'}
+          onPress={() => {
+            this.setState({modalVisible: true});
+          }}
+        />
+        <Appbtn
           text={'BOOK NOW'}
           onPress={() => {
             this.BookService();
           }}
         />
+
+        {/* modal to pick tools */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            this.setState({modalVisible: false});
+          }}>
+          <View style={styles.ModalContainer}>
+            <View style={styles.ViewContainer}>
+              <Text style={styles.LoginText}>Equipments</Text>
+              <View style={styles.TEXTCONTAINER}>
+                {this.state.Toolsdata.map(item => (
+                  <View style={styles.radiobutton}>
+                    <Text style={styles.LoginText2}>
+                      Name: {item.Equipmentname}
+                    </Text>
+                    <Text style={styles.LoginText2}>
+                      Price: {item.EquipmentPrice}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.setState(
+                          PrevState => ({
+                            addedTools: [
+                              ...PrevState.addedTools,
+                              {
+                                name: item.Equipmentname,
+                                price: item.EquipmentPrice,
+                              },
+                            ],
+                          }),
+                          () => {
+                            // console.log(this.state.addedTools);
+                            ToastAndroid.show(
+                              item.Equipmentname + ' added',
+                              ToastAndroid.SHORT,
+                            );
+                          },
+                        );
+                      }}
+                      style={styles.btnContainer}>
+                      <Text style={styles.btnText}> ADD </Text>
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </View>
+
+              <Appbtn
+                onPress={() => {
+                  this.AddEquipment();
+                }}
+                text={'Confirm'}
+              />
+            </View>
+          </View>
+        </Modal>
+        {/* modal to pick tools */}
       </View>
     );
   }
@@ -253,5 +386,73 @@ const styles = StyleSheet.create({
     color: '#8F94FB',
     fontWeight: 'bold',
     fontSize: h('2.5%'),
+  },
+  ModalContainer: {
+    flex: 1,
+    backgroundColor: '#0004',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ViewContainer: {
+    width: w('95%'),
+    height: h('95%'),
+    backgroundColor: 'white',
+    borderRadius: h('2%'),
+    alignItems: 'center',
+  },
+  LoginText: {
+    color: '#8F94FB',
+    fontSize: h('3%'),
+    fontWeight: 'bold',
+    marginTop: h('1%'),
+  },
+  LoginText2: {
+    color: '#8F94FB',
+    fontSize: h('2.4%'),
+    fontWeight: 'bold',
+    marginTop: h('1%'),
+  },
+  TEXTCONTAINER: {
+    width: '100%',
+    height: '84%',
+    // backgroundColor: 'red',
+    paddingTop: h('2%'),
+    alignItems: 'center',
+  },
+  radiobutton: {
+    width: w('90%'),
+    height: h('8%'),
+    // backgroundColor: 'red',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  Checkbtn: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#8F94FB',
+    borderRadius: 10,
+  },
+  unCheckbtn: {
+    width: 30,
+    height: 30,
+    // backgroundColor: 'green',
+    borderColor: '#8F94FB',
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+  btnContainer: {
+    width: w('20%'),
+    height: h('5%'),
+    backgroundColor: '#8F94FB',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: h('2%'),
+    borderRadius: h('1%'),
+  },
+  btnText: {
+    color: 'white',
+    fontSize: h('2%'),
+    fontWeight: 'bold',
   },
 });

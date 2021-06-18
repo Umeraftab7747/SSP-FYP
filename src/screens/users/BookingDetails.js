@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput} from 'react-native';
+import {Text, StyleSheet, View, TextInput, Modal} from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {axiosInstance, baseUrl} from '../api';
@@ -9,6 +9,7 @@ export class BookingDetails extends Component {
   state = {
     data: [],
     disputeMessage: '',
+    modalVisible: false,
   };
 
   componentDidMount() {
@@ -108,6 +109,12 @@ export class BookingDetails extends Component {
               </Text>
             </View>
             {/* detils */}
+            <Appbtn
+              onPress={() => {
+                this.setState({modalVisible: true});
+              }}
+              text={'SHOW EQUIPMENT'}
+            />
 
             {this.state.data.ServiceproviderAprove === true ? (
               <Appbtn
@@ -165,6 +172,35 @@ export class BookingDetails extends Component {
             ) : null}
           </View>
         </View>
+
+        {/* modal to pick tools */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            this.setState({modalVisible: false});
+          }}>
+          <View style={styles.ModalContainer}>
+            <View style={styles.ViewContainer}>
+              <Text style={styles.LoginText}>Equipments</Text>
+              <View style={styles.TEXTCONTAINER}>
+                <View style={styles.radiobutton}>
+                  <Text style={styles.LoginText2}>Name: this is item</Text>
+                  <Text style={styles.LoginText2}>Price: this is item</Text>
+                </View>
+              </View>
+
+              <Appbtn
+                onPress={() => {
+                  this.setState({modalVisible: false});
+                }}
+                text={'CLOSE'}
+              />
+            </View>
+          </View>
+        </Modal>
+        {/* modal to pick tools */}
       </KeyboardAwareScrollView>
     );
   }
@@ -209,5 +245,26 @@ const styles = StyleSheet.create({
     borderColor: '#8F94FB',
     borderWidth: h('0.3%'),
     padding: h('2%'),
+  },
+  ModalContainer: {
+    flex: 1,
+    backgroundColor: '#0004',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ViewContainer: {
+    width: w('95%'),
+    height: h('95%'),
+    backgroundColor: 'white',
+    borderRadius: h('2%'),
+    alignItems: 'center',
+  },
+
+  TEXTCONTAINER: {
+    width: '100%',
+    height: '84%',
+    // backgroundColor: 'red',
+    paddingTop: h('2%'),
+    alignItems: 'center',
   },
 });

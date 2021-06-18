@@ -292,12 +292,7 @@ export class BookingService extends Component {
           placeholder={'Enter Discription'}
           multiline
         />
-        <Appbtn
-          text={'ADD EQUIPMENT'}
-          onPress={() => {
-            this.setState({modalVisible: true});
-          }}
-        />
+
         <Appbtn
           text={'BOOK NOW'}
           onPress={() => {

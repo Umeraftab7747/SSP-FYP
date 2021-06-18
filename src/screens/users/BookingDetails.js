@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, TextInput, Modal} from 'react-native';
+import {Text, StyleSheet, View, TextInput, Modal, FlatList} from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {axiosInstance, baseUrl} from '../api';
@@ -10,12 +10,36 @@ export class BookingDetails extends Component {
     data: [],
     disputeMessage: '',
     modalVisible: false,
+    tools: [],
+    filterTools: [],
   };
 
   componentDidMount() {
     const xyz = this.props.route.params.ShareData;
-    this.setState({data: xyz}, () => {});
+    this.setState({data: xyz}, () => {
+      // console.log(this.state.data._id);
+      this.Equipments();
+    });
   }
+
+  Equipments = () => {
+    const params = {
+      id: this.state.data._id,
+    };
+
+    axiosInstance
+      .post(baseUrl + '/users/FindEquipmentBooking', params)
+      .then(res => {
+        const userData = res.data;
+
+        this.setState({tools: userData[0].tools[0]}, () => {});
+      })
+      .catch(error => {
+        if (error) {
+          console.log(error);
+        }
+      });
+  };
 
   Completed = () => {
     const params = {
@@ -109,13 +133,17 @@ export class BookingDetails extends Component {
               </Text>
             </View>
             {/* detils */}
+
             <Appbtn
               onPress={() => {
-                this.setState({modalVisible: true});
+                if (this.state.tools) {
+                  this.setState({modalVisible: true});
+                } else {
+                  alert('HELLOW');
+                }
               }}
               text={'SHOW EQUIPMENT'}
             />
-
             {this.state.data.ServiceproviderAprove === true ? (
               <Appbtn
                 onPress={() => {
@@ -185,18 +213,23 @@ export class BookingDetails extends Component {
             <View style={styles.ViewContainer}>
               <Text style={styles.LoginText}>Equipments</Text>
               <View style={styles.TEXTCONTAINER}>
-                <View style={styles.radiobutton}>
-                  <Text style={styles.LoginText2}>Name: this is item</Text>
-                  <Text style={styles.LoginText2}>Price: this is item</Text>
-                </View>
+                <FlatList
+                  data={this.state.tools}
+                  renderItem={({item}) => (
+                    <View style={styles.radiobutton}>
+                      <Text style={styles.LoginText2}>Name:{item.name} </Text>
+                      <Text style={styles.LoginText2}>Price:{item.price}</Text>
+                    </View>
+                  )}
+                  keyExtractor={item => Math.random().toString()}
+                />
+                <Appbtn
+                  onPress={() => {
+                    this.setState({modalVisible: false});
+                  }}
+                  text={'CLOSE'}
+                />
               </View>
-
-              <Appbtn
-                onPress={() => {
-                  this.setState({modalVisible: false});
-                }}
-                text={'CLOSE'}
-              />
             </View>
           </View>
         </Modal>
@@ -254,7 +287,7 @@ const styles = StyleSheet.create({
   },
   ViewContainer: {
     width: w('95%'),
-    height: h('95%'),
+    height: h('85%'),
     backgroundColor: 'white',
     borderRadius: h('2%'),
     alignItems: 'center',
@@ -266,5 +299,14 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     paddingTop: h('2%'),
     alignItems: 'center',
+  },
+  radiobutton: {
+    width: w('80%'),
+    height: h('8%'),
+    // backgroundColor: 'red',
+    justifyContent: 'space-around',
+    // alignItems: 'center',
+    marginTop: h('1%'),
+    // flexDirection: 'row',
   },
 });

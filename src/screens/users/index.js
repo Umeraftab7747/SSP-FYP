@@ -13,3 +13,4 @@ export {UpdateBooking} from './UpdateBooking';
 export {Checkbooking} from './Checkbooking';
 export {Suggestion} from './Suggestion';
 export {Suggested} from './Suggested';
+export {History} from './History';

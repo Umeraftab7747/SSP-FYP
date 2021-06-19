@@ -55,6 +55,7 @@ import {
   Checkbooking,
   Suggestion,
   Suggested,
+  History,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -136,6 +137,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Suggested"
           component={Suggested}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="History"
+          component={History}
           options={{headerShown: false}}
         />
 

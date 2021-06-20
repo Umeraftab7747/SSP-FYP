@@ -12,3 +12,4 @@ export {AddEquipement} from './AddEquipement';
 export {Equipment} from './Equipment';
 export {UpdateEquipment} from './UpdateEquipment';
 export {EquipmentDetails} from './EquipmentDetails';
+export {AdminToolsHistory} from './AdminToolsHistory';

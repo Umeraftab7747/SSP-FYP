@@ -65,6 +65,16 @@ export class Dashbord extends Component {
           style={styles.Btn}>
           <Text style={styles.BtnText}>ALL USERS</Text>
         </TouchableOpacity>
+        {/* btn */}
+        {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('AdminToolsHistory');
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>TOOLS HISTORY</Text>
+        </TouchableOpacity>
+        {/* btn */}
 
         <TouchableOpacity
           onPress={() => {

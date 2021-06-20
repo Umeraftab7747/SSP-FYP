@@ -17,7 +17,7 @@ export class Equipment extends Component {
   componentDidMount() {
     const xyz = this.props.route.params.Alldata;
     this.setState({data: xyz}, () => {
-      console.log();
+      console.log(this.state.data);
     });
   }
 
@@ -29,6 +29,7 @@ export class Equipment extends Component {
       Companyname: Company,
       EquipmentPrice: Price,
       discription: discription,
+      CompnayEmail: this.state.data.Email,
     };
 
     // ASY

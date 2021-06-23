@@ -82,6 +82,15 @@ export class Dashboard extends Component {
           <Text style={styles.BtnText}>BOOKING REQUEST</Text>
         </TouchableOpacity>
         {/* btn */}
+        {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('SellHistory');
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>HISTORY</Text>
+        </TouchableOpacity>
+        {/* btn */}
         <TouchableOpacity
           onPress={() => {
             this.removeData();

@@ -142,6 +142,7 @@ export class BookingService extends Component {
       UserEmail: this.state.Email,
       ServiceName: this.state.Servicedata.ServiceName,
       tools: this.state.addedTools,
+      CompnayEmail: this.state.Servicedata.Email,
     };
     axiosInstance
       .post(baseUrl + '/users/EquipmentBooking', params)

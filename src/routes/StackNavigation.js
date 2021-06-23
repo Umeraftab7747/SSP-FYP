@@ -42,6 +42,7 @@ import {
   Updateprofile,
   SSPconfirmbooking,
   ConfirmBooking,
+  SellHistory,
 } from '../screens/SSP';
 import {
   ServiceDeatails,
@@ -57,6 +58,10 @@ import {
   Suggestion,
   Suggested,
   History,
+  DashboardDetails,
+  StaticGuard,
+  Surveillance,
+  Premisses,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -145,6 +150,26 @@ export const StackNavigation = () => {
           component={History}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="DashboardDetails"
+          component={DashboardDetails}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="StaticGuard"
+          component={StaticGuard}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Surveillance"
+          component={Surveillance}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Premisses"
+          component={Premisses}
+          options={{headerShown: false}}
+        />
 
         {/* USER */}
 
@@ -202,6 +227,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="ConfirmBooking"
           component={ConfirmBooking}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SellHistory"
+          component={SellHistory}
           options={{headerShown: false}}
         />
         {/* Service provider */}

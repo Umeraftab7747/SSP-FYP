@@ -10,3 +10,4 @@ export {SSPProfile} from './SSPProfile';
 export {Updateprofile} from './Updateprofile';
 export {SSPconfirmbooking} from './SSPconfirmbooking';
 export {ConfirmBooking} from './ConfirmBooking';
+export {SellHistory} from './SellHistory';

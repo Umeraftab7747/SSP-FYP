@@ -340,6 +340,7 @@ export class Service extends Component {
                 value="Celebrity Protection"
               />
               <Picker.Item label="Event Security" value="Event Security" />
+              <Picker.Item label="Event Guard" value="Event Guard" />
             </Picker>
           ) : null}
           {/* picker */}

@@ -21,7 +21,9 @@ export class StaticGuard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Armed Guard',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Armed Guard</Text>
@@ -30,7 +32,9 @@ export class StaticGuard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'UnArmed Guard',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>UnArmed Guard</Text>
@@ -39,7 +43,9 @@ export class StaticGuard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Body Guard',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>BodyGuard</Text>
@@ -48,7 +54,9 @@ export class StaticGuard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Event Security',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Celebrity Protection</Text>
@@ -57,7 +65,9 @@ export class StaticGuard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Celebrity Protection',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Event Guard</Text>

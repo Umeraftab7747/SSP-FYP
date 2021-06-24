@@ -21,7 +21,9 @@ export class Premisses extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Mall Security',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Mall Security</Text>
@@ -30,7 +32,9 @@ export class Premisses extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Office/Factory Security',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Office/Factory Security</Text>
@@ -39,7 +43,9 @@ export class Premisses extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Housing Security',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Housing Society Security</Text>

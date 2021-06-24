@@ -22,7 +22,9 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'CCTV Desgin and Installtion',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>CCTV Design and Installion</Text>
@@ -31,7 +33,9 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Network Camera',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Network Camera</Text>
@@ -40,7 +44,9 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Analog Camera',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Analog Camera</Text>
@@ -49,7 +55,9 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Facial recognization Camera',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Facial Recognization</Text>
@@ -58,7 +66,9 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Number Plate Camera',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Number plate Camera</Text>
@@ -67,7 +77,9 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('DashboardDetails', {
+              data: 'Remote Acess System',
+            });
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Remote Acess System</Text>

@@ -26,7 +26,7 @@ export class UserConfirmBooking extends Component {
     const zxy = this.props.route.params.price;
     const abc = this.props.route.params.data;
     this.setState({eqData: xyz, price: zxy, data: abc}, () => {
-      console.log(this.state.data);
+      console.log(this.state.eqData);
       this.getData();
     });
   }
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   radiobutton: {
     width: w('90%'),
     height: h('8%'),
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',

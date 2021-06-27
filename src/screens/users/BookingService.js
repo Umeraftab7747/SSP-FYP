@@ -341,7 +341,7 @@ export class BookingService extends Component {
                             ],
                           }),
                           () => {
-                            // console.log(this.state.addedTools);
+                            console.log(this.state.addedTools);
                             ToastAndroid.show(
                               item.Equipmentname + ' added',
                               ToastAndroid.SHORT,

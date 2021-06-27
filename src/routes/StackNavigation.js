@@ -33,6 +33,7 @@ import {
   Category,
   AdminStatiGurad,
   AdminSurveillanceSecurity,
+  AdminPremisses,
 } from '../screens/Admin';
 import {
   Rejected,
@@ -336,6 +337,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="AdminSurveillanceSecurity"
           component={AdminSurveillanceSecurity}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AdminPremisses"
+          component={AdminPremisses}
           options={{headerShown: false}}
         />
 

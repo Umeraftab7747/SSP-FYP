@@ -30,7 +30,7 @@ export class Category extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('Premisses');
+            this.props.navigation.navigate('AdminPremisses');
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Premises Security</Text>

@@ -25,11 +25,33 @@ export class SellHistory extends Component {
     tools: [],
     filterTools: [],
     shareData: [],
+    BillData: [],
   };
 
   componentDidMount() {
     this.getData();
   }
+
+  Equipments = id => {
+    const data = {
+      SSPMAil: id,
+    };
+
+    axiosInstance
+      .post(baseUrl + '/billing/findbillssp', data)
+      .then(res => {
+        const userData = res.data;
+
+        this.setState({BillData: userData.user[0]}, () => {
+          console.log(this.state.BillData.tools);
+        });
+      })
+      .catch(error => {
+        if (error) {
+          console.log(error);
+        }
+      });
+  };
 
   // GETING LOGIN DATA
   getData = () => {
@@ -39,6 +61,8 @@ export class SellHistory extends Component {
         const params = {
           CompnayEmail: data,
         };
+
+        this.Equipments(data);
         // ASY
         axiosInstance
           .post(baseUrl + '/admin/sspCompletedProjectEquipment', params)
@@ -91,11 +115,9 @@ export class SellHistory extends Component {
   renderItem = item => (
     <TouchableOpacity
       onPress={() => {
-        this.setState({modalVisible: true, shareData: item.tools[0]}, () => {
-          this.state.shareData.forEach(arg => {
-            total += arg.price;
-            console.log(total);
-          });
+        this.setState({
+          modalVisible: true,
+          shareData: this.state.BillData.tools,
         });
       }}
       style={styles.FlatListContainer}>
@@ -164,6 +186,16 @@ export class SellHistory extends Component {
                   }}
                   keyExtractor={item => Math.random().toString()}
                 />
+
+                {this.state.BillData.ExtraPrice ? (
+                  <Text style={styles.LoginText2}>
+                    Extra Charges:{this.state.BillData.ExtraPrice}
+                  </Text>
+                ) : null}
+
+                <Text style={styles.LoginText2}>
+                  Service Charges:{this.state.BillData.ServicePrice}
+                </Text>
                 <Appbtn
                   onPress={() => {
                     this.setState({modalVisible: false});

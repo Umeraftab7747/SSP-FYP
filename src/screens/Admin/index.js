@@ -18,3 +18,4 @@ export {AdminToolsHistory} from './AdminToolsHistory';
 export {Category} from './Category';
 export {AdminStatiGurad} from './AdminStatiGurad';
 export {AdminSurveillanceSecurity} from './AdminSurveillanceSecurity';
+export {AdminPremisses} from './AdminPremisses';

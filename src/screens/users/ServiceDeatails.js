@@ -15,7 +15,7 @@ export class ServiceDeatails extends Component {
   };
   componentDidMount() {
     const abc = this.props.route.params.Alldata;
-    this.setState({data: abc});
+    this.setState({data: abc}, () => {});
     this.getData();
   }
 
@@ -115,12 +115,16 @@ export class ServiceDeatails extends Component {
         <View style={styles.DetailContainer}>
           <Text style={styles.Text}>Name: {this.state.data.ServiceName} </Text>
           <Text style={styles.Text}>Type: {this.state.data.ServiceType} </Text>
+          <Text style={[styles.Text]}>
+            Service Price: {this.state.data.ServicePrice}
+          </Text>
           <Text style={[styles.Text, {paddingTop: h('1%')}]}>
             Starting Hours: {this.state.data.Startinghour}
           </Text>
           <Text style={[styles.Text, {paddingBottom: h('2%')}]}>
             Ending Hours: {this.state.data.EndingHour}
           </Text>
+
           <Text
             style={[
               styles.Text,

@@ -169,7 +169,7 @@ export class Service extends Component {
               alert('Data Submitted for Review');
               this.setState({
                 Name: '',
-                ServiceType: 'Armed Guard',
+                ServiceType: '',
                 Price: '',
                 discription: '',
                 image: '',
@@ -204,7 +204,7 @@ export class Service extends Component {
               alert('Data Submitted for Review');
               this.setState({
                 Name: '',
-                ServiceType: 'Armed Guard',
+                ServiceType: '',
                 discription: '',
                 Price: '',
                 image: '',
@@ -330,7 +330,9 @@ export class Service extends Component {
                 color: '#8F94FB',
               }}
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue})
+                this.setState({ServiceType: itemValue}, () => {
+                  console.warn(this.state.ServiceType);
+                })
               }>
               <Picker.Item label="Armed Guard" value="Armed Guard" />
               <Picker.Item label="UnArmed Guard" value="UnArmed Guard" />
@@ -353,7 +355,9 @@ export class Service extends Component {
                 color: '#8F94FB',
               }}
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue})
+                this.setState({ServiceType: itemValue}, () => {
+                  console.warn(this.state.ServiceType);
+                })
               }>
               <Picker.Item
                 label="CCTV Desgin and Installtion"
@@ -386,7 +390,9 @@ export class Service extends Component {
                 color: '#8F94FB',
               }}
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue})
+                this.setState({ServiceType: itemValue}, () => {
+                  console.warn(this.state.ServiceType);
+                })
               }>
               <Picker.Item label="Mall Security" value="Mall Security" />
               <Picker.Item

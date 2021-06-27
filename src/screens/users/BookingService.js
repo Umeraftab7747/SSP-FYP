@@ -43,6 +43,7 @@ export class BookingService extends Component {
   componentDidMount() {
     const abc = this.props.route.params.Servicedata;
     this.setState({Servicedata: abc}, () => {
+      console.log(this.state.Servicedata);
       this.getTools();
     });
     this.getData();
@@ -144,18 +145,23 @@ export class BookingService extends Component {
       tools: this.state.addedTools,
       CompnayEmail: this.state.Servicedata.Email,
     };
+
     axiosInstance
       .post(baseUrl + '/users/EquipmentBooking', params)
       .then(res => {
         const userData = res.data;
         alert(userData.msg);
         this.setState({modalVisible: false}, () => {
-          this.props.navigation.navigate('UserBottomtab');
+          this.props.navigation.navigate('UserConfirmBooking', {
+            tools: this.state.addedTools,
+            price: this.state.Servicedata.ServicePrice,
+            data: this.state.Servicedata,
+          });
         });
       })
       .catch(error => {
         if (error) {
-          alert('Something Went Wrong');
+          // alert('Something Went Wrong');
         }
       });
   };
@@ -298,6 +304,7 @@ export class BookingService extends Component {
           text={'BOOK NOW'}
           onPress={() => {
             this.BookService();
+            // this.setState({modalVisible: true});
           }}
         />
 

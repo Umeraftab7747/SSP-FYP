@@ -22,3 +22,6 @@ export {StaticGuard} from './StaticGuard';
 export {Surveillance} from './Surveillance';
 export {Premisses} from './Premisses';
 export {SearchItem} from './SearchItem';
+
+// adding confirm booking page
+export {UserConfirmBooking} from './UserConfirmBooking';

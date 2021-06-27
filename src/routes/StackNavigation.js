@@ -66,6 +66,7 @@ import {
   Surveillance,
   Premisses,
   SearchItem,
+  UserConfirmBooking,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -177,6 +178,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="SearchItem"
           component={SearchItem}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UserConfirmBooking"
+          component={UserConfirmBooking}
           options={{headerShown: false}}
         />
 

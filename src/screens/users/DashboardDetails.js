@@ -26,6 +26,7 @@ export class DashboardDetails extends Component {
   componentDidMount() {
     const abc = this.props.route.params.data;
     this.setState({oldScreenData: abc}, () => {
+      console.log(this.state.oldScreenData);
       this.verifiedRequests();
     });
   }
@@ -42,7 +43,7 @@ export class DashboardDetails extends Component {
 
         if (userData) {
           this.setState({data: userData.user}, () => {
-            console.log(this.state.data);
+            // console.log(this.state.data);
           });
           this.setState({listData: this.state.data});
         } else if (!userData) {

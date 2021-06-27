@@ -12,27 +12,33 @@ export class BookingDetails extends Component {
     modalVisible: false,
     tools: [],
     filterTools: [],
+    BillData: [],
   };
 
   componentDidMount() {
     const xyz = this.props.route.params.ShareData;
     this.setState({data: xyz}, () => {
-      // console.log(this.state.data._id);
+      // console.log(this.state.data.ServiceId);
       this.Equipments();
     });
   }
 
   Equipments = () => {
     const params = {
-      id: this.state.data._id,
+      ServiceId: this.state.data.ServiceId,
     };
 
     axiosInstance
-      .post(baseUrl + '/users/FindEquipmentBooking', params)
+      .post(baseUrl + '/billing/findbill', params)
       .then(res => {
         const userData = res.data;
 
-        this.setState({tools: userData[0].tools[0]}, () => {});
+        this.setState(
+          {tools: userData.user[0].tools, BillData: userData.user[0]},
+          () => {
+            console.log(this.state.BillData);
+          },
+        );
       })
       .catch(error => {
         if (error) {
@@ -142,7 +148,7 @@ export class BookingDetails extends Component {
                   alert('HELLOW');
                 }
               }}
-              text={'SHOW EQUIPMENT'}
+              text={'BOOKING DETAILS'}
             />
             {this.state.data.ServiceproviderAprove === true ? (
               <Appbtn
@@ -211,10 +217,10 @@ export class BookingDetails extends Component {
           }}>
           <View style={styles.ModalContainer}>
             <View style={styles.ViewContainer}>
-              <Text style={styles.LoginText}>Equipments</Text>
+              <Text style={styles.LoginText}>Equipments/Charges</Text>
               <View style={styles.TEXTCONTAINER}>
                 <FlatList
-                  data={this.state.tools}
+                  data={this.state.BillData.tools}
                   renderItem={({item}) => (
                     <View style={styles.radiobutton}>
                       <Text style={styles.LoginText2}>Name:{item.name} </Text>
@@ -223,6 +229,16 @@ export class BookingDetails extends Component {
                   )}
                   keyExtractor={item => Math.random().toString()}
                 />
+
+                <Text style={styles.LoginText2}>
+                  Service Price:{this.state.BillData.ServicePrice}
+                </Text>
+                {this.state.BillData.ExtraPrice ? (
+                  <Text style={styles.LoginText2}>
+                    Extra Charges:{this.state.BillData.ExtraPrice}
+                  </Text>
+                ) : null}
+
                 <Appbtn
                   onPress={() => {
                     this.setState({modalVisible: false});

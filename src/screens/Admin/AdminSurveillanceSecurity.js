@@ -3,15 +3,15 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Header} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 
-export class Surveillance extends Component {
+export class AdminSurveillanceSecurity extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'Category'} />
+        <Header text={'ADD EQUIPMENT'} />
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
+            this.props.navigation.navigate('Equipment', {
               data: 'CCTV Desgin and Installtion',
             });
           }}
@@ -22,7 +22,7 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
+            this.props.navigation.navigate('Equipment', {
               data: 'Network Camera',
             });
           }}
@@ -33,7 +33,7 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
+            this.props.navigation.navigate('Equipment', {
               data: 'Analog Camera',
             });
           }}
@@ -44,7 +44,7 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
+            this.props.navigation.navigate('Equipment', {
               data: 'Facial recognization Camera',
             });
           }}
@@ -55,7 +55,7 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
+            this.props.navigation.navigate('Equipment', {
               data: 'Number Plate Camera',
             });
           }}
@@ -66,7 +66,7 @@ export class Surveillance extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
+            this.props.navigation.navigate('Equipment', {
               data: 'Remote Acess System',
             });
           }}

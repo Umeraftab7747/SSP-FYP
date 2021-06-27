@@ -34,20 +34,20 @@ export class Dashbord extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('AddEquipement');
+            this.props.navigation.navigate('Category');
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>ADD EQUIPMENTS</Text>
         </TouchableOpacity>
         {/* btn */}
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('UpdateEquipment');
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>UPDATE EQUIPMENT</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {/* btn */}
         <TouchableOpacity
           onPress={() => {

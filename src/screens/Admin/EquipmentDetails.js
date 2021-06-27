@@ -15,8 +15,9 @@ export class EquipmentDetails extends Component {
   };
 
   componentDidMount() {
-    const xyz = this.props.route.params.Alldata;
+    const xyz = this.props.route.params.data;
     this.setState({data: xyz}, () => {
+      console.log(this.state.data);
       this.setState({
         Name: this.state.data.Equipmentname,
         Company: this.state.data.Companyname,
@@ -29,7 +30,7 @@ export class EquipmentDetails extends Component {
   Submit = () => {
     const {Name, Price, Company, discription} = this.state;
     const params = {
-      ServiceId: this.state.data._id,
+      EquipmentCategory: this.state.data,
       Equipmentname: Name,
       Companyname: Company,
       EquipmentPrice: Price,

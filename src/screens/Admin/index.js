@@ -13,3 +13,8 @@ export {Equipment} from './Equipment';
 export {UpdateEquipment} from './UpdateEquipment';
 export {EquipmentDetails} from './EquipmentDetails';
 export {AdminToolsHistory} from './AdminToolsHistory';
+
+// add equipment
+export {Category} from './Category';
+export {AdminStatiGurad} from './AdminStatiGurad';
+export {AdminSurveillanceSecurity} from './AdminSurveillanceSecurity';

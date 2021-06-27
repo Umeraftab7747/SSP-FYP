@@ -3,16 +3,16 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 
-export class Dashboard extends Component {
+export class Category extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'DASHBOARD'} />
+        <Header text={'ADD EQUIPMENT'} />
 
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('StaticGuard');
+            this.props.navigation.navigate('AdminStatiGurad');
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Static Guard</Text>
@@ -21,7 +21,7 @@ export class Dashboard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('Surveillance');
+            this.props.navigation.navigate('AdminSurveillanceSecurity');
           }}
           style={styles.Btn}>
           <Text style={styles.BtnText}>Surveillance Security</Text>
@@ -35,6 +35,7 @@ export class Dashboard extends Component {
           style={styles.Btn}>
           <Text style={styles.BtnText}>Premises Security</Text>
         </TouchableOpacity>
+        {/* btn */}
       </View>
     );
   }

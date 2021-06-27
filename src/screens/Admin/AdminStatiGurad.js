@@ -3,75 +3,64 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import {Header} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 
-export class Surveillance extends Component {
+export class AdminStatiGurad extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'Category'} />
+        <Header text={'Sub-Category'} />
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
-              data: 'CCTV Desgin and Installtion',
+            this.props.navigation.navigate('Equipment', {
+              data: 'Armed Guard',
             });
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>CCTV Design and Installion</Text>
+          <Text style={styles.BtnText}>Armed Guard</Text>
         </TouchableOpacity>
         {/* btn */}
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
-              data: 'Network Camera',
+            this.props.navigation.navigate('Equipment', {
+              data: 'UnArmed Guard',
             });
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>Network Camera</Text>
+          <Text style={styles.BtnText}>UnArmed Guard</Text>
         </TouchableOpacity>
         {/* btn */}
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
-              data: 'Analog Camera',
+            this.props.navigation.navigate('Equipment', {
+              data: 'Body Guard',
             });
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>Analog Camera</Text>
+          <Text style={styles.BtnText}>BodyGuard</Text>
         </TouchableOpacity>
         {/* btn */}
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
-              data: 'Facial recognization Camera',
+            this.props.navigation.navigate('Equipment', {
+              data: 'Celebrity Protection',
             });
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>Facial Recognization</Text>
+          <Text style={styles.BtnText}>Celebrity Protection</Text>
         </TouchableOpacity>
         {/* btn */}
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
-              data: 'Number Plate Camera',
+            this.props.navigation.navigate('Equipment', {
+              data: 'Event Security',
             });
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>Number plate Camera</Text>
-        </TouchableOpacity>
-        {/* btn */}
-        {/* btn */}
-        <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('DashboardDetails', {
-              data: 'Remote Acess System',
-            });
-          }}
-          style={styles.Btn}>
-          <Text style={styles.BtnText}>Remote Acess System</Text>
+          <Text style={styles.BtnText}>Event Guard</Text>
         </TouchableOpacity>
         {/* btn */}
       </View>

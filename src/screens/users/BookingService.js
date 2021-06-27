@@ -50,7 +50,7 @@ export class BookingService extends Component {
 
   getTools = () => {
     const params = {
-      ServiceId: this.state.Servicedata._id,
+      EquipmentCategory: this.state.Servicedata.ServiceType,
     };
 
     // ASY
@@ -194,7 +194,7 @@ export class BookingService extends Component {
             this.setState(
               {modalVisible: true, modalData: userData.user},
               () => {
-                console.log(this.state.modalData._id);
+                // console.log(this.state.modalData._id);
               },
             );
           }

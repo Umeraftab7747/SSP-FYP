@@ -30,6 +30,9 @@ import {
   UpdateEquipment,
   EquipmentDetails,
   AdminToolsHistory,
+  Category,
+  AdminStatiGurad,
+  AdminSurveillanceSecurity,
 } from '../screens/Admin';
 import {
   Rejected,
@@ -300,6 +303,21 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="AdminToolsHistory"
           component={AdminToolsHistory}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Category"
+          component={Category}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AdminStatiGurad"
+          component={AdminStatiGurad}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AdminSurveillanceSecurity"
+          component={AdminSurveillanceSecurity}
           options={{headerShown: false}}
         />
 

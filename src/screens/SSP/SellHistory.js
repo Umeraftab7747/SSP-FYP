@@ -14,6 +14,7 @@ import {Icon} from 'react-native-elements';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+var total = 0;
 export class SellHistory extends Component {
   state = {
     data: [],
@@ -35,7 +36,6 @@ export class SellHistory extends Component {
     AsyncStorage.getItem('ServiceProviderData').then(value => {
       const data = JSON.parse(value);
       if (data !== null) {
-        console.log(data);
         const params = {
           CompnayEmail: data,
         };
@@ -44,12 +44,11 @@ export class SellHistory extends Component {
           .post(baseUrl + '/admin/sspCompletedProjectEquipment', params)
           .then(res => {
             const userData = res.data;
-            console.log(userData);
 
             if (userData.status === 200) {
               this.setState({data: userData.user}, () => {
                 this.setState({tools: this.state.data[0]}, () => {
-                  console.log(this.state.tools);
+                  // console.log(this.state.tools);
                 });
               });
 
@@ -93,7 +92,10 @@ export class SellHistory extends Component {
     <TouchableOpacity
       onPress={() => {
         this.setState({modalVisible: true, shareData: item.tools[0]}, () => {
-          console.log(this.state.shareData);
+          this.state.shareData.forEach(arg => {
+            total += arg.price;
+            console.log(total);
+          });
         });
       }}
       style={styles.FlatListContainer}>
@@ -114,7 +116,7 @@ export class SellHistory extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'History'} />
+        <Header text={'Income history'} />
         {/* Searchbar */}
         <View style={styles.SearchbarContainer}>
           <View style={styles.LeftIconContainer}>
@@ -146,16 +148,20 @@ export class SellHistory extends Component {
           }}>
           <View style={styles.ModalContainer}>
             <View style={styles.ViewContainer}>
-              <Text style={styles.LoginText}>Equipments</Text>
+              <Text style={styles.LoginText}>Equipments Sold</Text>
               <View style={styles.TEXTCONTAINER}>
                 <FlatList
                   data={this.state.shareData}
-                  renderItem={({item}) => (
-                    <View style={styles.radiobutton}>
-                      <Text style={styles.LoginText2}>Name:{item.name}</Text>
-                      <Text style={styles.LoginText2}>Price:{item.price}</Text>
-                    </View>
-                  )}
+                  renderItem={({item}) => {
+                    return (
+                      <View style={styles.radiobutton}>
+                        <Text style={styles.LoginText2}>Name:{item.name}</Text>
+                        <Text style={styles.LoginText2}>
+                          Price:{item.price}
+                        </Text>
+                      </View>
+                    );
+                  }}
                   keyExtractor={item => Math.random().toString()}
                 />
                 <Appbtn

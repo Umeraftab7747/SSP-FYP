@@ -1,18 +1,7 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableOpacity,
-  TextInput,
-  Modal,
-} from 'react-native';
-import {Header, Appbtn} from '../../Components';
+import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {Header} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
-import {Icon} from 'react-native-elements';
-import {axiosInstance, baseUrl} from '../api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 export class StaticGuard extends Component {
   render() {
     return (
@@ -55,7 +44,7 @@ export class StaticGuard extends Component {
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('DashboardDetails', {
-              data: 'Event Security',
+              data: 'Celebrity Protection',
             });
           }}
           style={styles.Btn}>
@@ -66,7 +55,7 @@ export class StaticGuard extends Component {
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('DashboardDetails', {
-              data: 'Celebrity Protection',
+              data: 'Event Security',
             });
           }}
           style={styles.Btn}>

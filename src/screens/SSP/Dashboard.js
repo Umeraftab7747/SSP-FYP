@@ -88,7 +88,7 @@ export class Dashboard extends Component {
             this.props.navigation.navigate('SellHistory');
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>HISTORY</Text>
+          <Text style={styles.BtnText}>INCOME HISTORY</Text>
         </TouchableOpacity>
         {/* btn */}
         <TouchableOpacity

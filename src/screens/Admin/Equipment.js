@@ -15,7 +15,7 @@ export class Equipment extends Component {
   };
 
   componentDidMount() {
-    const xyz = this.props.route.params.Alldata;
+    const xyz = this.props.route.params.data;
     this.setState({data: xyz}, () => {
       console.log(this.state.data);
     });
@@ -24,12 +24,11 @@ export class Equipment extends Component {
   Submit = () => {
     const {Name, Price, Company, discription} = this.state;
     const params = {
-      ServiceId: this.state.data._id,
+      EquipmentCategory: this.state.data,
       Equipmentname: Name,
       Companyname: Company,
       EquipmentPrice: Price,
       discription: discription,
-      CompnayEmail: this.state.data.Email,
     };
 
     // ASY
@@ -48,7 +47,7 @@ export class Equipment extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Header text={'Equipment'} />
+        <Header text={'New Equipment'} />
         <AppInput
           IconName={'add'}
           onChangeText={Name => {

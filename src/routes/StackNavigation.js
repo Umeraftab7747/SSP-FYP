@@ -46,6 +46,7 @@ import {
   SSPconfirmbooking,
   ConfirmBooking,
   SellHistory,
+  AddExtraCharges,
 } from '../screens/SSP';
 import {
   ServiceDeatails,
@@ -247,6 +248,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="SellHistory"
           component={SellHistory}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AddExtraCharges"
+          component={AddExtraCharges}
           options={{headerShown: false}}
         />
         {/* Service provider */}

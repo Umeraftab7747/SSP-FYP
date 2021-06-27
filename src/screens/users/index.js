@@ -21,3 +21,4 @@ export {DashboardDetails} from './DashboardDetails';
 export {StaticGuard} from './StaticGuard';
 export {Surveillance} from './Surveillance';
 export {Premisses} from './Premisses';
+export {SearchItem} from './SearchItem';

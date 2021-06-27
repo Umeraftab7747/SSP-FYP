@@ -12,6 +12,16 @@ export class Dashboard extends Component {
         {/* btn */}
         <TouchableOpacity
           onPress={() => {
+            this.props.navigation.navigate('SearchItem');
+          }}
+          style={styles.Btn}>
+          <Text style={styles.BtnText}>SEARCH</Text>
+        </TouchableOpacity>
+        {/* btn */}
+
+        {/* btn */}
+        <TouchableOpacity
+          onPress={() => {
             this.props.navigation.navigate('StaticGuard');
           }}
           style={styles.Btn}>
@@ -35,6 +45,7 @@ export class Dashboard extends Component {
           style={styles.Btn}>
           <Text style={styles.BtnText}>Premises Security</Text>
         </TouchableOpacity>
+        {/* btn */}
       </View>
     );
   }

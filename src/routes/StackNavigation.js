@@ -65,6 +65,7 @@ import {
   StaticGuard,
   Surveillance,
   Premisses,
+  SearchItem,
 } from '../screens/users';
 
 export const StackNavigation = () => {
@@ -171,6 +172,11 @@ export const StackNavigation = () => {
         <Stack.Screen
           name="Premisses"
           component={Premisses}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SearchItem"
+          component={SearchItem}
           options={{headerShown: false}}
         />
 

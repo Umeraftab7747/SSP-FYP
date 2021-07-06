@@ -7,8 +7,9 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Platform,
+  Modal,
   Button,
+  ToastAndroid,
 } from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
@@ -25,6 +26,7 @@ export class Service extends Component {
     check: true,
     check2: false,
     check3: 'static',
+    modalVisible: false,
 
     // all field for backend
     Email: '',
@@ -327,89 +329,347 @@ export class Service extends Component {
             {/* radio button */}
           </View>
           <Text style={styles.text}>TYPE OF SERVICE</Text>
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({modalVisible: true});
+            }}
+            style={styles.TextBtn2}>
+            <Text style={styles.btntext}>Select Service</Text>
+          </TouchableOpacity>
 
           {/* picker */}
 
           {this.state.check3 === 'static' ? (
-            <Picker
-              selectedValue={this.state.ServiceType}
-              style={{
-                height: h('7%'),
-                width: w('70%'),
-                color: '#8F94FB',
-              }}
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue}, () => {
-                  console.warn(itemValue);
-                })
-              }>
-              <Picker.Item label="Armed Guard" value="Armed Guard" />
-              <Picker.Item label="UnArmed Guard" value="UnArmed Guard" />
-              <Picker.Item label="Body Guard" value="Body Guard" />
-              <Picker.Item
-                label="Celebrity Protection"
-                value="Celebrity Protection"
-              />
-              <Picker.Item label="Event Security" value="Event Security" />
-              <Picker.Item label="Event Guard" value="Event Guard" />
-            </Picker>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.modalVisible}
+              onRequestClose={() => {
+                this.setState({modalVisible: false});
+              }}>
+              <View style={styles.Modalcontainer}>
+                <View style={styles.ModalMainContainer}>
+                  <Text style={styles.text}>SELECT YOUR SERVICE</Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Armed Guard',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Armed Guard Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Armed Guard</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'UnArmed Guard',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'UnArmed Guard Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>UnArmed Guard</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Body Guard',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Body Guard Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Body Guard</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Celebrity Protection',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Celebrity Protection Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Celebrity Protection</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Event Security',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Event Security Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Event Security</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Event Guard',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Event Guard Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Event Guard</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
           ) : null}
           {/* picker */}
           {this.state.check3 === 'Survilance' ? (
-            <Picker
-              selectedValue={this.state.ServiceType}
-              style={{
-                height: h('7%'),
-                width: w('50%'),
-                color: '#8F94FB',
-              }}
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue}, () => {
-                  console.warn(this.state.ServiceType);
-                })
-              }>
-              <Picker.Item
-                label="CCTV Desgin and Installtion"
-                value="CCTV Desgin and Installtion"
-              />
-              <Picker.Item
-                label="Number Plate Camera"
-                value="Number Plate Camera"
-              />
-              <Picker.Item
-                label="Facial recognization Camera"
-                value="Facial recognization Camera"
-              />
-              <Picker.Item label="Network Camera" value="Network Camera" />
-              <Picker.Item label="Analog Camera" value="Analog Camera" />
-              <Picker.Item
-                label="Remote Acess System"
-                value="Remote Acess System"
-              />
-            </Picker>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.modalVisible}
+              onRequestClose={() => {
+                this.setState({modalVisible: false});
+              }}>
+              <View style={styles.Modalcontainer}>
+                <View style={styles.ModalMainContainer}>
+                  <Text style={styles.text}>SELECT YOUR SERVICE</Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'CCTV Desgin and Installtion',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'CCTV Desgin and Installtion Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>
+                      CCTV Desgin and Installtion
+                    </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Number Plate Camera',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Number Plate Camera Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Number Plate Camera</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Facial recognization Camera',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Facial recognization Camera Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>
+                      Facial recognization Camera
+                    </Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Network Camera',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Network Camera Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Network Camera</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Analog Camera',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Analog Camera Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Analog Camera</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Remote Acess System',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Remote Acess System Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Remote Acess System</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
           ) : null}
           {/* picker */}
           {/* picker */}
           {this.state.check3 === 'Premises' ? (
-            <Picker
-              selectedValue={this.state.ServiceType}
-              style={{
-                height: h('7%'),
-                width: w('50%'),
-                color: '#8F94FB',
-              }}
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue}, () => {
-                  console.warn(itemValue);
-                })
-              }>
-              <Picker.Item label="Mall Security" value="Mall Security" />
-              <Picker.Item
-                label="Office/Factory Security"
-                value="Office/Factory Security"
-              />
-              <Picker.Item label="Housing Security" value="Housing Security" />
-            </Picker>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.modalVisible}
+              onRequestClose={() => {
+                this.setState({modalVisible: false});
+              }}>
+              <View style={styles.Modalcontainer}>
+                <View style={styles.ModalMainContainer}>
+                  <Text style={styles.text}>SELECT YOUR SERVICE</Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Mall Security',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Mall Security Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Mall Security</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Office/Factory Security',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Office/Factory Security Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Office/Factory Security</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState(
+                        {
+                          ServiceType: 'Housing Security',
+                          modalVisible: false,
+                        },
+                        () => {
+                          ToastAndroid.show(
+                            'Housing Security Selected',
+                            ToastAndroid.SHORT,
+                          );
+                        },
+                      );
+                    }}
+                    style={styles.TextBtn}>
+                    <Text style={styles.btntext}>Housing Security</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
           ) : null}
           {/* picker */}
 
@@ -630,5 +890,41 @@ const styles = StyleSheet.create({
     borderColor: '#8F94FB',
     borderWidth: h('0.3%'),
     padding: h('2%'),
+  },
+  Modalcontainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0003',
+  },
+  ModalMainContainer: {
+    backgroundColor: 'white',
+    width: '90%',
+    height: '70%',
+    alignItems: 'center',
+    paddingTop: h('2%'),
+  },
+  TextBtn: {
+    width: '90%',
+    height: h('6%'),
+    backgroundColor: '#8F94FB',
+    marginTop: h('2%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: h('1%'),
+  },
+  TextBtn2: {
+    width: '50%',
+    height: h('6%'),
+    backgroundColor: '#8F94FB',
+    marginTop: h('2%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: h('1%'),
+  },
+  btntext: {
+    color: 'white',
+    fontSize: h('2%'),
+    fontWeight: 'bold',
   },
 });

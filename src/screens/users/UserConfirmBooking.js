@@ -1,15 +1,6 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  TextInput,
-  Button,
-  FlatList,
-  ToastAndroid,
-} from 'react-native';
-import {Header, Appbtn, AppInput} from '../../Components';
+import {Text, StyleSheet, View, FlatList} from 'react-native';
+import {Header, Appbtn} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';

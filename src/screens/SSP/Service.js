@@ -30,7 +30,7 @@ export class Service extends Component {
     Email: '',
     Name: '',
     Price: '',
-    ServiceType: 'Armed Guard',
+    ServiceType: [],
     discription: '',
     image: '',
     test: '',
@@ -262,7 +262,10 @@ export class Service extends Component {
               ) : (
                 <TouchableOpacity
                   onPress={() => {
-                    this.setState({check3: 'static'});
+                    this.setState({
+                      check3: 'static',
+                      ServiceType: 'Armed Guard',
+                    });
                   }}>
                   <View style={styles.unCheckbtn} />
                 </TouchableOpacity>
@@ -284,7 +287,10 @@ export class Service extends Component {
               ) : (
                 <TouchableOpacity
                   onPress={() => {
-                    this.setState({check3: 'Survilance'});
+                    this.setState({
+                      check3: 'Survilance',
+                      ServiceType: 'CCTV Desgin and Installtion',
+                    });
                   }}>
                   <View style={styles.unCheckbtn} />
                 </TouchableOpacity>
@@ -307,7 +313,10 @@ export class Service extends Component {
               ) : (
                 <TouchableOpacity
                   onPress={() => {
-                    this.setState({check3: 'Premises'});
+                    this.setState({
+                      check3: 'Premises',
+                      ServiceType: 'Mall Security',
+                    });
                   }}>
                   <View style={styles.unCheckbtn} />
                 </TouchableOpacity>
@@ -330,7 +339,9 @@ export class Service extends Component {
                 color: '#8F94FB',
               }}
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue}, () => {})
+                this.setState({ServiceType: itemValue}, () => {
+                  console.warn(itemValue);
+                })
               }>
               <Picker.Item label="Armed Guard" value="Armed Guard" />
               <Picker.Item label="UnArmed Guard" value="UnArmed Guard" />
@@ -353,7 +364,9 @@ export class Service extends Component {
                 color: '#8F94FB',
               }}
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue}, () => {})
+                this.setState({ServiceType: itemValue}, () => {
+                  console.warn(this.state.ServiceType);
+                })
               }>
               <Picker.Item
                 label="CCTV Desgin and Installtion"
@@ -386,7 +399,9 @@ export class Service extends Component {
                 color: '#8F94FB',
               }}
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({ServiceType: itemValue}, () => {})
+                this.setState({ServiceType: itemValue}, () => {
+                  console.warn(itemValue);
+                })
               }>
               <Picker.Item label="Mall Security" value="Mall Security" />
               <Picker.Item

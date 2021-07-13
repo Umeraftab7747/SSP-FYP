@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import {Header, Appbtn, AppInput} from '../../Components';
 import {w, h} from 'react-native-responsiveness';
-import {Picker} from '@react-native-picker/picker';
 import {axiosInstance, baseUrl} from '../api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -42,6 +41,9 @@ export class Service extends Component {
     isDatePickerVisible2: false,
     StartHour: '',
     EndHour: '',
+
+    // user details
+    userDetails: '',
   };
 
   componentDidMount() {
@@ -123,10 +125,33 @@ export class Service extends Component {
     AsyncStorage.getItem('ServiceProviderData').then(value => {
       const data = JSON.parse(value);
       if (data !== null) {
-        this.setState({Email: data});
+        this.setState({Email: data}, () => {
+          this.DETAILS(this.state.Email);
+        });
       }
     });
   };
+
+  // GETINS USER DETAILS
+  DETAILS = value => {
+    const params = {
+      Email: value,
+    };
+
+    // ASY
+    axiosInstance
+      .post(baseUrl + '/service-provider/ServiceProviderData', params)
+      .then(res => {
+        this.setState({userDetails: res.data.user[0]}, () => {
+          console.log(this.state.userDetails.Firstname);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // ASYC
+  };
+
   submit = () => {
     const {
       Email,
@@ -159,6 +184,7 @@ export class Service extends Component {
           Startinghour: StartHour,
           EndingHour: EndHour,
           image: image,
+          ServiceProviderName: this.state.userDetails.Firstname,
         };
 
         // ASY
@@ -166,7 +192,7 @@ export class Service extends Component {
           .post(baseUrl + '/service/', params)
           .then(res => {
             const userData = res.data;
-            console.log(userData);
+
             if (userData.status === 200) {
               alert('Data Submitted for Review');
               this.setState({
@@ -194,6 +220,7 @@ export class Service extends Component {
           Startinghour: StartHour,
           EndingHour: EndHour,
           test: test,
+          ServiceProviderName: this.state.userDetails.Firstname,
         };
 
         // ASY
@@ -201,7 +228,7 @@ export class Service extends Component {
           .post(baseUrl + '/service/', params)
           .then(res => {
             const userData = res.data;
-            console.log(userData);
+
             if (userData.status === 200) {
               alert('Data Submitted for Review');
               this.setState({

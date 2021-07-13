@@ -79,7 +79,7 @@ export class Dashboard extends Component {
             this.props.navigation.navigate('SSPconfirmbooking');
           }}
           style={styles.Btn}>
-          <Text style={styles.BtnText}>BOOKING REQUEST</Text>
+          <Text style={styles.BtnText}>ACTIVE SERVICES</Text>
         </TouchableOpacity>
         {/* btn */}
         {/* btn */}

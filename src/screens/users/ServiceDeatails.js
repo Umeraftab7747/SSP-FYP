@@ -15,7 +15,10 @@ export class ServiceDeatails extends Component {
   };
   componentDidMount() {
     const abc = this.props.route.params.Alldata;
-    this.setState({data: abc}, () => {});
+    this.setState({data: abc}, () => {
+      console.log(this.state.data);
+    });
+
     this.getData();
   }
 
@@ -113,6 +116,9 @@ export class ServiceDeatails extends Component {
         <Header text={'Service Details'} />
         {/* detail container */}
         <View style={styles.DetailContainer}>
+          <Text style={styles.Text}>
+            Service Provider: {this.state.data.ServiceProviderName}
+          </Text>
           <Text style={styles.Text}>Name: {this.state.data.ServiceName} </Text>
           <Text style={styles.Text}>Type: {this.state.data.ServiceType} </Text>
           <Text style={[styles.Text]}>

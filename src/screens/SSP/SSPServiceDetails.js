@@ -48,7 +48,7 @@ export class SSPServiceDetails extends Component {
   renderItem = item => (
     <View style={styles.FlatListContainer}>
       <View style={styles.RightFlatList}>
-        <Text style={styles.FlatlistName}>NAME: {item.UserName}</Text>
+        <Text style={styles.FlatlistName}>Service Name: {item.UserName}</Text>
         <Text
           style={[
             styles.FlatlistName,
@@ -83,7 +83,9 @@ export class SSPServiceDetails extends Component {
         <Header text={'Service Details'} />
         {/* detail container */}
         <View style={styles.DetailContainer}>
-          <Text style={styles.Text}>Name: {this.state.data.ServiceName} </Text>
+          <Text style={styles.Text}>
+            Service Name: {this.state.data.ServiceName}
+          </Text>
           <Text style={styles.Text}>Type: {this.state.data.ServiceType} </Text>
           <Text
             style={[

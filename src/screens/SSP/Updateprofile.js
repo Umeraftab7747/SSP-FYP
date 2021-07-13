@@ -60,25 +60,29 @@ export class Updateprofile extends Component {
 
   // GETINS USER DETAILS
   UPDATED = () => {
-    const params = {
-      Email: this.state.userDetails.Email,
-      Name: this.state.Name,
-      Cnic: this.state.Cnic,
-      Phone: this.state.Phone,
-      Companyname: this.state.Companyname,
-      Password: this.state.Password,
-    };
+    if (this.state.Password.length >= 6) {
+      const params = {
+        Email: this.state.userDetails.Email,
+        Name: this.state.Name,
+        Cnic: this.state.Cnic,
+        Phone: this.state.Phone,
+        Companyname: this.state.Companyname,
+        Password: this.state.Password,
+      };
 
-    // ASY
-    axiosInstance
-      .post(baseUrl + '/service-provider/SSPUpdate', params)
-      .then(res => {
-        this.props.navigation.goBack();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    // ASYC
+      // ASY
+      axiosInstance
+        .post(baseUrl + '/service-provider/SSPUpdate', params)
+        .then(res => {
+          this.props.navigation.goBack();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // ASYC
+    } else {
+      alert('Password should be 6 character long');
+    }
   };
 
   render() {

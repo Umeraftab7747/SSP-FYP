@@ -59,24 +59,32 @@ export class Profile extends Component {
 
   // GETINS USER DETAILS
   UPDATED = () => {
-    const params = {
-      Email: this.state.userDetails.Email,
-      Name: this.state.Name,
-      Cnic: this.state.Cnic,
-      Phone: this.state.Phone,
-      Password: this.state.Password,
-    };
+    if (this.state.Cnic.length >= 13) {
+      if (this.state.Password.length >= 6) {
+        const params = {
+          Email: this.state.userDetails.Email,
+          Name: this.state.Name,
+          Cnic: this.state.Cnic,
+          Phone: this.state.Phone,
+          Password: this.state.Password,
+        };
 
-    // ASY
-    axiosInstance
-      .post(baseUrl + '/users/UserUpdate', params)
-      .then(res => {
-        this.props.navigation.goBack();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    // ASYC
+        // ASY
+        axiosInstance
+          .post(baseUrl + '/users/UserUpdate', params)
+          .then(res => {
+            this.props.navigation.goBack();
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        // ASYC
+      } else {
+        alert('PASSWORD MUST BE OF 6 digits');
+      }
+    } else {
+      alert('CNIC SHOULD BE OF 13 DIGITS');
+    }
   };
 
   render() {
